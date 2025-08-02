@@ -15,33 +15,44 @@
     }
 
     header {
-      background: #004080;
+      background: linear-gradient(to right, #003366, #0059b3);
       color: white;
-      padding: 1.5rem 1rem;
+      padding: 2rem 1.5rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
 
     .header-content {
       display: flex;
       align-items: center;
+      max-width: 1000px;
+      margin: 0 auto;
     }
 
     .profile-pic {
-      width: 100px;
-      height: 100px;
+      width: 120px;
+      height: 120px;
       object-fit: cover;
       border-radius: 50%;
-      margin-right: 1rem;
-      border: 2px solid white;
+      border: 3px solid #fff;
+      box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
+      margin-right: 1.5rem;
+      transition: transform 0.3s ease;
     }
 
-    header h1 {
+    .profile-pic:hover {
+      transform: scale(1.05);
+    }
+
+    .text-info h1 {
       margin: 0;
-      font-size: 1.8rem;
+      font-size: 2rem;
+      font-weight: 700;
     }
 
-    header p {
-      margin: 0.25rem 0 0;
-      font-size: 1rem;
+    .text-info p {
+      margin-top: 0.5rem;
+      font-size: 1.1rem;
+      color: #e0e0e0;
     }
 
     nav {
@@ -100,11 +111,10 @@
   </style>
 </head>
 <body>
-
   <header>
     <div class="header-content">
-      <img src="my-picture.jpg" alt="My Photo" class="profile-pic">
-      <div>
+      <img src="my-picture.jpg" alt="Mohammad Al Hosan" class="profile-pic">
+      <div class="text-info">
         <h1>Mohammad Al Hosan</h1>
         <p>Undergraduate Student at BUET</p>
       </div>
@@ -120,9 +130,7 @@
 
   <section id="about">
     <h2>About Me</h2>
-    <p>
-      I am a final-year Electrical and Electronic Engineering undergraduate at BUET.
-    </p>
+    <p>I am a final-year Electrical and Electronic Engineering undergraduate at BUET.</p>
   </section>
 
   <section id="projects">
@@ -155,6 +163,5 @@
   <footer>
     &copy; 2025 Mohammad Al Hosan. All rights reserved.
   </footer>
-
 </body>
 </html>

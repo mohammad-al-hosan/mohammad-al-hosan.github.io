@@ -13,25 +13,49 @@
       background: #f7f7f7;
       color: #222;
     }
+
     header {
       background: #004080;
       color: white;
-      padding: 2rem 1rem;
-      text-align: center;
+      padding: 1.5rem 1rem;
     }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+    }
+
+    .profile-pic {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-right: 1rem;
+      border: 2px solid white;
+    }
+
     header h1 {
       margin: 0;
+      font-size: 1.8rem;
     }
+
+    header p {
+      margin: 0.25rem 0 0;
+      font-size: 1rem;
+    }
+
     nav {
       text-align: center;
       margin-top: 1rem;
     }
+
     nav a {
       margin: 0 1rem;
       text-decoration: none;
       color: #004080;
       font-weight: bold;
     }
+
     section {
       max-width: 800px;
       margin: 2rem auto;
@@ -40,44 +64,51 @@
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
     }
+
     footer {
       text-align: center;
       padding: 1rem;
       font-size: 0.9rem;
       color: #666;
     }
+
     .project-card {
-  border: 1px solid #ddd;
-  padding: 1rem 1.5rem;
-  margin-bottom: 1.5rem;
-  border-radius: 6px;
-  background-color: #fafafa;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
+      border: 1px solid #ddd;
+      padding: 1rem 1.5rem;
+      margin-bottom: 1.5rem;
+      border-radius: 6px;
+      background-color: #fafafa;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
 
-.project-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
+    .project-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
 
-.project-card h3 {
-  margin-top: 0;
-  color: #004080;
-}
+    .project-card h3 {
+      margin-top: 0;
+      color: #004080;
+    }
 
-.project-card a {
-  text-decoration: none;
-  color: #004080;
-  font-weight: bold;
-}
-
+    .project-card a {
+      text-decoration: none;
+      color: #004080;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
+
   <header>
-    <h1>Mohammad Al Hosan</h1>
-    <p>Undergraduate Student at BUET</p>
+    <div class="header-content">
+      <img src="my-picture.jpg" alt="My Photo" class="profile-pic">
+      <div>
+        <h1>Mohammad Al Hosan</h1>
+        <p>Undergraduate Student at BUET</p>
+      </div>
+    </div>
   </header>
 
   <nav>
@@ -95,21 +126,20 @@
   </section>
 
   <section id="projects">
-  <h2>Featured Projects</h2>
+    <h2>Featured Projects</h2>
 
-  <div class="project-card">
-    <h3>Design of a Class-A Common-Emitter RF Power Amplifier for the 433 MHz ISM Band</h3>
-    <p>Designed in Cadence Virtuoso, achieving 10.11 dB gain, 7.52% PAE, and 18.01 dBm P<sub>sat</sub>.</p>
-    <p><a href="https://github.com/mohammad-al-hosan/Class_A_RF_Power_Amplifier_433MHz.git" target="_blank">View on GitHub</a></p>
-  </div>
+    <div class="project-card">
+      <h3>Design of a Class-A Common-Emitter RF Power Amplifier for the 433 MHz ISM Band</h3>
+      <p>Designed in Cadence Virtuoso, achieving 10.11 dB gain, 7.52% PAE, and 18.01 dBm P<sub>sat</sub>.</p>
+      <p><a href="https://github.com/mohammad-al-hosan/Class_A_RF_Power_Amplifier_433MHz.git" target="_blank">View on GitHub</a></p>
+    </div>
 
-  <div class="project-card">
-    <h3>IoT-Based System for Real-Time Monitoring and Control of FRUIT Storage Conditions</h3>
-    <p>Arduino-based system using DHT22 and MQ135 sensors with relay-controlled misting, Peltier cooling, and ventilation. Integrated with Arduino IoT Cloud via ESP8266 for real-time data logging and remote control.</p>
-    <p><a href="https://github.com/mohammad-al-hosan/IOT_Fruit_Storage_System.git" target="_blank">View on GitHub</a></p>
-  </div>
-
-</section>
+    <div class="project-card">
+      <h3>IoT-Based System for Real-Time Monitoring and Control of FRUIT Storage Conditions</h3>
+      <p>Arduino-based system using DHT22 and MQ135 sensors with relay-controlled misting, Peltier cooling, and ventilation. Integrated with Arduino IoT Cloud via ESP8266 for real-time data logging and remote control.</p>
+      <p><a href="https://github.com/mohammad-al-hosan/IOT_Fruit_Storage_System.git" target="_blank">View on GitHub</a></p>
+    </div>
+  </section>
 
   <section id="cv">
     <h2>CV</h2>
@@ -125,5 +155,6 @@
   <footer>
     &copy; 2025 Mohammad Al Hosan. All rights reserved.
   </footer>
+
 </body>
 </html>

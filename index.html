@@ -98,7 +98,7 @@
     display:grid; grid-template-columns:1fr auto; gap:36px; align-items:center;
   }
   .hero-photo{
-    width:150px; height:150px; border-radius:50%;
+    width:220px; height:220px; border-radius:50%;
     object-fit:cover; border:1px solid var(--line-strong);
     background:var(--bg-panel-2);
   }
@@ -254,7 +254,7 @@
     .interest-grid{grid-template-columns:1fr;}
     .project-featured{grid-template-columns:1fr;}
     .hero{grid-template-columns:1fr; text-align:left;}
-    .hero-photo{order:-1; width:110px; height:110px;}
+    .hero-photo{order:-1; width:150px; height:150px;}
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -296,7 +296,6 @@
       </p>
       <div class="hero-actions">
         <a class="btn primary" href="CV_MohammadAlHosanKanon.pdf">Download CV</a>
-        <a class="btn" href="mailto:2006090@eee.buet.ac.bd">Email me</a>
         <a class="btn" href="#publications">See publications</a>
         <a class="btn" href="#projects">See undergraduate projects</a>
       </div>
@@ -523,7 +522,7 @@
       progress, or code for any of the projects above.
     </p>
     <div class="contact-row">
-      <a href="mailto:2006090@eee.buet.ac.bd">2006090@eee.buet.ac.bd</a>
+      <a href="mailto:2006090@eee.buet.ac.bd" class="email-link">2006090@eee.buet.ac.bd</a>
       <a href="https://www.linkedin.com/in/md-al-hosan/" target="_blank" rel="noopener">LinkedIn</a>
       <a href="https://github.com/mohammad-al-hosan" target="_blank" rel="noopener">GitHub</a>
       <a href="CV_MohammadAlHosanKanon.pdf">Download CV (PDF)</a>
@@ -553,6 +552,29 @@
         localStorage.setItem('theme','dark');
         toggle.textContent = '\u2600';
       }
+    });
+
+    var EMAIL = '2006090@eee.buet.ac.bd';
+    var GMAIL_COMPOSE = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(EMAIL);
+
+    function openEmail(e){
+      if(e) e.preventDefault();
+      var openedApp = false;
+      function onBlur(){ openedApp = true; }
+      window.addEventListener('blur', onBlur);
+
+      window.location.href = 'mailto:' + EMAIL;
+
+      setTimeout(function(){
+        window.removeEventListener('blur', onBlur);
+        if(!openedApp){
+          window.open(GMAIL_COMPOSE, '_blank');
+        }
+      }, 700);
+    }
+
+    document.querySelectorAll('a.email-link').forEach(function(link){
+      link.addEventListener('click', openEmail);
     });
 
     var btn = document.getElementById('toggleTimeline');

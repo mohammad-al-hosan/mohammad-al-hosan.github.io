@@ -3,591 +3,268 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Mohammad Al Hosan Kanon — Semiconductor Device Physics &amp; Computational Nanoelectronics</title>
-<meta name="description" content="Academic portfolio of Mohammad Al Hosan Kanon — BUET EEE graduate researching semiconductor device physics, DFT, and 2D materials." />
+<title>Mohammad Al Hosan Kanon | Semiconductor Devices &amp; 2D Materials</title>
+<meta name="description" content="Portfolio of Mohammad Al Hosan Kanon, BUET EEE graduate working on first-principles DFT of 2D van der Waals heterostructures and semiconductor device simulation." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,72,400;0,72,500;0,72,600;1,72,400;1,72,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,72,400;0,72,500;0,72,600;1,72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg:#f6f7f9;
-    --bg-panel:#ffffff;
-    --bg-panel-2:#eef1f5;
-    --ink:#14203a;
-    --ink-dim:#4b5872;
-    --ink-faint:#8793ab;
-    --teal:#0f766e;
-    --teal-soft:#d8ece9;
-    --amber:#a9762f;
-    --line:rgba(20,32,58,0.10);
-    --line-strong:rgba(20,32,58,0.22);
-    --on-teal:#ffffff;
-    --serif:'Newsreader', serif;
-    --sans:'IBM Plex Sans', sans-serif;
-    --mono:'IBM Plex Mono', monospace;
-  }
-
-  html[data-theme="dark"]{
-    --bg:#0a101d;
-    --bg-panel:#0f1830;
-    --bg-panel-2:#111d3a;
-    --ink:#e7ebf5;
-    --ink-dim:#9aa6bc;
-    --ink-faint:#5b6785;
-    --teal:#49d7cd;
-    --teal-soft:#173836;
-    --amber:#d7ad55;
-    --line:rgba(231,235,245,0.09);
-    --line-strong:rgba(231,235,245,0.18);
-    --on-teal:#06110f;
-  }
-
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    background:var(--bg);
-    color:var(--ink);
-    font-family:var(--sans);
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-    transition:background .25s, color .25s;
-  }
-
-  ::selection{background:var(--teal-soft); color:var(--ink);}
-
-  a{color:var(--teal); text-decoration:none;}
-  a:hover{text-decoration:underline;}
-  a:focus-visible, button:focus-visible{outline:2px solid var(--teal); outline-offset:3px;}
-
-  .wrap{max-width:920px; margin:0 auto; padding:0 28px;}
-
-  /* ---------- nav ---------- */
-  header.site-nav{
-    position:sticky; top:0; z-index:20;
-    background:color-mix(in srgb, var(--bg) 88%, transparent);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--line);
-  }
-  .nav-inner{
-    max-width:920px; margin:0 auto; padding:14px 28px;
-    display:flex; align-items:center; justify-content:space-between;
-    gap:16px;
-  }
-  .nav-mark{
-    font-family:var(--mono); font-size:13px; letter-spacing:0.06em;
-    color:var(--ink-dim); white-space:nowrap;
-  }
-  .nav-mark strong{color:var(--ink); font-weight:500;}
-  nav.links{display:flex; align-items:center; gap:20px; flex-wrap:wrap; font-family:var(--mono); font-size:12.5px;}
-  nav.links a{color:var(--ink-dim); letter-spacing:0.03em; text-transform:uppercase;}
-  nav.links a:hover{color:var(--teal); text-decoration:none;}
-
-  .theme-toggle{
-    display:inline-flex; align-items:center; justify-content:center;
-    width:30px; height:30px; border-radius:50%;
-    border:1px solid var(--line-strong); background:var(--bg-panel);
-    color:var(--ink-dim); cursor:pointer; font-size:14px;
-    transition:border-color .2s, color .2s;
-  }
-  .theme-toggle:hover{border-color:var(--teal); color:var(--teal);}
-
-  /* ---------- hero ---------- */
-  .hero{
-    padding:72px 0 56px;
-    display:grid; grid-template-columns:1fr auto; gap:36px; align-items:center;
-  }
-  .hero-photo{
-    width:220px; height:220px; border-radius:50%;
-    object-fit:cover; border:1px solid var(--line-strong);
-    background:var(--bg-panel-2);
-  }
-  .eyebrow{
-    font-family:var(--mono); font-size:12.5px; letter-spacing:0.14em;
-    color:var(--teal); text-transform:uppercase; margin:0 0 18px;
-    display:flex; align-items:center; gap:10px;
-  }
-  .eyebrow::before{content:''; width:22px; height:1px; background:var(--teal);}
-  .hero h1{
-    font-family:var(--serif); font-weight:500; font-size:clamp(2.1rem, 4.6vw, 3.2rem);
-    line-height:1.08; margin:0 0 14px; color:var(--ink);
-    letter-spacing:-0.01em;
-  }
-  .hero .role{
-    font-family:var(--serif); font-style:italic; font-size:1.2rem; color:var(--ink-dim);
-    margin:0 0 22px; max-width:560px;
-  }
-  .hero p.lede{
-    max-width:560px; color:var(--ink-dim); font-size:1rem; margin:0 0 28px;
-  }
-  .hero-actions{display:flex; gap:14px; flex-wrap:wrap;}
-  .btn{
-    font-family:var(--mono); font-size:12.5px; letter-spacing:0.04em;
-    padding:11px 20px; border-radius:3px; border:1px solid var(--line-strong);
-    color:var(--ink); transition:border-color .2s, color .2s, background .2s;
-  }
-  .btn:hover{border-color:var(--teal); color:var(--teal); text-decoration:none; background:var(--teal-soft);}
-  .btn.primary{background:var(--teal); color:var(--on-teal); border-color:var(--teal); font-weight:500;}
-  .btn.primary:hover{opacity:0.9; color:var(--on-teal);}
-
-  /* ---------- sections ---------- */
-  section{padding:60px 0;}
-  section + section{border-top:1px solid var(--line);}
-  .sec-head{display:flex; align-items:baseline; gap:14px; margin-bottom:30px;}
-  .sec-num{font-family:var(--mono); font-size:12px; color:var(--ink-faint);}
-  h2.sec-title{
-    font-family:var(--serif); font-weight:500; font-size:1.6rem; margin:0; color:var(--ink);
-    letter-spacing:-0.01em;
-  }
-
-  .about-text{max-width:640px; color:var(--ink-dim); font-size:1rem;}
-  .about-text p{margin:0 0 16px;}
-  .about-text strong{color:var(--ink); font-weight:600;}
-
-  .facts{
-    display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
-    background:var(--line); border:1px solid var(--line); border-radius:6px; margin-top:32px;
-    overflow:hidden;
-  }
-  .fact{background:var(--bg-panel); padding:18px 20px;}
-  .fact .num{font-family:var(--serif); font-size:1.5rem; color:var(--teal); font-weight:500;}
-  .fact .label{font-family:var(--mono); font-size:11px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:0.04em; margin-top:4px;}
-
-  /* research interests */
-  .interest-grid{display:grid; grid-template-columns:repeat(2, 1fr); gap:12px 28px;}
-  .interest-item{
-    display:flex; align-items:baseline; gap:12px; padding:12px 0;
-    border-bottom:1px solid var(--line); font-size:0.96rem;
-  }
-  .interest-item .tag{font-family:var(--mono); font-size:11px; color:var(--teal); min-width:26px;}
-
-  /* research experience */
-  .thesis-card{
-    background:var(--bg-panel); border:1px solid var(--line); border-radius:8px;
-    padding:28px 26px;
-  }
-  .thesis-card .thesis-top{
-    display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap;
-    margin-bottom:6px;
-  }
-  .thesis-card .thesis-label{font-family:var(--mono); font-size:12px; color:var(--ink-dim); letter-spacing:0.04em;}
-  .thesis-card .status{font-family:var(--mono); font-size:11px; color:var(--amber); font-style:italic;}
-  .thesis-card h3{
-    font-family:var(--serif); font-weight:500; font-size:1.22rem; line-height:1.35;
-    margin:6px 0 12px; color:var(--ink);
-  }
-  .thesis-card .supervisor{color:var(--ink-dim); font-size:0.9rem; font-style:italic; margin-bottom:18px;}
-  .thesis-card ul{margin:0; padding-left:20px; color:var(--ink-dim); font-size:0.95rem;}
-  .thesis-card li{margin-bottom:8px;}
-  .thesis-card li::marker{color:var(--teal);}
-
-  /* publications */
-  .pub{
-    padding:20px 0; border-bottom:1px solid var(--line);
-    display:grid; grid-template-columns:32px 1fr; gap:16px;
-  }
-  .pub:first-child{padding-top:0;}
-  .pub .idx{font-family:var(--mono); color:var(--ink-faint); font-size:13px; padding-top:2px;}
-  .pub h3{font-family:var(--sans); font-weight:600; font-size:0.96rem; margin:0 0 6px; color:var(--ink); line-height:1.4;}
-  .pub .venue{font-family:var(--mono); font-size:11.5px; color:var(--teal); text-transform:uppercase; letter-spacing:0.03em;}
-  .pub .meta{color:var(--ink-faint); font-size:0.85rem; margin-top:4px;}
-  .pub .link{font-family:var(--mono); font-size:11.5px; margin-top:8px; display:inline-block;}
-
-  /* ongoing research */
-  .ongoing-grid{display:grid; gap:16px;}
-  .ongoing-card{
-    border:1px solid var(--line); border-radius:8px; padding:20px 22px;
-    background:var(--bg-panel);
-  }
-  .ongoing-card h3{font-family:var(--sans); font-weight:600; font-size:0.96rem; margin:0 0 8px; color:var(--ink);}
-  .ongoing-card p{color:var(--ink-dim); font-size:0.9rem; margin:0;}
-
-  /* projects */
-  .project-featured{
-    display:grid; grid-template-columns:repeat(2, 1fr); gap:18px; margin-bottom:8px;
-  }
-  .pcard{
-    border:1px solid var(--line); border-radius:8px; padding:22px;
-    background:var(--bg-panel); transition:border-color .2s, transform .2s;
-  }
-  .pcard:hover{border-color:var(--teal); transform:translateY(-2px);}
-  .pcard .term{font-family:var(--mono); font-size:11px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:0.04em;}
-  .pcard h3{font-family:var(--sans); font-weight:600; font-size:0.96rem; margin:8px 0 8px; color:var(--ink); line-height:1.4;}
-  .pcard p{color:var(--ink-dim); font-size:0.88rem; margin:0 0 12px;}
-  .pcard .stack{font-family:var(--mono); font-size:11px; color:var(--teal);}
-  .pcard .repo-link{font-family:var(--mono); font-size:11.5px; margin-top:12px; display:inline-block;}
-
-  .timeline-toggle{margin-top:28px; text-align:center;}
-  .timeline-toggle button{
-    background:none; border:1px dashed var(--line-strong); color:var(--ink-dim);
-    font-family:var(--mono); font-size:12px; padding:10px 22px; border-radius:20px;
-    cursor:pointer; transition:border-color .2s, color .2s;
-  }
-  .timeline-toggle button:hover{border-color:var(--teal); color:var(--teal);}
-
-  #timeline{display:none; margin-top:30px;}
-  #timeline.open{display:block;}
-  .term-block{margin-bottom:30px;}
-  .term-block h4{
-    font-family:var(--mono); font-size:12px; color:var(--amber); text-transform:uppercase;
-    letter-spacing:0.06em; margin:0 0 14px; padding-bottom:8px; border-bottom:1px solid var(--line);
-  }
-  .term-project{padding:12px 0; border-bottom:1px solid var(--line); font-size:0.9rem;}
-  .term-project:last-child{border-bottom:none;}
-  .term-project .tname{color:var(--ink); font-weight:500;}
-  .term-project .tdesc{color:var(--ink-faint); display:block; margin-top:4px; font-size:0.85rem;}
-
-  /* footer / contact */
-  footer{padding:56px 0 50px;}
-  .contact-row{
-    display:flex; gap:26px; flex-wrap:wrap; margin-top:22px;
-    font-family:var(--mono); font-size:13px;
-  }
-  .contact-row a{color:var(--ink-dim);}
-  .contact-row a:hover{color:var(--teal); text-decoration:none;}
-  .fine{color:var(--ink-faint); font-size:12px; margin-top:40px; font-family:var(--mono);}
-
-  @media (max-width:640px){
-    .nav-inner{flex-direction:column; align-items:flex-start; gap:10px;}
-    nav.links{gap:14px;}
-    .facts{grid-template-columns:1fr;}
-    .interest-grid{grid-template-columns:1fr;}
-    .project-featured{grid-template-columns:1fr;}
-    .hero{grid-template-columns:1fr; text-align:left;}
-    .hero-photo{order:-1; width:150px; height:150px;}
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    html{scroll-behavior:auto;}
-    *{transition:none !important;}
-  }
+:root{--bg:#f6f7f9;--panel:#fff;--panel2:#eef1f5;--ink:#14203a;--dim:#4b5872;--faint:#6b7790;--teal:#0f766e;--tealsoft:#d8ece9;--amber:#a9762f;--line:rgba(20,32,58,.10);--line2:rgba(20,32,58,.22);--onteal:#fff;--serif:'Newsreader',Georgia,serif;--sans:'IBM Plex Sans',system-ui,sans-serif;--mono:'IBM Plex Mono',monospace}
+html[data-theme="dark"]{--bg:#0a101d;--panel:#0f1830;--panel2:#111d3a;--ink:#e7ebf5;--dim:#9aa6bc;--faint:#7c88a5;--teal:#49d7cd;--tealsoft:#173836;--amber:#d7ad55;--line:rgba(231,235,245,.09);--line2:rgba(231,235,245,.18);--onteal:#06110f}
+@media(prefers-color-scheme:dark){html:not([data-theme="light"]):not([data-theme="dark"]){--bg:#0a101d;--panel:#0f1830;--panel2:#111d3a;--ink:#e7ebf5;--dim:#9aa6bc;--faint:#7c88a5;--teal:#49d7cd;--tealsoft:#173836;--amber:#d7ad55;--line:rgba(231,235,245,.09);--line2:rgba(231,235,245,.18);--onteal:#06110f}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--teal);text-decoration:none}a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+.wrap{max-width:920px;margin:0 auto;padding:0 28px}
+header.nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:920px;margin:0 auto;padding:12px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.mark{font-family:var(--mono);font-size:13px;color:var(--dim);white-space:nowrap}.mark b{color:var(--ink);font-weight:500}
+nav{display:flex;align-items:center;gap:18px;flex-wrap:wrap;font-size:13.5px}
+nav a{color:var(--dim)}nav a:hover{color:var(--teal);text-decoration:none}
+.tt{width:30px;height:30px;border-radius:50%;border:1px solid var(--line2);background:var(--panel);color:var(--dim);cursor:pointer;font-size:14px}
+.tt:hover{border-color:var(--teal);color:var(--teal)}
+.hero{padding:68px 0 52px;display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center}
+.photo{width:210px;height:210px;border-radius:50%;object-fit:cover;border:1px solid var(--line2);background:var(--panel2)}
+.hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(2.1rem,4.6vw,3.2rem);line-height:1.08;margin:0 0 12px;letter-spacing:-.01em}
+.role{font-family:var(--serif);font-style:italic;font-size:1.2rem;color:var(--dim);margin:0 0 18px;max-width:560px}
+.lede{max-width:580px;color:var(--dim);margin:0 0 26px}
+.acts{display:flex;gap:12px;flex-wrap:wrap}
+.btn{font-size:14px;padding:10px 18px;border-radius:4px;border:1px solid var(--line2);color:var(--ink)}
+.btn:hover{border-color:var(--teal);color:var(--teal);text-decoration:none;background:var(--tealsoft)}
+.btn.p{background:var(--teal);color:var(--onteal);border-color:var(--teal);font-weight:500}.btn.p:hover{opacity:.9;color:var(--onteal)}
+section{padding:54px 0}section+section{border-top:1px solid var(--line)}
+h2{font-family:var(--serif);font-weight:500;font-size:1.6rem;margin:0 0 24px;letter-spacing:-.01em}
+h3{font-family:var(--sans);font-weight:600;font-size:.97rem;line-height:1.4;margin:0 0 6px}
+.txt{max-width:660px;color:var(--dim)}.txt p{margin:0 0 14px}.txt b{color:var(--ink);font-weight:600}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:6px;margin-top:28px;overflow:hidden}
+.fact{background:var(--panel);padding:16px 18px}.fact b{display:block;font-family:var(--serif);font-size:1.5rem;color:var(--teal);font-weight:500}
+.fact span{font-size:12.5px;color:var(--faint)}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{border:1px solid var(--line2);border-radius:20px;padding:6px 14px;font-size:.92rem;background:var(--panel)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:24px 24px;margin-bottom:16px}
+.card .top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:var(--mono);font-size:12px;color:var(--dim)}
+.card h3{font-family:var(--serif);font-weight:500;font-size:1.15rem;margin:8px 0 10px}
+.sup{color:var(--dim);font-size:.9rem;font-style:italic;margin:0 0 14px}
+.card ul{margin:0;padding-left:20px;color:var(--dim);font-size:.94rem}.card li{margin-bottom:6px}.card li::marker{color:var(--teal)}
+.st{color:var(--amber)}
+.sub{font-family:var(--serif);font-style:italic;color:var(--dim);font-size:1.05rem;margin:28px 0 8px}.sub:first-of-type{margin-top:0}
+.pub{padding:16px 0;border-bottom:1px solid var(--line)}
+.venue{font-family:var(--mono);font-size:12px;color:var(--teal)}
+.meta{color:var(--faint);font-size:.86rem;margin-top:3px}
+.badge{font-family:var(--mono);font-size:11px;border:1px solid var(--amber);color:var(--amber);border-radius:10px;padding:1px 8px;margin-left:6px;white-space:nowrap}
+.lnk{font-size:.86rem;display:inline-block;margin-top:6px}
+.col{max-width:700px}.col .sub{margin-top:36px}.col .sub:first-child{margin-top:0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.row{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--line);font-size:.94rem}
+.row small{display:block;color:var(--faint);font-size:.84rem}
+.row .d{font-family:var(--mono);font-size:12px;color:var(--faint);white-space:nowrap}
+.skills dt{font-weight:600;font-size:.92rem;margin-top:12px}.skills dd{margin:2px 0 0;color:var(--dim);font-size:.92rem}
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pc{border:1px solid var(--line);border-radius:8px;padding:20px;background:var(--panel)}
+.pc small{font-size:12px;color:var(--faint)}.pc p{color:var(--dim);font-size:.88rem;margin:6px 0 10px}.pc .s{font-size:12px;color:var(--teal)}
+#tl{display:none;margin-top:24px}#tl.open{display:block}
+.tb{background:none;border:1px dashed var(--line2);color:var(--dim);font:inherit;font-size:13.5px;padding:9px 20px;border-radius:20px;cursor:pointer}
+.tb:hover{border-color:var(--teal);color:var(--teal)}
+.tp{padding:10px 0;border-bottom:1px solid var(--line);font-size:.9rem}.tp i{display:block;color:var(--faint);font-style:normal;font-size:.85rem}
+.tl-h{font-size:12.5px;color:var(--amber);margin:20px 0 4px;font-weight:600}
+footer{padding:50px 0}.crow{display:flex;gap:24px;flex-wrap:wrap;margin-top:18px;font-size:.95rem}
+.fine{color:var(--faint);font-size:12.5px;margin-top:34px}
+@media(max-width:640px){.nav-in{flex-direction:column;align-items:flex-start;gap:8px}.facts{grid-template-columns:1fr 1fr}.two,.pgrid{grid-template-columns:1fr}.hero{grid-template-columns:1fr}.photo{order:-1;width:140px;height:140px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
-
-<header class="site-nav">
-  <div class="nav-inner">
-    <span class="nav-mark"><strong>M. A. H. Kanon</strong> / EEE, BUET</span>
-    <nav class="links">
-      <a href="#about">About</a>
-      <a href="#interests">Research</a>
-      <a href="#experience">Thesis</a>
-      <a href="#publications">Publications</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">&#9789;</button>
-    </nav>
-  </div>
-</header>
+<header class="nav"><div class="nav-in">
+<span class="mark"><b>M. A. H. Kanon</b> / EEE, BUET</span>
+<nav><a href="#about">About</a><a href="#research">Research</a><a href="#publications">Publications</a><a href="#projects">Projects</a><a href="#more">Awards &amp; service</a><a href="#contact">Contact</a>
+<button class="tt" id="tt" type="button" aria-label="Toggle dark mode">&#9789;</button></nav>
+</div></header>
 
 <main class="wrap">
+<section class="hero" id="top">
+<div>
+<h1>Mohammad Al Hosan Kanon</h1>
+<p class="role">Semiconductor devices, electronic materials, and first-principles simulation of 2D heterostructures</p>
+<p class="lede">Currently researching TCAD-based semiconductor devices, with a background in first-principles (DFT) studies of 2D van der Waals heterostructures.</p>
+<div class="acts"><a class="btn p" href="CV_MohammadAlHosanKanon.pdf">Download CV</a><a class="btn" href="#publications">Publications</a><a class="btn" href="#contact">Contact</a></div>
+</div>
+<img class="photo" src="profile.jpg" alt="Mohammad Al Hosan Kanon" />
+</section>
 
-  <!-- ================= HERO ================= -->
-  <section class="hero" id="top">
-    <div>
-      <p class="eyebrow">Dhaka, Bangladesh &middot; BUET EEE</p>
-      <h1>Mohammad Al Hosan Kanon</h1>
-      <p class="role">Semiconductor device physics &amp; computational nanoelectronics</p>
-      <p class="lede">
-        Recent graduate in Electrical and Electronic Engineering from Bangladesh University of
-        Engineering and Technology (BUET), specializing in Electronics and Photonics. My
-        undergraduate thesis uses first-principles DFT to study contact modulation in
-        metal&ndash;2D&nbsp;TMD heterostructures. I also work in analog/RF circuit design and VLSI.
-      </p>
-      <div class="hero-actions">
-        <a class="btn primary" href="CV_MohammadAlHosanKanon.pdf">Download CV</a>
-        <a class="btn" href="#publications">See publications</a>
-        <a class="btn" href="#projects">See undergraduate projects</a>
-      </div>
-    </div>
-    <img class="hero-photo" src="profile.jpg" alt="Mohammad Al Hosan Kanon" />
-  </section>
+<section id="about">
+<h2>About</h2>
+<div class="txt">
+<p>I graduated from the Department of EEE at BUET (Dec 2021 to June 2026) with a CGPA of <b>3.78/4.00</b>, including <b>4.00/4.00</b> in my senior year.</p>
+<p>My main work is <b>first-principles DFT of van der Waals heterostructures</b> (Quantum ESPRESSO) and <b>TCAD simulation of nanoscale transistors</b> (Silvaco). Alongside this I have worked on analog/RF design, digital VLSI flows, embedded systems, and applied machine learning.</p>
+</div>
+<div class="facts">
+<div class="fact"><b>3.78</b><span>CGPA out of 4.00</span></div>
+<div class="fact"><b>4</b><span>papers on IEEE Xplore</span></div>
+<div class="fact"><b>4</b><span>manuscripts under review</span></div>
+<div class="fact"><b>7.0</b><span>IELTS Academic, C1</span></div>
+</div>
+</section>
 
-  <!-- ================= ABOUT ================= -->
-  <section id="about">
-    <div class="sec-head"><span class="sec-num">01</span><h2 class="sec-title">About</h2></div>
-    <div class="about-text">
-      <p>
-        I completed my B.Sc. in Electrical and Electronic Engineering at BUET (Dec 2021&ndash;Jun 2026),
-        majoring in <strong>Electronics and Photonics</strong>, with a final CGPA of <strong>3.78/4.00</strong>
-        &mdash; including <strong>4.00/4.00</strong> in each of my final two terms.
-      </p>
-      <p>
-        My research centers on <strong>semiconductor device physics, computational nanoelectronics,
-        2D materials, and first-principles simulation using Density Functional Theory (DFT)</strong>.
-        My undergraduate thesis, supervised by Dr. Sharif Mohammad Mominuzzaman, investigates how
-        strain and electric fields modulate contact behavior at metal&ndash;2D TMD heterostructure
-        interfaces using Quantum ESPRESSO.
-      </p>
-      <p>
-        Alongside this, I have a secondary background in <strong>analog/RF circuit design, VLSI systems,
-        and machine learning for signal analysis</strong> &mdash; developed through coursework, lab
-        projects, and four IEEE conference publications across my undergraduate years.
-      </p>
-    </div>
+<section id="research">
+<h2>Research</h2>
+<div class="chips" style="margin-bottom:28px"><span class="chip">Semiconductor devices</span><span class="chip">Electronic materials</span><span class="chip">Nanoelectronics</span><span class="chip">Nanotechnology</span></div>
 
-    <div class="facts">
-      <div class="fact"><div class="num">3.78</div><div class="label">CGPA / 4.00</div></div>
-      <div class="fact"><div class="num">4</div><div class="label">IEEE Publications</div></div>
-      <div class="fact"><div class="num">2026</div><div class="label">Graduating Class</div></div>
-    </div>
-  </section>
+<div class="card">
+<div class="top"><span>Undergraduate thesis, Apr 2025 to June 2026</span><span class="st">Journal extension under review</span></div>
+<h3>Schottky-to-Ohmic Contact Modulation in Graphene/Janus MoSeTe van der Waals Heterostructures via Electric Field and Biaxial Strain: A First-Principles Study</h3>
+<p class="sup">Supervisor: Prof. Dr. Sharif Mohammad Mominuzzaman, Professor and Head, Department of EEE, BUET</p>
+<ul>
+<li>Identified multiple independent pathways to a fully Ohmic Graphene/MoSeTe contact by tuning the Schottky barrier with electric field and biaxial strain.</li>
+<li>Proposed a 2D field-effect transistor architecture that uses the tunable contact behavior.</li>
+<li>A companion study on the 1T-NbS<sub>2</sub>/Janus 2H-MoSeTe heterostructure is submitted to <i>Nanoscale Advances</i>.</li>
+</ul>
+</div>
 
-  <!-- ================= RESEARCH INTERESTS ================= -->
-  <section id="interests">
-    <div class="sec-head"><span class="sec-num">02</span><h2 class="sec-title">Research Interests</h2></div>
-    <div class="interest-grid">
-      <div class="interest-item"><span class="tag">01</span> Semiconductor Device Physics</div>
-      <div class="interest-item"><span class="tag">02</span> Computational Nanoelectronics</div>
-      <div class="interest-item"><span class="tag">03</span> Density Functional Theory (DFT)</div>
-      <div class="interest-item"><span class="tag">04</span> 2D Materials &amp; Heterostructures</div>
-      <div class="interest-item"><span class="tag">05</span> Analog &amp; RF Integrated Circuits</div>
-      <div class="interest-item"><span class="tag">06</span> VLSI &amp; Digital Design</div>
-    </div>
-  </section>
+<div class="card">
+<div class="top"><span>Research project, Feb 2026 to Aug 2026</span><span class="st">ICECE 2026, under review</span></div>
+<h3>Mitigation of Short-Channel Effects in 20 nm Double-Gate MOSFETs via Step Oxide, Dual-Material Gate, and Halo Doping</h3>
+<p class="sup">Supervisor: Prof. Dr. Sharif Mohammad Mominuzzaman</p>
+<ul><li>Achieved a 60% reduction in DIBL and a nearly sixfold improvement in I<sub>ON</sub>/I<sub>OFF</sub> using step-oxide, dual-material-gate, and halo-doping engineering (Silvaco TCAD).</li></ul>
+</div>
+</section>
 
-  <!-- ================= RESEARCH EXPERIENCE ================= -->
-  <section id="experience">
-    <div class="sec-head"><span class="sec-num">03</span><h2 class="sec-title">Research Experience</h2></div>
-    <div class="thesis-card">
-      <div class="thesis-top">
-        <span class="thesis-label">Undergraduate Thesis &middot; 2025&ndash;2026</span>
-        <span class="status">Journal manuscript in preparation</span>
-      </div>
-      <h3>Metal&ndash;2D TMD Semiconductor Heterostructure Contact Modulation Using Electric Field and Strain Effects via First-Principles DFT Calculations</h3>
-      <p class="supervisor">Supervisor: Dr. Sharif Mohammad Mominuzzaman, Professor, Department of EEE, BUET</p>
-      <ul>
-        <li>Performed first-principles DFT simulations of metal&ndash;TMD heterostructures using Quantum ESPRESSO.</li>
-        <li>Investigated strain- and electric-field-induced modulation of Schottky contact characteristics and electronic properties.</li>
-        <li>Analyzed charge transfer, electrostatic potential profiles, and band alignment at metal&ndash;semiconductor interfaces.</li>
-      </ul>
-    </div>
-  </section>
+<section id="publications">
+<h2>Publications</h2>
 
-  <!-- ================= PUBLICATIONS ================= -->
-  <section id="publications">
-    <div class="sec-head"><span class="sec-num">04</span><h2 class="sec-title">Conference Publications</h2></div>
+<p class="sub">Journal</p>
+<div class="pub">
+<h3>Schottky-to-Ohmic Contact Modulation in 1T-NbS<sub>2</sub>/Janus 2H-MoSeTe van der Waals Heterostructures via Electric Field and Biaxial Strain: A First-Principles Study<span class="badge">under review</span></h3>
+<div class="venue">Nanoscale Advances</div>
+<div class="meta">M. A. H. Kanon and S. M. Mominuzzaman</div>
+</div>
 
-    <div class="pub">
-      <span class="idx">01</span>
-      <div>
-        <h3>Design and Simulation of a Class-A Common-Emitter RF Power Amplifier for the 433&nbsp;MHz ISM Band in Cadence Virtuoso</h3>
-        <div class="venue">ICECTE 2026</div>
-        <div class="meta">M. A. H. Kanon <em>et al.</em>, Proc. 5th Int. Conf. Electrical, Computer &amp; Telecommunication Engineering, Rajshahi, Bangladesh, 2026, pp. 1&ndash;6.</div>
-        <a class="link" href="https://doi.org/10.1109/ICECTE69292.2026.11429413" target="_blank" rel="noopener">View on IEEE Xplore &rarr;</a>
-      </div>
-    </div>
+<p class="sub">Conference: devices, circuits, and VLSI</p>
+<div class="pub">
+<h3>Mitigation of Short-Channel Effects in 20 nm Double-Gate MOSFETs via Step Oxide, Dual-Material Gate, and Halo Doping<span class="badge">under review</span></h3>
+<div class="venue">ICECE 2026, Dhaka</div>
+<div class="meta">M. A. H. Kanon and S. M. Mominuzzaman</div>
+</div>
+<div class="pub">
+<h3>Design and Simulation of a Class-A Common-Emitter RF Power Amplifier for the 433 MHz ISM Band in Cadence Virtuoso</h3>
+<div class="venue">ICECTE 2026, Rajshahi</div>
+<div class="meta">M. A. H. Kanon, S. A. Rifat, I. Ahmad, and M. A. Islam. Proc. 5th Int. Conf. Electrical, Computer &amp; Telecommunication Engineering, pp. 1&ndash;6.</div>
+<a class="lnk" href="https://doi.org/10.1109/ICECTE69292.2026.11429413" target="_blank" rel="noopener">IEEE Xplore</a>
+</div>
+<div class="pub">
+<h3>Synthesis Constraint Sweep and Physical Implementation of a Parameterized MAC Unit: Cross-Toolchain Validation on Commercial 45 nm and Open-Source 130 nm Processes<span class="badge">under review</span></h3>
+<div class="venue">ICECE 2026, Dhaka</div>
+<div class="meta">M. A. H. Kanon, S. T. Islam, N. Sadik, S. A. Rifat, I. Ahmad, M. A. Islam, and A. Sarkar</div>
+</div>
 
-    <div class="pub">
-      <span class="idx">02</span>
-      <div>
-        <h3>IoT-Based Real-Time Monitoring and Preservation System for Small-Scale Fruit Storage</h3>
-        <div class="venue">ICECTE 2026</div>
-        <div class="meta">M. A. H. Kanon <em>et al.</em>, Proc. 5th Int. Conf. Electrical, Computer &amp; Telecommunication Engineering, Rajshahi, Bangladesh, 2026, pp. 1&ndash;6.</div>
-        <a class="link" href="https://doi.org/10.1109/ICECTE69292.2026.11429225" target="_blank" rel="noopener">View on IEEE Xplore &rarr;</a>
-      </div>
-    </div>
+<p class="sub">Conference: embedded systems and applied machine learning</p>
+<div class="pub">
+<h3>IoT-Based Real-Time Monitoring and Preservation System for Small-Scale Fruit Storage</h3>
+<div class="venue">ICECTE 2026, Rajshahi</div>
+<div class="meta">M. A. H. Kanon, M. M. Rahman, P. Mobarak, and M. Al Amin. Proc. 5th Int. Conf. Electrical, Computer &amp; Telecommunication Engineering, pp. 1&ndash;6.</div>
+<a class="lnk" href="https://doi.org/10.1109/ICECTE69292.2026.11429225" target="_blank" rel="noopener">IEEE Xplore</a>
+</div>
+<div class="pub">
+<h3>Design and Implementation of a Dual-Mode Floor Mopping Robot</h3>
+<div class="venue">IEEE RAAICON 2025, Dhaka</div>
+<div class="meta">M. A. H. Kanon, I. Ahmad, D. A. Saha, M. A. Amin, N. Tasnim, and P. Mobarak. pp. 421&ndash;426.</div>
+<a class="lnk" href="https://doi.org/10.1109/RAAICON69033.2025.11502377" target="_blank" rel="noopener">IEEE Xplore</a>
+</div>
+<div class="pub">
+<h3>Bridging Spectral Specificity and Semantic Generalization for Respiratory Sound Classification: A Comparative Study of MFCCs and Augmented YAMNet Embeddings</h3>
+<div class="venue">IEEE QPAIN 2026, Chittagong</div>
+<div class="meta">M. Al Amin, M. A. H. Kanon, and M. M. Rahman. pp. 1&ndash;6.</div>
+<a class="lnk" href="https://doi.org/10.1109/QPAIN69676.2026.11546080" target="_blank" rel="noopener">IEEE Xplore</a>
+</div>
+<div class="pub">
+<h3>Machine Learning-Based Optical Quality Classification of LEDs Using a Low-Cost Optical Characterization System<span class="badge">under review</span></h3>
+<div class="venue">ICECE 2026, Dhaka</div>
+<div class="meta">M. A. H. Kanon, M. A. Islam, I. Ahmad, S. A. Rifat, and S. T. Islam</div>
+</div>
+</section>
 
-    <div class="pub">
-      <span class="idx">03</span>
-      <div>
-        <h3>Design and Implementation of a Dual-Mode Floor Mopping Robot</h3>
-        <div class="venue">IEEE RAAICON 2025</div>
-        <div class="meta">M. A. H. Kanon <em>et al.</em>, 2025 IEEE 4th Int. Conf. Robotics, Automation, AI &amp; IoT, Dhaka, Bangladesh, 2025, pp. 421&ndash;426.</div>
-        <a class="link" href="https://doi.org/10.1109/RAAICON69033.2025.11502377" target="_blank" rel="noopener">View on IEEE Xplore &rarr;</a>
-      </div>
-    </div>
+<section id="projects">
+<h2>Selected projects</h2>
+<div class="pgrid">
+<div class="pc"><small>Level 4, Term 2</small><h3>RTL-to-GDSII implementation of an optimised MAC unit</h3><p>Parameterized multiply-accumulate unit taken from RTL to GDSII on two flows: commercial Cadence Genus/Innovus (GPDK045, 45 nm) and open-source OpenROAD (IHP SG13G2, 130 nm). Extended into the ICECE 2026 paper above.</p><span class="s">SystemVerilog, Cadence Genus/Innovus, OpenROAD</span></div>
+<div class="pc"><small>Level 4, Term 2</small><h3>Optical quality classification of LEDs</h3><p>Low-cost measurement setup with a BPW34 photodiode and TCS34725 sensor on Arduino, feeding feature-engineered KNN and Random Forest classifiers, with a Streamlit interface. Extended into the ICECE 2026 paper above.</p><span class="s">Python (scikit-learn, pandas), Streamlit, Arduino, PySerial</span></div>
+<div class="pc"><small>Level 4, Term 2</small><h3>Electrical services design, 10-storey residential building</h3><p>Load estimation, wiring, and distribution design for a multi-storied residential building, drawn in AutoCAD.</p><span class="s">AutoCAD, load estimation, distribution design</span></div>
+<div class="pc"><small>Level 4, Term 1</small><h3>Class-A RF power amplifier, 433 MHz</h3><p>Cadence Virtuoso (90 nm gpdk090): 10.11 dB gain, 18.01 dBm P<sub>sat</sub>, 7.52% PAE, S<sub>11</sub> of about &minus;33.5 dB.</p><span class="s">Cadence Virtuoso, RF design, QUCS Studio</span><br><a class="lnk" href="https://github.com/mohammad-al-hosan/Class_A_RF_Power_Amplifier_433MHz.git" target="_blank" rel="noopener">GitHub</a></div>
+<div class="pc"><small>Level 4, Term 1</small><h3>IoT fruit storage monitor</h3><p>Arduino Mega with ESP8266, DHT22 and MQ135 sensing, relay-driven Peltier cooling and misting, cloud logging with remote override.</p><span class="s">Embedded systems, IoT</span><br><a class="lnk" href="https://github.com/mohammad-al-hosan/IOT_Fruit_Storage_System.git" target="_blank" rel="noopener">GitHub</a></div>
+<div class="pc"><small>Level 3, Term 1</small><h3>Fast-decoupled load flow</h3><p>MATLAB implementation on IEEE 4 to 30 bus systems; faster convergence than Newton&ndash;Raphson at comparable accuracy.</p><span class="s">MATLAB, power systems</span></div>
+<div class="pc"><small>Level 3, Term 2</small><h3>UART in Verilog on FPGA</h3><p>Moore FSM transmitter and receiver with parity checking, verified by testbench and demonstrated on CPLD/FPGA hardware.</p><span class="s">Verilog, FPGA</span></div>
+</div>
+<div style="text-align:center;margin-top:24px"><button class="tb" id="tb" type="button" aria-expanded="false" aria-controls="tl">Show earlier projects (Level 2 to 3)</button></div>
+<div id="tl">
+<div class="tl-h">Level 3, Term 2</div>
+<div class="tp">Autonomous mop bot<i>Ultrasonic obstacle avoidance; extended into the RAAICON 2025 paper.</i></div>
+<div class="tp">Smart-grid UPS with bidirectional inverter<i>Push&ndash;pull inverter with solar charging and automatic load shifting.</i></div>
+<div class="tl-h">Level 3, Term 1</div>
+<div class="tp">Low-power FM transmitter<i>Electret microphone front end, 2N2222 amplifier, tunable LC oscillator.</i></div>
+<div class="tp">Pulmonary disease detection with MFCC and KNN<i>Respiratory sound classification; extended into the QPAIN 2026 paper.</i></div>
+<div class="tl-h">Level 2</div>
+<div class="tp">PSpice PID controller design and tuning<i>Op-amp P/I/D blocks evaluated on step, square, triangular, and sinusoidal inputs.</i></div>
+<div class="tp">Induction motor rewinding and parameter measurement<i>Equivalent-circuit extraction from DC, no-load, and blocked-rotor tests.</i></div>
+<div class="tp">2D Poisson equation by finite differences<i>MATLAB electrostatic potential and field visualization for varying boundary conditions.</i></div>
+</div>
+</section>
 
-    <div class="pub">
-      <span class="idx">04</span>
-      <div>
-        <h3>Bridging Spectral Specificity and Semantic Generalization for Respiratory Sound Classification: A Comparative Study of MFCCs and Augmented YAMNet Embeddings</h3>
-        <div class="venue">IEEE QPAIN 2026</div>
-        <div class="meta">Md. Al Amin, M. A. H. Kanon, Md. Muaz Rahman, 2026 IEEE 2nd Int. Conf. Quantum Photonics, AI &amp; Networking, Chittagong, Bangladesh, 2026, pp. 1&ndash;6.</div>
-        <a class="link" href="https://doi.org/10.1109/QPAIN69676.2026.11546080" target="_blank" rel="noopener">View on IEEE Xplore &rarr;</a>
-      </div>
-    </div>
-  </section>
+<section id="more">
+<h2>Awards, skills, and service</h2>
+<div class="col">
+<p class="sub">Awards and scholarships</p>
+<div class="row"><div>Dean's List Award<small>BUET. GPA of 3.75 or higher across two consecutive regular terms.</small></div><span class="d">2026</span></div>
+<div class="row"><div>University Merit Scholarship<small>BUET. Perfect 4.00 GPA in Level-4 Term-I and Term-II.</small></div><span class="d">2025&ndash;26</span></div>
+<div class="row"><div>University Stipend Scholarship<small>BUET. GPA of 3.92 in Level-3 Term-II.</small></div><span class="d">2025</span></div>
+<div class="row"><div>Government Board Scholarship, SSC<small>Board of Intermediate and Secondary Education, Chattogram.</small></div><span class="d">2018</span></div>
 
-  <!-- ================= ONGOING RESEARCH ================= -->
-  <section id="ongoing">
-    <div class="sec-head"><span class="sec-num">05</span><h2 class="sec-title">Ongoing Research Activities</h2></div>
-    <div class="ongoing-grid">
-      <div class="ongoing-card">
-        <h3>Dual-Flow RTL-to-GDSII Implementation of a Parameterized MAC Unit</h3>
-        <p>A comparative study of commercial and open-source EDA toolchains for a parameterized multiply-accumulate unit, from RTL through GDSII.</p>
-      </div>
-      <div class="ongoing-card">
-        <h3>A Portable Measurement Architecture for Multi-Modal LED Analysis</h3>
-        <p>Scalable data normalization framework for multi-modal LED characterization measurements.</p>
-      </div>
-    </div>
-  </section>
+<p class="sub">Technical skills</p>
+<dl class="skills" style="margin:0">
+<dt>Materials and device simulation</dt><dd>Quantum ESPRESSO, Silvaco TCAD, Materials Studio, VESTA</dd>
+<dt>EDA and circuit design</dt><dd>Cadence tools, Quartus, Proteus, OrCAD PSpice, LTSpice</dd>
+<dt>Hardware and programming</dt><dd>FPGA, Arduino, STM32; Python, MATLAB, C/C++, Verilog/SystemVerilog</dd>
+<dt>Documentation</dt><dd>LaTeX (Overleaf, TeXstudio), MS Word, MS PowerPoint</dd>
+</dl>
 
-  <!-- ================= PROJECTS ================= -->
-  <section id="projects">
-    <div class="sec-head"><span class="sec-num">06</span><h2 class="sec-title">Undergraduate Projects</h2></div>
+<p class="sub">Peer review</p>
+<div class="row"><div>Journal reviewer, <i>Physica Scripta</i><small>IOP Publishing</small></div><span class="d">Present</span></div>
+<div class="row"><div>Conference reviewer, IEEE COMPAS<small>IEEE CS BDC, University of Dhaka</small></div><span class="d">2026</span></div>
 
-    <div class="project-featured">
-      <div class="pcard">
-        <span class="term">Level 4 &middot; Term 1</span>
-        <h3>Class-A Common-Emitter RF Power Amplifier, 433&nbsp;MHz ISM Band</h3>
-        <p>Designed in Cadence Virtuoso (90nm gpdk090): 10.11&nbsp;dB gain, 18.01&nbsp;dBm P<sub>sat</sub>, 7.52% PAE, with S&#8321;&#8321;&nbsp;&asymp;&nbsp;&minus;33.5&nbsp;dB matching.</p>
-        <span class="stack">Cadence Virtuoso &middot; RF Design &middot; QUCS Studio</span><br/>
-        <a class="repo-link" href="https://github.com/mohammad-al-hosan/Class_A_RF_Power_Amplifier_433MHz.git" target="_blank" rel="noopener">View on GitHub &rarr;</a>
-      </div>
+<p class="sub">Internship</p>
+<div class="row"><div>Inovace Technologies Ltd.<small>Hardware&ndash;software integration for biometric devices with R&amp;D; observed QC and RMA workflows.</small></div><span class="d">Nov 2025</span></div>
 
-      <div class="pcard">
-        <span class="term">Level 4 &middot; Term 1</span>
-        <h3>IoT-Based Real-Time Fruit Storage Monitoring System</h3>
-        <p>Arduino Mega + ESP8266, DHT22/MQ135 sensing, relay-controlled Peltier cooling and misting, with Arduino IoT Cloud logging and remote override.</p>
-        <span class="stack">Embedded Systems &middot; IoT &middot; Cloud Integration</span><br/>
-        <a class="repo-link" href="https://github.com/mohammad-al-hosan/IOT_Fruit_Storage_System.git" target="_blank" rel="noopener">View on GitHub &rarr;</a>
-      </div>
+<p class="sub">Language proficiency</p>
+<div class="row"><div>IELTS Academic, overall 7.0 (C1)<small>Listening 7.5, Reading 8.0, Writing 6.5, Speaking 6.5</small></div></div>
+</div>
+</section>
 
-      <div class="pcard">
-        <span class="term">Level 3 &middot; Term 1</span>
-        <h3>Fast-Decoupled Load Flow (FDLF) Study</h3>
-        <p>Implemented FDLF in MATLAB across IEEE 4&ndash;30 bus test systems; faster convergence than Newton&ndash;Raphson at comparable accuracy.</p>
-        <span class="stack">MATLAB &middot; Power Systems</span>
-      </div>
-
-      <div class="pcard">
-        <span class="term">Level 3 &middot; Term 2</span>
-        <h3>UART Design in Verilog for FPGA Implementation</h3>
-        <p>Moore FSM-based Tx/Rx modules with parity checking; verified via testbench simulation and demonstrated on CPLD/FPGA hardware.</p>
-        <span class="stack">Verilog &middot; FPGA</span>
-      </div>
-    </div>
-
-    <div class="timeline-toggle">
-      <button id="toggleTimeline" type="button" aria-expanded="false" aria-controls="timeline">
-        Show full undergraduate project timeline (Level 2&ndash;4)
-      </button>
-    </div>
-
-    <div id="timeline">
-      <div class="term-block">
-        <h4>Level 3 &middot; Term 2</h4>
-        <div class="term-project">
-          <span class="tname">Mop Bot &mdash; Autonomous Floor Cleaner</span>
-          <span class="tdesc">Ultrasonic sensing and obstacle avoidance; later extended into the IEEE RAAICON 2025 paper above with Bluetooth control and gyroscope-assisted navigation.</span>
-        </div>
-        <div class="term-project">
-          <span class="tname">Smart Grid Type UPS Using Bidirectional Inverter</span>
-          <span class="tdesc">Push&ndash;pull inverter with solar charging, automatic load shifting, and validated frequency/load stability.</span>
-        </div>
-      </div>
-
-      <div class="term-block">
-        <h4>Level 3 &middot; Term 1</h4>
-        <div class="term-project">
-          <span class="tname">Low-Power FM Transmitter for Wireless Audio Communication</span>
-          <span class="tdesc">Electret microphone front-end, 2N2222 amplifier stage, tunable LC oscillator for short-range FM audio transmission.</span>
-        </div>
-        <div class="term-project">
-          <span class="tname">Pulmonary Disease Detection Using MFCC and KNN</span>
-          <span class="tdesc">MFCC feature extraction with a KNN classifier for respiratory sound classification; later extended into the IEEE QPAIN 2026 paper above.</span>
-        </div>
-      </div>
-
-      <div class="term-block">
-        <h4>Level 2 &middot; Term 2</h4>
-        <div class="term-project">
-          <span class="tname">PSpice-Based PID Controller Design and Tuning</span>
-          <span class="tdesc">Op-amp based P/I/D blocks with manually tuned gains, evaluated across step, square, triangular, and sinusoidal inputs.</span>
-        </div>
-        <div class="term-project">
-          <span class="tname">Squirrel-Cage Induction Motor Rewinding &amp; Parameter Measurement</span>
-          <span class="tdesc">Full rewind and equivalent-circuit parameter extraction via DC, no-load, and blocked-rotor tests; torque&ndash;speed curves in MATLAB Simulink.</span>
-        </div>
-      </div>
-
-      <div class="term-block">
-        <h4>Level 2 &middot; Term 1</h4>
-        <div class="term-project">
-          <span class="tname">Numerical Solution of the 2D Poisson's Equation</span>
-          <span class="tdesc">Finite Difference Method implementation in MATLAB for electrostatic potential and field-vector visualization under varying charge/boundary conditions.</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= CONTACT ================= -->
-  <footer id="contact">
-    <div class="sec-head"><span class="sec-num">07</span><h2 class="sec-title">Contact</h2></div>
-    <p class="about-text">
-      I'm looking to pursue a Ph.D. in semiconductor device physics, computational nanoelectronics,
-      or 2D materials research. Feel free to reach out &mdash; I'm happy to share my full CV, thesis
-      progress, or code for any of the projects above.
-    </p>
-    <div class="contact-row">
-      <a href="mailto:2006090@eee.buet.ac.bd" class="email-link">2006090@eee.buet.ac.bd</a>
-      <a href="https://www.linkedin.com/in/md-al-hosan/" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="https://github.com/mohammad-al-hosan" target="_blank" rel="noopener">GitHub</a>
-      <a href="CV_MohammadAlHosanKanon.pdf">Download CV (PDF)</a>
-    </div>
-    <p class="fine">&copy; 2026 Mohammad Al Hosan Kanon. Built with plain HTML/CSS, hosted on GitHub Pages.</p>
-  </footer>
-
+<footer id="contact">
+<h2>Contact</h2>
+<p class="txt">I am applying for Ph.D. positions starting Fall 2027 in semiconductor device physics, 2D materials, and computational nanoelectronics. Email me for my CV, thesis results, or code from any project above.</p>
+<div class="crow">
+<a href="mailto:md.alhosan.buet@gmail.com">md.alhosan.buet@gmail.com</a>
+<a href="https://www.linkedin.com/in/md-al-hosan" target="_blank" rel="noopener">LinkedIn</a>
+<a href="https://scholar.google.com/citations?user=BAxNnlMAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>
+<a href="https://github.com/mohammad-al-hosan" target="_blank" rel="noopener">GitHub</a>
+<a href="CV_MohammadAlHosanKanon.pdf">CV (PDF)</a>
+</div>
+<p class="fine">&copy; 2026 Mohammad Al Hosan Kanon. Hosted on GitHub Pages.</p>
+</footer>
 </main>
 
 <script>
-  (function(){
-    var root = document.documentElement;
-    var toggle = document.getElementById('themeToggle');
-    var saved = localStorage.getItem('theme');
-    if(saved === 'dark'){
-      root.setAttribute('data-theme','dark');
-      toggle.textContent = '\u2600';
-    }
-    toggle.addEventListener('click', function(){
-      var isDark = root.getAttribute('data-theme') === 'dark';
-      if(isDark){
-        root.removeAttribute('data-theme');
-        localStorage.setItem('theme','light');
-        toggle.textContent = '\u263D';
-      } else {
-        root.setAttribute('data-theme','dark');
-        localStorage.setItem('theme','dark');
-        toggle.textContent = '\u2600';
-      }
-    });
-
-    var EMAIL = '2006090@eee.buet.ac.bd';
-    var GMAIL_COMPOSE = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(EMAIL);
-
-    function openEmail(e){
-      if(e) e.preventDefault();
-      var openedApp = false;
-      function onBlur(){ openedApp = true; }
-      window.addEventListener('blur', onBlur);
-
-      window.location.href = 'mailto:' + EMAIL;
-
-      setTimeout(function(){
-        window.removeEventListener('blur', onBlur);
-        if(!openedApp){
-          window.open(GMAIL_COMPOSE, '_blank');
-        }
-      }, 700);
-    }
-
-    document.querySelectorAll('a.email-link').forEach(function(link){
-      link.addEventListener('click', openEmail);
-    });
-
-    var btn = document.getElementById('toggleTimeline');
-    var panel = document.getElementById('timeline');
-    btn.addEventListener('click', function(){
-      var isOpen = panel.classList.toggle('open');
-      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      btn.textContent = isOpen
-        ? 'Hide full undergraduate project timeline'
-        : 'Show full undergraduate project timeline (Level 2\u20134)';
-    });
-  })();
+(function(){
+var r=document.documentElement,t=document.getElementById('tt');
+function store(v){try{localStorage.setItem('theme',v)}catch(e){}}
+var s=null;try{s=localStorage.getItem('theme')}catch(e){}
+function dark(){return r.getAttribute('data-theme')==='dark'||(!r.getAttribute('data-theme')&&matchMedia('(prefers-color-scheme: dark)').matches)}
+function icon(){t.textContent=dark()?'\u2600':'\u263D'}
+if(s)r.setAttribute('data-theme',s);icon();
+t.onclick=function(){var v=dark()?'light':'dark';r.setAttribute('data-theme',v);store(v);icon()};
+var b=document.getElementById('tb'),p=document.getElementById('tl');
+b.onclick=function(){var o=p.classList.toggle('open');b.setAttribute('aria-expanded',o);b.textContent=o?'Hide earlier projects':'Show earlier projects (Level 2 to 3)'};
+})();
 </script>
-
 </body>
 </html>

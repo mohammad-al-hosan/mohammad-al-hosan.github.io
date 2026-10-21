@@ -1,21 +1,63 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RTL-to-GDSII Implementation of an Optimised Multiply-Accumulate Unit | M. A. H. Kanon</title>
-<meta name="description" content="A parameterized MAC unit taken from RTL to GDSII on two independent flows, one commercial and one open-source, to check whether synthesis conclusions hold across toolchains.">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,72,400;0,72,500;0,72,600;1,72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/style.css"></head><body>
-<header class="nav"><div class="nav-in"><span class="mark"><b>M. A. H. Kanon</b> / EEE, BUET</span>
-<nav><a href="../index.html">Home</a><a href="../index.html#research">Research</a><a href="../index.html#projects">Projects</a><a href="../index.html#contact">Contact</a><button class="tt" id="tt" type="button" aria-label="Toggle dark mode">&#9789;</button></nav></div></header>
-<main class="wrap">
-<a class="back" href="../index.html#projects">&larr; Back to portfolio</a>
-<div class="ph"><div class="kind">Academic project &middot; Level 4, Term 2</div><h1>RTL-to-GDSII Implementation of an Optimised Multiply-Accumulate Unit</h1><p class="lede">A parameterized MAC unit taken from RTL to GDSII on two independent flows, one commercial and one open-source, to check whether synthesis conclusions hold across toolchains.</p>
-<div class="facts pf"><div class="fact"><b>2026</b><span>Year</span></div><div class="fact"><b>Cadence Genus/Innovus, GPDK045 (45&nbsp;nm)</b><span>Flow A</span></div><div class="fact"><b>OpenROAD, IHP SG13G2 (130&nbsp;nm)</b><span>Flow B</span></div><div class="fact"><b>ICECE 2026 paper, under review</b><span>Outcome</span></div></div></div>
-<section><h2>Motivation</h2><div class="card"><ul><li>The MAC is the core of DSP and ML accelerators; its area, timing, and power depend heavily on synthesis constraints.</li><li>Most results come from a single toolchain. Repeating the study on a second flow tests whether the trends are real or tool artifacts.</li></ul></div></section>
-<section><h2>How it was done</h2><ol class="steps"><li><h3>Parameterized RTL</h3><ul><li>SystemVerilog MAC unit with configurable parameters.</li></ul></li><li><h3>Synthesis constraint sweep</h3><ul><li>Constraints varied and the resulting area, timing, and power compared.</li></ul></li><li><h3>Physical implementation</h3><ul><li>Place and route to GDSII in Innovus on GPDK045 and in OpenROAD on IHP SG13G2.</li></ul></li><li><h3>Cross-toolchain validation</h3><ul><li>Same design and sweeps on both flows to compare trends.</li></ul></li></ol></section>
-<section><h2>Figures</h2><div class="figs"><figure class="wide"><img src="../assets/img/mac-unit-rtl-to-gdsii/fig1-flow.png" alt="Design flow" loading="lazy"><figcaption><b>Design flow.</b> RTL-to-GDSII flow on both toolchains.</figcaption></figure><figure class=""><img src="../assets/img/mac-unit-rtl-to-gdsii/fig2-layout.png" alt="Final layout" loading="lazy"><figcaption><b>Final layout.</b> GDSII layout of the MAC unit.</figcaption></figure><figure class=""><img src="../assets/img/mac-unit-rtl-to-gdsii/fig3-sweep.png" alt="Constraint sweep" loading="lazy"><figcaption><b>Constraint sweep.</b> Area/timing trade-off from the synthesis sweep.</figcaption></figure></div></section>
-
-<section><h2>Tools</h2><div class="chips"><span class="chip">SystemVerilog</span><span class="chip">Cadence Genus</span><span class="chip">Cadence Innovus</span><span class="chip">OpenROAD</span></div></section>
-
-</main><footer><div class="wrap"><p class="fine">&copy; Mohammad Al Hosan Kanon &middot; <a href="../index.html">Portfolio</a></p></div></footer>
-<script src="../assets/site.js"></script></body></html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RTL-to-GDSII Implementation of an Optimised Multiply-Accumulate Unit</title><style>
+:root{--ink:#111;--red:#8b0000;--blue:#000080;--muted:#555;--rule:#ccc;--serif:Georgia,'Times New Roman',serif;--mono:'Courier New',monospace}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:#fff;color:var(--ink);font:400 1rem/1.7 var(--serif)}
+.wrap{max-width:1000px;margin:0 auto;padding:0 1.25rem}
+a{color:inherit}
+.top{border-bottom:1px solid var(--ink);font:400 .8rem var(--mono);padding:.7rem 0}
+.top .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.top a{text-decoration:none;border-bottom:1px solid var(--ink)}
+.hero{padding:2rem 0 2.25rem;border-bottom:1px solid var(--ink)}
+.tag{font:600 .75rem var(--mono);color:var(--red);letter-spacing:.05em;text-transform:uppercase;margin:0 0 .6rem}
+h1{font:700 clamp(1.7rem,3.6vw,2.6rem)/1.2 var(--serif);margin:0 0 .6rem}
+.sub{font-style:italic;color:var(--muted);margin:0 0 1.5rem}
+.lead{max-width:760px;margin:0}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));border:1px solid var(--ink);margin-top:1.5rem}
+.stats div{padding:.9rem 1rem;border-right:1px solid var(--ink);border-bottom:1px solid var(--ink);margin:0 -1px -1px 0}
+.stats b{display:block;font:700 1.5rem/1.2 var(--serif)}
+.stats span{font:400 .75rem/1.4 var(--mono);color:var(--muted)}
+.sec{padding:2.5rem 0;border-bottom:1px solid var(--ink)}
+h2{font:700 1.5rem var(--serif);margin:0 0 1.25rem}
+h2 small{font:600 .8rem var(--mono);color:var(--red);margin-right:.7rem}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.card{border:1px solid var(--ink);padding:1rem 1.1rem}
+.card h3{font:700 .8rem var(--mono);margin:0 0 .4rem;text-transform:uppercase;color:var(--blue)}
+.card p{margin:0;font-size:.9rem}
+.flow{display:flex;flex-wrap:wrap;gap:.5rem;align-items:stretch}
+.step{flex:1 1 130px;border:1px solid var(--ink);padding:.7rem .8rem;position:relative}
+.step:not(:last-child)::after{content:"\2192";position:absolute;right:-.85rem;top:50%;transform:translateY(-50%);background:#fff;font:700 1rem var(--mono);z-index:1;padding:0 .1rem}
+.step i{font:600 .7rem var(--mono);font-style:normal;color:var(--red)}
+.step b{display:block;font-size:.9rem;line-height:1.3;margin:.15rem 0 .3rem}
+.step span{font-size:.76rem;line-height:1.45;color:var(--muted);display:block}
+.find{list-style:none;margin:0;padding:0;counter-reset:f}
+.find li{counter-increment:f;display:grid;grid-template-columns:2.6rem 1fr;gap:.8rem;padding:.9rem 0;border-bottom:1px dotted var(--rule)}
+.find li::before{content:counter(f);font:700 1.1rem var(--mono);background:var(--ink);color:#fff;text-align:center;height:2.1rem;line-height:2.1rem}
+.find b{display:block}.find span{font-size:.9rem;color:var(--muted)}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:.88rem}
+th,td{border:1px solid var(--ink);padding:.5rem .75rem;text-align:left}
+th{background:var(--ink);color:#fff;font:600 .78rem var(--mono)}
+td:not(:first-child){font-family:var(--mono)}
+.imgs{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:1.25rem}.figs{padding:2rem 0;background:#f6f6f2}
+figure{margin:0;border:1px solid var(--ink);display:flex;flex-direction:column}
+figure img{display:block;width:100%;max-height:420px;object-fit:contain;background:#fff;padding:.4rem}
+.miss{display:none;padding:2.5rem 1rem;text-align:center;font:400 .75rem var(--mono);color:var(--red);border-bottom:1px dashed var(--red);word-break:break-all}
+figcaption{font-size:.78rem;color:var(--muted);padding:.5rem .75rem;border-top:1px solid var(--rule)}
+figcaption b{color:var(--red);font-family:var(--mono)}
+.note{border-left:4px solid var(--red);padding:.3rem 0 .3rem 1rem;font-size:.9rem;margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem}.chips span{font:400 .78rem var(--mono);border:1px solid var(--ink);padding:.2rem .6rem}
+footer{background:var(--ink);color:#fff;text-align:center;padding:1.5rem 0;font:400 .8rem var(--mono)}
+footer p{margin:.2rem 0}footer a{color:#fff}
+@media(max-width:800px){.imgs{grid-template-columns:1fr}.three{grid-template-columns:1fr}.step:not(:last-child)::after{display:none}}
+</style></head><body>
+<div class="top"><div class="wrap"><span>Mohammad Al Hosan Kanon &middot; Academic Project</span><a href="index.html">&larr; All projects</a></div></div>
+<header class="hero"><div class="wrap"><p class="tag">RTL-to-GDSII &middot; 2026</p><h1>RTL-to-GDSII Implementation of an Optimised Multiply-Accumulate Unit</h1><p class="sub">Cadence GPDK045 (45 nm) and OpenROAD IHP SG13G2 (130 nm) cross-toolchain validation</p>
+<p class="lead">A parameterized 16-bit multiply-accumulate unit taken from SystemVerilog through synthesis, place-and-route and DRC-clean layout in Cadence GPDK045, then re-implemented independently in OpenROAD on IHP SG13G2.</p><div class="stats"><div><b>288 / 288</b><span>coverage bins at 100%</span></div><div><b>778</b><span>cells, Cadence netlist</span></div><div><b>47 &times; 47 &micro;m</b><span>final die, 94.547% utilisation</span></div><div><b>0</b><span>DRC violations</span></div><div><b>1,847</b><span>cells, OpenROAD netlist</span></div></div></div></header>
+<section class="sec figs"><div class="wrap"><div class="imgs"><figure><img src='images/mac-final-layout.png' alt='Final Cadence layout at 94.547% density, zero DRC violations.' onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><div class='miss'>Add image: images/mac-final-layout.png</div><figcaption><b>Fig 1.</b> Final Cadence layout at 94.547% density, zero DRC violations.</figcaption></figure><figure><img src='images/mac-openroad-gdsii.png' alt='Final OpenROAD GDSII on IHP SG13G2, viewed in KLayout.' onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><div class='miss'>Add image: images/mac-openroad-gdsii.png</div><figcaption><b>Fig 2.</b> Final OpenROAD GDSII on IHP SG13G2, viewed in KLayout.</figcaption></figure><figure><img src='images/mac-pap-vs-frequency.png' alt='Power-area-period product vs clock frequency, minimum at 100 MHz.' onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><div class='miss'>Add image: images/mac-pap-vs-frequency.png</div><figcaption><b>Fig 3.</b> Power-area-period product vs clock frequency, minimum at 100 MHz.</figcaption></figure><figure><img src='images/mac-input-delay-sweep.png' alt='Input-delay sweep at 100 MHz showing the non-monotonic response.' onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><div class='miss'>Add image: images/mac-input-delay-sweep.png</div><figcaption><b>Fig 4.</b> Input-delay sweep at 100 MHz showing the non-monotonic response.</figcaption></figure></div></div></section>
+<section class="sec"><div class="wrap"><h2>Workflow</h2><div class="flow"><div class='step'><i>STEP 1</i><b>RTL design</b><span>16-bit operands, 40-bit accumulator, ready-valid handshake, 3-stage datapath</span></div><div class='step'><i>STEP 2</i><b>Verification</b><span>8 directed tests, then constrained-random with 288 cross-coverage bins</span></div><div class='step'><i>STEP 3</i><b>Synthesis sweeps</b><span>Frequency, input delay, output delay; power, area, power-area-period</span></div><div class='step'><i>STEP 4</i><b>Physical design</b><span>Floorplan, power mesh, placement, CTS, routing</span></div><div class='step'><i>STEP 5</i><b>Die compression</b><span>53 &rarr; 47 &micro;m until timing closure fails</span></div><div class='step'><i>STEP 6</i><b>OpenROAD check</b><span>Same RTL on IHP 130 nm with Yosys/ABC</span></div></div></div></section>
+<section class="sec"><div class="wrap"><h2>Key findings</h2><ol class="find"><li><div><b>Constraints do not respond alike</b><span>Input-delay power and area have an interior minimum at 2 ns. Output delay rises monotonically from its minimum at 0.1 ns.</span></div></li><li><div><b>100 MHz minimises power-area-period</b><span>Area stays flat below 100 MHz and rises sharply above it as larger, faster cells are inserted.</span></div></li><li><div><b>Same RTL, different netlists</b><span>Cadence maps the multiplier to a carry-save adder tree (778 cells); OpenROAD gives 1,847 cells.</span></div></li></ol></div></section>
+<section class="sec"><div class="wrap"><h2>Cadence vs OpenROAD</h2><div class="tw"><table><tr><th>Metric</th><th>Cadence (45 nm)</th><th>OpenROAD (130 nm)</th></tr><tr><td>Mapped cells</td><td>778</td><td>1,847</td></tr><tr><td>Core utilisation</td><td>94.547%</td><td>73.2%</td></tr><tr><td>Clock insertion delay</td><td>1.5 ns</td><td>1.2 ns</td></tr><tr><td>Clock skew</td><td>20 ps</td><td>45 ps</td></tr><tr><td>DRC violations</td><td>0</td><td>0</td></tr><tr><td>Runtime, RTL to GDS</td><td>~1.5 hr</td><td>~45 min</td></tr></table></div></div></section>
+<section class="sec"><div class="wrap"><h2>Note</h2><p class="note">Sequential tuning worked here, likely because the design is small; a joint sweep is future work. Coverage at 100% means every defined bin was hit, not that the design is exhaustively verified. The two flows use different processes, libraries and placement densities, so cell counts and utilisation are not a measure of relative tool quality. Only the nominal PVT corner was studied.</p><div class="chips" style="margin-top:1.25rem"><span>SystemVerilog</span><span>Cadence Genus</span><span>Cadence Innovus</span><span>GPDK045</span><span>OpenROAD</span><span>Yosys / ABC</span><span>IHP SG13G2</span><span>KLayout</span></div></div></section>
+<footer><p>Paper under review, ICECE 2026</p><p>md.alhosan.buet@gmail.com &middot; <a href="https://mdkanon.io">mdkanon.io</a></p></footer>
+</body></html>

@@ -1,519 +1,271 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sequential Electrostatic Engineering in DG-MOSFETs</title>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sequential Mitigation of Short-Channel Effects in 20 nm DG-MOSFETs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+:root{--paper:#f9f9f7;--ink:#111;--red:#8b0000;--blue:#000080;--muted:#555;--rule:#d1d1cc;--serif:'Merriweather',Georgia,serif;--head:'Playfair Display',Georgia,serif;--mono:'Source Code Pro',monospace}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:4.5rem}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 1rem/1.75 var(--serif);-webkit-font-smoothing:antialiased}
+sub,sup{line-height:0}a{color:inherit}
+.wrap{max-width:1200px;margin:0 auto;padding:0 1.25rem}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+/* sticky stage nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(249,249,247,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--ink)}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:1rem;min-height:3rem}
+.top b{font:600 .8rem var(--mono)}
+.top nav{display:flex;gap:.25rem}
+.top nav a{font:400 .8rem var(--mono);text-decoration:none;padding:.3rem .7rem;border:1px solid transparent}
+.top nav a:hover{border-color:var(--ink)}
+.top nav a.on{background:var(--ink);color:var(--paper)}
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        paper: '#f9f9f7',
-                        ink: '#111111',
-                        accentRed: '#8b0000',
-                        accentBlue: '#000080',
-                        muted: '#555555'
-                    },
-                    fontFamily: {
-                        serifBody: ['Merriweather', 'serif'],
-                        serifHead: ['Playfair Display', 'serif'],
-                        mono: ['Source Code Pro', 'monospace'],
-                    },
-                    borderWidth: {
-                        'DEFAULT': '1px',
-                        '2': '2px',
-                        '3': '3px',
-                    }
-                }
-            }
-        }
-    </script>
+/* hero */
+.hero{padding:3.5rem 0 2rem;border-bottom:1px solid var(--ink)}
+.hero h1{font:700 clamp(2rem,5vw,3.6rem)/1.12 var(--head);margin:0 0 1rem;max-width:20ch}
+.hero .sub{font-style:italic;color:var(--muted);font-size:1.1rem;max-width:62ch;margin:0 0 2rem}
+.abstract{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:2.5rem;align-items:start}
+.abstract p{margin:0;font-size:.92rem;text-align:justify;hyphens:auto}
+.abstract p::first-letter{font:700 3.4rem/.9 var(--head);float:left;padding:.3rem .5rem 0 0}
+.path{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;font:600 .78rem var(--mono)}
+.path span{border:1px solid var(--ink);padding:.25rem .6rem;background:#fff}
+.path i{font-style:normal;color:var(--muted)}
+.path-note{font:400 .78rem/1.5 var(--mono);color:var(--muted);margin:.8rem 0 0}
 
-    <style>
-        body {
-            background-color: #f9f9f7;
-            color: #111111;
-        }
+/* stage viewer */
+.viewer{padding:2.5rem 0 3.5rem;border-bottom:1px solid var(--ink)}
+.vhead{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem}
+.vhead h2,.sec h2{font:700 clamp(1.5rem,3vw,2.1rem)/1.2 var(--head);margin:0}
+.vhead p{margin:0;font:400 .78rem var(--mono);color:var(--muted)}
+.rail{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-bottom:1rem}
+.tab{all:unset;cursor:pointer;display:block;border:1px solid var(--ink);background:#fff;padding:.55rem .8rem .8rem;position:relative;overflow:hidden}
+.tab b{display:block;font:600 .95rem var(--mono)}
+.tab small{display:block;font:400 .72rem/1.3 var(--serif);color:var(--muted)}
+.tab i{position:absolute;left:0;bottom:0;height:4px;width:0;background:var(--red)}
+.tab.done i{width:100%;background:var(--ink)}
+.tab.on{background:var(--ink);color:var(--paper)}.tab.on small{color:#bbb}
+.tab:hover:not(.on){background:#efefe9}
+.stage{display:grid;position:relative;overflow:hidden;border:1px solid var(--ink);background:var(--paper);box-shadow:5px 5px 0 rgba(17,17,17,.12)}
+.slide{grid-area:1/1;display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);background:var(--paper);visibility:hidden}
+.slide.on{visibility:visible}
+.pane{padding:1.25rem;border-right:1px solid var(--ink);background:#f1f1ec;display:grid;gap:1rem;align-content:start}
+.pane.two{grid-template-columns:1fr 1fr}
+.story{padding:1.5rem 1.5rem 1.25rem;display:flex;flex-direction:column;gap:1rem}
+.kick{font:400 .78rem var(--mono);color:var(--muted);margin:0}
+.story h3{font:700 1.35rem/1.3 var(--head);margin:0}
+.flow{margin:0;display:grid;gap:.6rem}
+.flow div{display:grid;grid-template-columns:4.6rem 1fr;gap:.75rem;border-left:4px solid var(--ink);padding:.15rem 0 .15rem .75rem}
+.flow div:nth-child(1){border-color:var(--red)}.flow div:nth-child(3){border-color:var(--blue)}
+.flow dt{font:600 .78rem/1.9 var(--mono)}
+.flow dd{margin:0;font-size:.85rem;line-height:1.6}
+.more{margin-top:auto;font:600 .8rem var(--mono);text-decoration:none;border-bottom:2px solid var(--ink);align-self:flex-start}
+.ctrl{display:flex;justify-content:space-between;align-items:center;gap:.5rem;margin-top:1rem;flex-wrap:wrap}
+.ctrl div{display:flex;gap:.5rem}
+.btn{font:400 .8rem var(--mono);background:#fff;color:var(--ink);border:1px solid var(--ink);padding:.5rem 1rem;cursor:pointer}
+.btn:hover{background:var(--ink);color:var(--paper)}
+#count{font:400 .78rem var(--mono);color:var(--muted)}
 
-        /* Academic Print Styling */
-        .journal-border-top { border-top: 4px solid #111111; }
-        .journal-border-bottom { border-bottom: 2px solid #111111; }
-        .column-divider { column-rule: 1px solid #d1d1cc; }
-        
-        .figure-box {
-            background-color: #ffffff;
-            border: 1px solid #111111;
-            padding: 0.75rem;
-            box-shadow: 4px 4px 0px 0px rgba(17,17,17,0.1);
-            margin-bottom: 1.5rem;
-        }
+/* figures */
+.fig{margin:0;background:#fff;border:1px solid var(--ink);box-shadow:4px 4px 0 rgba(17,17,17,.1);display:flex;flex-direction:column}
+.fh{display:flex;gap:.6rem;align-items:baseline;padding:.5rem .75rem;border-bottom:1px solid var(--ink);background:var(--paper)}
+.fh b{font:600 .75rem var(--mono);color:var(--red);white-space:nowrap}
+.fh span{font:700 .9rem/1.3 var(--head)}
+.fi{all:unset;cursor:zoom-in;display:block;padding:.6rem;background:#fff}
+.fi img{display:block;width:100%;height:auto;max-height:340px;object-fit:contain}
+.fig figcaption{font-size:.78rem;line-height:1.55;color:var(--muted);padding:.6rem .75rem;border-top:1px solid #e5e5e5;margin-top:auto}
+dialog{border:1px solid var(--ink);padding:0;max-width:94vw;background:#fff}
+dialog::backdrop{background:rgba(0,0,0,.7)}
+dialog img{display:block;max-width:94vw;max-height:90vh}
 
-        .figure-box img {
-            width: 100%;
-            height: auto;
-            border: 1px solid #e5e5e5;
-        }
+/* detailed sections */
+.sec{padding:3.5rem 0;border-bottom:1px solid var(--ink)}
+.sec header{display:flex;gap:1.25rem;align-items:center;margin-bottom:1.5rem}
+.badge{font:700 1.1rem var(--mono);background:var(--ink);color:var(--paper);padding:.6rem .9rem;min-width:4.2rem;text-align:center}
+.sec header p{margin:.2rem 0 0;color:var(--muted);font-style:italic;font-size:.95rem}
+.glance{display:grid;grid-template-columns:repeat(3,1fr);margin-bottom:2rem;border:1px solid var(--ink);background:#fff}
+.glance div{padding:.9rem 1.1rem;border-right:1px solid var(--ink);font-size:.85rem;line-height:1.6}
+.glance div:last-child{border:0}
+.glance b{display:block;font:600 .8rem var(--mono);margin-bottom:.2rem}
+.glance div:nth-child(1) b{color:var(--red)}.glance div:nth-child(3) b{color:var(--blue)}
+.cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:2.5rem;margin-bottom:2rem;align-items:start}
+.cols.one{grid-template-columns:minmax(0,70ch)}
+.cols p{margin:0 0 1rem;text-align:justify;hyphens:auto;font-size:.95rem}
+.chartbox{background:#fff;border:1px solid var(--ink);box-shadow:4px 4px 0 rgba(17,17,17,.1)}
+.chartbox .cv{position:relative;height:330px;padding:1rem}
+.figgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:1.5rem;align-items:start}
 
-        .figure-caption {
-            font-family: 'Merriweather', serif;
-            font-size: 0.8rem;
-            color: #555555;
-            margin-top: 0.75rem;
-            line-height: 1.4;
-            border-top: 1px solid #e5e5e5;
-            padding-top: 0.5rem;
-        }
+/* wrap-up */
+.sum{padding:3.5rem 0 4rem}
+.sum h2{font:700 clamp(1.5rem,3vw,2.1rem) var(--head);margin:0 0 1.5rem}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:640px;background:#fff;font-size:.85rem;line-height:1.55}
+th,td{border:1px solid var(--ink);padding:.7rem .9rem;text-align:left;vertical-align:top}
+th{font:600 .78rem var(--mono);background:var(--ink);color:var(--paper)}
+td:first-child{font:600 .85rem var(--mono);white-space:nowrap}
+footer{background:var(--ink);color:var(--paper);padding:1.75rem 0;text-align:center;font:400 .8rem var(--mono)}
+footer p{margin:0;opacity:.85}
 
-        .figure-caption strong {
-            color: #111111;
-            font-family: 'Playfair Display', serif;
-        }
-
-        .drop-cap::first-letter {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
-            font-weight: 700;
-            float: left;
-            line-height: 1;
-            padding-right: 0.5rem;
-            color: #111111;
-        }
-
-        /* Chart Wrappers */
-        .chart-wrapper {
-            position: relative;
-            height: 350px;
-            width: 100%;
-            background: white;
-            border: 1px solid #111111;
-            padding: 1rem;
-            box-shadow: 4px 4px 0px 0px rgba(17,17,17,0.1);
-        }
-
-        /* Carousel / Stage Switcher Styles */
-        .stage-btn.active {
-            background-color: #111111;
-            color: #f9f9f7;
-            border-color: #111111;
-        }
-    </style>
+@media(max-width:860px){
+ .abstract,.cols{grid-template-columns:1fr}.slide{grid-template-columns:1fr}
+ .pane{border-right:0;border-bottom:1px solid var(--ink)}
+ .glance{grid-template-columns:1fr}.glance div{border-right:0;border-bottom:1px solid var(--ink)}
+ .top b{display:none}.tab small{display:none}.pane.two{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
 </head>
-<body class="font-serifBody text-ink antialiased selection:bg-accentRed selection:text-white">
+<body>
 
-    <!-- Journal Header -->
-    <header class="max-w-7xl mx-auto px-4 sm:px-8 pt-12 pb-6">
-        <div class="flex justify-between items-end border-b border-ink pb-2 mb-2">
-            <span class="font-mono text-xs uppercase tracking-widest">Journal of Applied Nanoelectronics</span>
-            <span class="font-mono text-xs uppercase tracking-widest">Vol. 42 &bull; Issue 08 &bull; 2026</span>
-        </div>
-        <div class="journal-border-top journal-border-bottom py-8 text-center">
-            <h1 class="font-serifHead text-4xl md:text-6xl font-bold leading-tight mb-4">
-                Sequential Mitigation of Short-Channel Effects in 20 nm DG-MOSFETs
-            </h1>
-            <h2 class="font-serifBody text-lg md:text-xl text-muted italic">
-                An Electrostatic Engineering Approach utilizing Step-Oxide, Dual-Material Gate, and Halo Doping
-            </h2>
-        </div>
-    </header>
+<div class="top"><div class="wrap">
+  <b>DG-MOSFET · TCAD study</b>
+  <nav id="spy">
+    <a href="#overview">Overview</a><a href="#uo">UO</a><a href="#so">SO</a><a href="#dmg">DMG</a><a href="#halo">Halo</a>
+  </nav>
+</div></div>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-8 py-8">
-        
-        <!-- Abstract & Interactive Structural Evolution Animation / Stage Switcher -->
-        <section class="mb-16">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
-                
-                <!-- Abstract Column -->
-                <div class="md:col-span-4 border-r border-gray-300 pr-8">
-                    <h3 class="font-serifHead text-xl font-bold mb-4 uppercase tracking-wider border-b border-ink pb-2">Abstract</h3>
-                    <p class="text-sm leading-relaxed drop-cap text-justify mb-4">
-                        The continued scaling of Double-Gate (DG) MOSFETs is severely constrained by short-channel effects (SCEs), predominantly Drain-Induced Barrier Lowering (DIBL). This study investigates a sequential structural engineering methodology to decouple source and drain electrostatics. By integrating an asymmetric Step-Oxide (SO), a Dual-Material Gate (DMG), and localized Halo Doping, the device achieves a DIBL reduction from a baseline of 67.21 mV/V down to sub-30 mV/V, whilst preserving ON-state performance and RF metrics.
-                    </p>
-                    <p class="text-sm leading-relaxed text-justify text-muted">
-                        Use the interactive stage viewer on the right to examine the sequential architectural progression from standard uniform oxide to fully optimized halo-engineered profiles.
-                    </p>
-                </div>
+<header class="hero" id="overview"><div class="wrap">
+  <h1>Sequential Mitigation of Short-Channel Effects in 20&nbsp;nm DG-MOSFETs</h1>
+  <p class="sub">An electrostatic engineering approach using Step-Oxide, Dual-Material Gate and Halo doping</p>
+  <div class="abstract">
+    <p>The continued scaling of Double-Gate (DG) MOSFETs is constrained by short-channel effects (SCEs), above all Drain-Induced Barrier Lowering (DIBL). This study applies a sequential structural methodology to decouple source and drain electrostatics. By adding an asymmetric Step-Oxide (SO), a Dual-Material Gate (DMG) and localized Halo doping, DIBL falls from a baseline of 67.21 mV/V to below 30 mV/V, while ON-state drive and RF cutoff frequency are tracked at every step.</p>
+    <div>
+      <div class="path" aria-label="Design path"><span>UO</span><i>&rarr;</i><span>SO</span><i>&rarr;</i><span>DMG</span><i>&rarr;</i><span>Halo</span></div>
+      <p class="path-note">Each stage keeps the previous fix and adds one more. Watch the four stages below, or step through them yourself.</p>
+    </div>
+  </div>
+</div></header>
 
-                <!-- Interactive Structural Evolution Stage Viewer -->
-                <div class="md:col-span-8">
-                    <div class="flex justify-between items-center border-b border-ink pb-2 mb-4">
-                        <h3 class="font-serifHead text-xl font-bold uppercase tracking-wider">Structural Evolution Stages</h3>
-                        <div class="flex gap-2 text-xs font-mono">
-                            <button onclick="switchStage(0)" id="btn-stage-0" class="stage-btn active px-3 py-1 border border-ink transition-all">1. UO</button>
-                            <button onclick="switchStage(1)" id="btn-stage-1" class="stage-btn px-3 py-1 border border-ink transition-all">2. SO</button>
-                            <button onclick="switchStage(2)" id="btn-stage-2" class="stage-btn px-3 py-1 border border-ink transition-all">3. DMG</button>
-                            <button onclick="switchStage(3)" id="btn-stage-3" class="stage-btn px-3 py-1 border border-ink transition-all">4. Halo</button>
-                        </div>
-                    </div>
+<section class="viewer"><div class="wrap">
+  <div class="vhead"><h2>The device, one change at a time</h2><p id="hint">Auto-plays &middot; pauses on hover</p></div>
+  <div class="rail" id="rail" role="tablist"></div>
+  <div class="stage" id="stage" aria-live="off"></div>
+  <div class="ctrl">
+    <button class="btn" id="prev">&larr; Previous</button>
+    <div><span id="count"></span></div>
+    <div><button class="btn" id="play" aria-pressed="true">Pause</button><button class="btn" id="next">Next &rarr;</button></div>
+  </div>
+</div></section>
 
-                    <!-- Stage 0: Uniform Oxide -->
-                    <div class="evolution-stage" id="stage-0">
-                        <div class="figure-box">
-                            <img src="../assets/img/dg-mosfet-short-channel/Uniform_Oxide.png" alt="Uniform Oxide Baseline Structure">
-                            <p class="figure-caption"><strong>Fig 1.</strong> Baseline Uniform Oxide (UO) structure showing standard gate oxide thickness $t_{ox}$ across the channel region between source and drain.</p>
-                        </div>
-                    </div>
+<main id="secs"></main>
 
-                    <!-- Stage 1: Step Oxide -->
-                    <div class="evolution-stage hidden" id="stage-1">
-                        <div class="figure-box">
-                            <img src="../assets/img/dg-mosfet-short-channel/Step_Oxide.png" alt="Step Oxide Structure">
-                            <p class="figure-caption"><strong>Fig 2.</strong> Step Oxide (SO) integration, featuring a thicker source-side oxide to suppress tunneling while maintaining drain-side control.</p>
-                        </div>
-                    </div>
+<section class="sum"><div class="wrap">
+  <h2>What each stage bought, and what it cost</h2>
+  <div class="tw"><table>
+    <tr><th>Stage</th><th>Change</th><th>Gain</th><th>Cost</th></tr>
+    <tr><td>UO</td><td>Single oxide thickness</td><td>Baseline reference</td><td>Thin oxide tunnels; thick oxide worsens SS and DIBL</td></tr>
+    <tr><td>SO</td><td>2.0&nbsp;nm at source, 0.8&nbsp;nm at drain</td><td>Source barrier stays stable at V<sub>DS</sub> = 0.8&nbsp;V</td><td>Added process step</td></tr>
+    <tr><td>DMG</td><td>Two gate metals, M<sub>1</sub> and M<sub>2</sub></td><td>Stronger source-side barrier, lower OFF leakage</td><td>Lower peak f<sub>T</sub> at larger &Delta;&Phi;</td></tr>
+    <tr><td>Halo</td><td>P<sup>+</sup> pockets at source and drain</td><td>DIBL 33 &rarr; 28.4&nbsp;mV/V at 2&times;10<sup>18</sup>&nbsp;cm<sup>-3</sup></td><td>Mobility and V<sub>th</sub> shift if over-doped</td></tr>
+  </table></div>
+</div></section>
 
-                    <!-- Stage 2: Dual Material Gate -->
-                    <div class="evolution-stage hidden" id="stage-2">
-                        <div class="figure-box">
-                            <img src="../assets/img/dg-mosfet-short-channel/Dual_Metal.png" alt="Dual Material Gate Structure">
-                            <p class="figure-caption"><strong>Fig 3.</strong> Dual Material Gate (DMG) configuration layered over the Step-Oxide to modulate channel potential.</p>
-                        </div>
-                    </div>
+<footer><p>&copy; 2026 Mohammad Al Hosan &middot; TCAD simulation project</p></footer>
+<dialog id="lb"><img alt=""></dialog>
 
-                    <!-- Stage 3: Halo Doping & Schematic -->
-                    <div class="evolution-stage hidden" id="stage-3">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div class="figure-box mb-0">
-                                <img src="../assets/img/dg-mosfet-short-channel/Halo_Doping.png" alt="Halo Doping Structure">
-                                <p class="figure-caption"><strong>Fig 4a.</strong> Integration of highly concentrated localized Halo (pocket) doping at the source and drain junctions.</p>
-                            </div>
-                            <div class="figure-box mb-0">
-                                <img src="../assets/img/dg-mosfet-short-channel/fig12-halo-schematic.png" alt="Halo Schematic Definition">
-                                <p class="figure-caption"><strong>Fig 4b.</strong> Schematic representation of the localized P+ pocket implant constraining the depletion region.</p>
-                            </div>
-                        </div>
-                    </div>
+<script>
+const B='../assets/img/dg-mosfet-short-channel/';
+const F={
+'1':{s:'Uniform_Oxide.png',t:'Device structure: uniform oxide',c:'Baseline Uniform Oxide (UO) structure with a single gate-oxide thickness t<sub>ox</sub> across the channel between source and drain.'},
+'2':{s:'Step_Oxide.png',t:'Device structure: step oxide',c:'Step Oxide (SO): a thicker oxide at the source end to suppress tunneling, a thinner one at the drain end to keep gate control.'},
+'3':{s:'Dual_Metal.png',t:'Device structure: dual-material gate',c:'Dual Material Gate (DMG) layered over the Step Oxide to shape the channel potential.'},
+'4a':{s:'Halo_Doping.png',t:'Device structure: halo doping',c:'Localized, heavily doped halo (pocket) regions at the source and drain junctions.'},
+'4b':{s:'fig12-halo-schematic.png',t:'Halo pocket schematic',c:'The localized P<sup>+</sup> pocket implant that constrains the depletion region.'},
+'5':{s:'fig2-uo-transfer.png',t:'Transfer curves, uniform oxide',c:'I<sub>D</sub>&ndash;V<sub>GS</sub> characteristics. OFF-current degrades significantly at t<sub>ox</sub> = 2.0&nbsp;nm.'},
+'6':{s:'fig3-uo-bands.png',t:'Energy bands, uniform oxide',c:'The source-side barrier lowers as oxide thickness increases, so it fails to block the drain potential.'},
+'7':{s:'fig5-so-current-density.png',t:'Current density, step oxide',c:'Current density comparison showing stronger carrier confinement in the SO-DG device.'},
+'8':{s:'fig6-so-potential.png',t:'Surface potential, step oxide',c:'The step oxide pins the potential step closer to the drain.'},
+'9':{s:'fig7-so-bands.png',t:'Energy bands, step oxide',c:'The source barrier height stays stable even at V<sub>DS</sub> = 0.8&nbsp;V, which shows the shielding effect of the asymmetric geometry.'},
+'10':{s:'fig8-dmg-bands.png',t:'Conduction band vs. &Delta;&Phi;',c:'Conduction band across several work-function differences. A larger &Delta;&Phi; gives a steeper barrier against DIBL.'},
+'11':{s:'fig11-dmg-potential.png',t:'2D potential contour, DMG',c:'Internal potential map showing the abrupt transition at the metal-metal boundary.'},
+'12':{s:'fig9-dmg-current.png',t:'ON and OFF current density',c:'The DMG structure strongly reduces OFF-state leakage while keeping reasonable ON-state drive.'},
+'13':{s:'fig10-dmg-ft.png',t:'Cutoff frequency f<sub>T</sub> vs. &Delta;&Phi;',c:'A higher &Delta;&Phi; helps electrostatics but lowers the peak cutoff frequency f<sub>T</sub>.'}};
+const ph='<sub>',pe='</sub>';
+const S=[
+{k:'uo',tab:'UO',nm:'Uniform oxide',now:'One oxide thickness everywhere. Thin leaks, thick loses control.',hero:['1'],
+ p:'Thin oxide (0.8&nbsp;nm) causes direct gate tunneling. Thick oxide (2.0&nbsp;nm) degrades SS and DIBL.',m:'Baseline device. Sweep t<sub>ox</sub> from 0.8 to 2.0&nbsp;nm.',r:'DIBL rises 43.5 &rarr; 67.5&nbsp;mV/V and SS 69 &rarr; 74.8&nbsp;mV/dec as the oxide thickens.',
+ title:'I. The uniform oxide scaling limit',sum:'No single thickness satisfies both gate reliability and electrostatic control.',
+ body:['Calibrating a 20&nbsp;nm DG-MOSFET with a uniform oxide shows the limit of standard scaling. Thinning the gate oxide to 0.8&nbsp;nm improves electrostatic control but causes unacceptable direct gate tunneling.','A thicker oxide (2.0&nbsp;nm) protects the gate, but the Subthreshold Swing (SS) degrades and DIBL grows because the drain potential penetrates the channel easily.'],
+ chart:'uo',figs:['5','6']},
+{k:'so',tab:'SO',nm:'Step oxide',now:'Two oxide thicknesses along the channel, one on each side.',hero:['2'],
+ p:'The drain field still reaches the source barrier. The oxide has to serve two jobs.',m:'Thick oxide (2.0&nbsp;nm) at the source end, thin oxide (0.8&nbsp;nm) at the drain end.',r:'The source barrier stays stable at V<sub>DS</sub> = 0.8&nbsp;V (Fig 9).',
+ title:'II. Electrostatic decoupling with Step Oxide (SO-DG)',sum:'Different oxide at each end separates the source and drain electrostatics.',
+ body:['To resolve the conflict between tunneling and electrostatics, an asymmetric Step-Oxide is used: thick oxide (2.0&nbsp;nm) at the source end and thin oxide (0.8&nbsp;nm) at the drain end.','The aim is to keep the drain electric field from reaching the source barrier. This local change alters both the current density and the potential landscape, as the three figures below show.'],figs:['7','8','9']},
+{k:'dmg',tab:'DMG',nm:'Dual-material gate',now:'Split the gate into two metals to build a step in the channel potential.',hero:['3'],
+ p:'The source-side injection barrier still needs reinforcing.',m:'Gate split into M<sub>1</sub> (source side) and M<sub>2</sub> (drain side) with different work functions.',r:'Lower OFF-state leakage. Cost: a lower peak f<sub>T</sub> at larger &Delta;&Phi;.',
+ title:'III. Barrier modulation with a Dual-Material Gate (DMSO-DG)',sum:'A work-function step reinforces the source barrier against the drain.',
+ body:['The gate electrode is split into two materials with different work functions, M<sub>1</sub> near the source and M<sub>2</sub> near the drain. The work-function difference (&Delta;&Phi;) induces a step in the channel potential that reinforces the source-side injection barrier.','Larger &Delta;&Phi; improves electrostatics but reduces the peak cutoff frequency, so it is a trade-off to tune.'],figs:['10','11','12','13']},
+{k:'halo',tab:'Halo',nm:'Halo doping',now:'Pockets of heavy doping stop the drain depletion region from spreading.',hero:['4a','4b'],
+ p:'The drain depletion region still widens sideways into the channel.',m:'Heavily doped P<sup>+</sup> pockets next to the source and drain extensions.',r:'DIBL 33 &rarr; 28.4&nbsp;mV/V at 2&times;10<sup>18</sup>&nbsp;cm<sup>-3</sup>. Too much doping hurts mobility and V<sub>th</sub>.',
+ title:'IV. Depletion confinement with Halo optimization',sum:'Pockets bound the depletion width, but the concentration has to be calibrated.',
+ body:['The final stage limits lateral expansion of the drain depletion region. Localized, heavily doped P<sup>+</sup> halos placed next to the source and drain extensions physically bound the depletion width.','The concentration must be calibrated. Excess doping degrades mobility through impurity scattering and shifts the threshold voltage, which can cancel earlier high-frequency gains. A concentration of 2&times;10<sup>18</sup>&nbsp;cm<sup>-3</sup> gives the best balance in this sweep, reducing DIBL to 28.4&nbsp;mV/V.'],chart:'halo',figs:[]}
+];
+const $=s=>document.querySelector(s);
+const fig=(id,tag='')=>{const f=F[id];return `<figure class="fig"><div class="fh"><b>Fig ${id}</b><span>${f.t}</span></div><button class="fi" data-z="${f.s}" aria-label="Enlarge: ${f.t.replace(/<[^>]+>/g,'')}"><img src="${B+f.s}" alt="${f.t.replace(/<[^>]+>/g,'')}" loading="lazy"></button><figcaption>${f.c}</figcaption></figure>`};
 
-                    <!-- Stage Navigation Controls -->
-                    <div class="flex justify-between items-center mt-4">
-                        <button onclick="prevStage()" class="font-mono text-xs uppercase px-4 py-2 border border-ink hover:bg-ink hover:text-paper transition-all">&larr; Previous Stage</button>
-                        <span id="stage-indicator" class="font-mono text-xs text-muted">Stage 1 of 4: Uniform Oxide Baseline</span>
-                        <button onclick="nextStage()" class="font-mono text-xs uppercase px-4 py-2 border border-ink hover:bg-ink hover:text-paper transition-all">Next Stage &rarr;</button>
-                    </div>
-                </div>
+/* build viewer + sections */
+$('#rail').innerHTML=S.map((s,i)=>`<button class="tab" role="tab" data-i="${i}"><b>${i+1}. ${s.tab}</b><small>${s.nm}</small><i></i></button>`).join('');
+$('#stage').innerHTML=S.map((s,i)=>`<article class="slide"><div class="pane${s.hero.length>1?' two':''}">${s.hero.map(h=>fig(h)).join('')}</div><div class="story"><p class="kick">Stage ${i+1} of 4 &middot; ${s.nm}</p><h3>${s.now}</h3><dl class="flow"><div><dt>Problem</dt><dd>${s.p}</dd></div><div><dt>Change</dt><dd>${s.m}</dd></div><div><dt>Result</dt><dd>${s.r}</dd></div></dl><a class="more" href="#${s.k}">Read the full stage &darr;</a></div></article>`).join('');
+$('#secs').innerHTML=S.map(s=>`<section class="sec" id="${s.k}"><div class="wrap"><header><span class="badge">${s.tab}</span><div><h2>${s.title}</h2><p>${s.sum}</p></div></header><div class="glance"><div><b>Problem</b>${s.p}</div><div><b>Change</b>${s.m}</div><div><b>Result</b>${s.r}</div></div><div class="cols${s.chart?'':' one'}"><div>${s.body.map(t=>`<p>${t}</p>`).join('')}</div>${s.chart?`<div class="chartbox"><div class="fh"><b>${s.chart=='uo'?'Chart':'Fig 14'}</b><span>${s.chart=='uo'?'DIBL and SS vs. oxide thickness':'DIBL and SS vs. halo concentration'}</span></div><div class="cv"><canvas id="c-${s.chart}"></canvas></div><figcaption class="fig" style="border:0;box-shadow:none;font-size:.78rem;color:#555;padding:.6rem .75rem;border-top:1px solid #e5e5e5">${s.chart=='uo'?'Trend of DIBL (solid) and SS (dashed) as t<sub>ox</sub> goes from 0.8 to 2.0&nbsp;nm.':'DIBL and SS evolution with halo doping concentration.'}</figcaption></div>`:''}</div>${s.figs.length?`<div class="figgrid">${s.figs.map(f=>fig(f)).join('')}</div>`:''}</div></section>`).join('');
 
-            </div>
-        </section>
+/* viewer logic */
+const tabs=[...document.querySelectorAll('.tab')],slides=[...document.querySelectorAll('.slide')];
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const DUR=4000,MOVE=800,EASE='cubic-bezier(.7,0,.2,1)';
+let cur=0,busy=false,prog=0,last=0,playing=!reduce,hover=false,inView=true;
+slides[0].classList.add('on');
+function mark(){tabs.forEach((t,i)=>{t.classList.toggle('on',i===cur);t.classList.toggle('done',i<cur);t.setAttribute('aria-selected',i===cur);t.querySelector('i').style.width=i===cur?prog*100+'%':''});
+ $('#count').textContent=`Stage ${cur+1} of 4: ${S[cur].nm}`}
+function go(n,dir){n=(n+4)%4;if(n===cur||busy)return;
+ const o=slides[cur],a=slides[n];a.classList.add('on');a.style.zIndex=2;o.style.zIndex=1;
+ const d=reduce?0:MOVE;busy=true;
+ /* incoming slide opens from the right (or left when going back), like a page turning */
+ a.animate([{transform:`translateX(${dir*100}%)`,boxShadow:`${-dir*28}px 0 44px -18px rgba(0,0,0,.35)`},{transform:'translateX(0)',boxShadow:'0 0 0 rgba(0,0,0,0)'}],{duration:d,easing:EASE});
+ o.animate([{transform:'none',opacity:1},{transform:`translateX(${-dir*22}%)`,opacity:.4}],{duration:d,easing:EASE}).onfinish=()=>{o.classList.remove('on');o.style.zIndex='';a.style.zIndex='';busy=false};
+ if(d===0){o.classList.remove('on');busy=false}
+ cur=n;prog=0;mark()}
+const next=()=>go(cur+1,1),prev=()=>go(cur-1,-1);
+$('#next').onclick=next;$('#prev').onclick=prev;
+tabs.forEach((t,i)=>t.onclick=()=>go(i,i>cur?1:-1));
+const pb=$('#play');
+function setPlay(v){playing=v;pb.textContent=v?'Pause':'Play';pb.setAttribute('aria-pressed',v);$('#hint').textContent=v?'Auto-plays · pauses on hover':'Paused · use the buttons to move'}
+pb.onclick=()=>setPlay(!playing);setPlay(playing);
+const st=$('#stage');
+st.onmouseenter=()=>hover=true;st.onmouseleave=()=>hover=false;
+st.addEventListener('focusin',()=>hover=true);st.addEventListener('focusout',()=>hover=false);
+new IntersectionObserver(e=>inView=e[0].isIntersecting,{threshold:.35}).observe(st);
+function tick(t){const dt=t-last;last=t;
+ if(playing&&!hover&&inView&&!busy&&!document.hidden&&dt<200){prog+=dt/DUR;if(prog>=1)next();else tabs[cur].querySelector('i').style.width=prog*100+'%'}
+ requestAnimationFrame(tick)}
+mark();requestAnimationFrame(tick);
+document.addEventListener('keydown',e=>{if(!inView||e.target.closest('dialog'))return;if(e.key==='ArrowRight')next();if(e.key==='ArrowLeft')prev()});
 
-        <hr class="border-t border-ink mb-16">
+/* image zoom */
+const lb=$('#lb');document.addEventListener('click',e=>{const b=e.target.closest('[data-z]');if(b){lb.querySelector('img').src=B+b.dataset.z;lb.showModal()}else if(e.target===lb||e.target.closest('#lb'))lb.close()});
 
-        <!-- 1. Uniform Oxide Baseline -->
-        <section class="mb-16">
-            <h2 class="font-serifHead text-3xl font-bold mb-8">I. The Uniform Oxide (UO) Scaling Limit</h2>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-                <div>
-                    <p class="text-justify leading-relaxed mb-6">
-                        Initial calibration of a 20 nm DG-MOSFET with a uniform oxide layer demonstrates the fundamental limitations of standard scaling. While aggressively thinning the gate oxide (down to 0.8 nm) improves electrostatic control, it leads to unacceptable levels of direct gate tunneling. 
-                    </p>
-                    <p class="text-justify leading-relaxed mb-8">
-                        Conversely, utilizing a thicker oxide (2.0 nm) to guarantee gate reliability severely degrades the Subthreshold Swing (SS) and causes massive Drain-Induced Barrier Lowering (DIBL) as drain potential easily penetrates the channel.
-                    </p>
-                    
-                    <h4 class="font-serifHead font-bold text-lg mb-4 text-center">Uniform Oxide Performance Trends</h4>
-                    <div class="chart-wrapper mb-8">
-                        <canvas id="chartUO"></canvas>
-                    </div>
-                </div>
-                
-                <div class="flex flex-col gap-6">
-                    <div class="figure-box">
-                        <img src="../assets/img/dg-mosfet-short-channel/fig2-uo-transfer.png" alt="Transfer Characteristics (UO)">
-                        <p class="figure-caption"><strong>Fig 5.</strong> Transfer characteristics ($I_D-V_{GS}$) for Uniform Oxide. The OFF-current degrades significantly at $t_{ox} = 2.0$ nm.</p>
-                    </div>
-                    <div class="figure-box">
-                        <img src="../assets/img/dg-mosfet-short-channel/fig3-uo-bands.png" alt="Energy Bands (UO)">
-                        <p class="figure-caption"><strong>Fig 6.</strong> Energy band diagram. The barrier at the source side lowers noticeably as oxide thickness increases, failing to block drain potential.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+/* scroll spy */
+const links=[...document.querySelectorAll('#spy a')];
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(l=>l.classList.toggle('on',l.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-40% 0px -55% 0px'});
+['overview','uo','so','dmg','halo'].forEach(id=>io.observe(document.getElementById(id)));
 
-        <hr class="border-t border-ink mb-16">
-
-        <!-- 2. Step Oxide Engineering -->
-        <section class="mb-16">
-            <h2 class="font-serifHead text-3xl font-bold mb-8">II. Electrostatic Decoupling via Step-Oxide (SO-DG)</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-                <div class="md:col-span-1">
-                    <p class="text-justify leading-relaxed">
-                        To resolve the conflict between tunneling and electrostatics, an asymmetric Step-Oxide architecture is implemented. By maintaining a thick oxide (2.0 nm) at the source end and a thin oxide (0.8 nm) at the drain end, the device physically restricts the drain's electric field from reaching the source barrier. This localized structural change fundamentally alters the current density and potential landscape.
-                    </p>
-                </div>
-                
-                <div class="md:col-span-2 grid grid-cols-2 gap-4">
-                    <div class="figure-box">
-                        <img src="../assets/img/dg-mosfet-short-channel/fig5-so-current-density.png" alt="Current Density Profile">
-                        <p class="figure-caption"><strong>Fig 7.</strong> Current density distribution comparison showing enhanced carrier confinement in the SO-DG configuration.</p>
-                    </div>
-                    <div class="figure-box">
-                        <img src="../assets/img/dg-mosfet-short-channel/fig6-so-potential.png" alt="Potential Distribution">
-                        <p class="figure-caption"><strong>Fig 8.</strong> Surface potential perturbation. The step oxide effectively pins the potential step closer to the drain.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="max-w-2xl mx-auto figure-box">
-                <img src="../assets/img/dg-mosfet-short-channel/fig7-so-bands.png" alt="Energy Bands (SO)">
-                <p class="figure-caption text-center"><strong>Fig 9.</strong> Energy band profiles for Step-Oxide. The source barrier height remains remarkably stable even at high drain biases ($V_{DS} = 0.8V$), proving the shielding effect of the asymmetric geometry.</p>
-            </div>
-        </section>
-
-        <hr class="border-t border-ink mb-16">
-
-        <!-- 3. Dual Material Gate -->
-        <section class="mb-16">
-            <h2 class="font-serifHead text-3xl font-bold mb-8">III. Barrier Modulation using Dual-Material Gate (DMSO-DG)</h2>
-            
-            <p class="text-justify leading-relaxed max-w-4xl mx-auto mb-10 text-lg">
-                To further immunize the device against SCEs, the gate electrode is split into two materials with differing work functions ($M_1$ near the source, $M_2$ near the drain). This work-function differential ($\Delta\Phi$) artificially induces a step in the channel potential, reinforcing the source-side injection barrier.
-            </p>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                <div class="figure-box">
-                    <img src="../assets/img/dg-mosfet-short-channel/fig8-dmg-bands.png" alt="DMG Conduction Bands">
-                    <p class="figure-caption"><strong>Fig 10.</strong> Conduction band profiling across various work-function differences ($\Delta\Phi$). A larger $\Delta\Phi$ creates a steeper, more resilient barrier against DIBL.</p>
-                </div>
-                <div class="figure-box">
-                    <img src="../assets/img/dg-mosfet-short-channel/fig11-dmg-potential.png" alt="DMG Potential Contour">
-                    <p class="figure-caption"><strong>Fig 11.</strong> 2D contour mapping of the internal potential, vividly illustrating the abrupt transition introduced by the metal-metal boundary.</p>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="figure-box">
-                    <img src="../assets/img/dg-mosfet-short-channel/fig9-dmg-current.png" alt="DMG Current Profile">
-                    <p class="figure-caption"><strong>Fig 12.</strong> ON and OFF state current densities. The DMG architecture significantly crushes OFF-state leakage while maintaining reasonable ON-drive.</p>
-                </div>
-                <div class="figure-box">
-                    <img src="../assets/img/dg-mosfet-short-channel/fig10-dmg-ft.png" alt="Cutoff Frequency">
-                    <p class="figure-caption"><strong>Fig 13.</strong> RF Performance analysis. While higher $\Delta\Phi$ benefits electrostatics, a trade-off is observed in the peak cutoff frequency ($f_T$).</p>
-                </div>
-            </div>
-        </section>
-
-        <hr class="border-t border-ink mb-16">
-
-        <!-- 4. Halo Doping Optimization -->
-        <section class="mb-16">
-            <h2 class="font-serifHead text-3xl font-bold mb-8">IV. Depletion Confinement via Halo Optimization</h2>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                <div class="lg:col-span-5">
-                    <p class="text-justify leading-relaxed mb-6">
-                        The final stage of mitigation addresses the lateral expansion of the drain depletion region. By introducing localized, heavily doped $P^+$ 'halos' or pockets immediately adjacent to the source/drain extensions, the depletion width is physically bounded.
-                    </p>
-                    <p class="text-justify leading-relaxed mb-6">
-                        However, halo concentration must be strictly calibrated. Excessive doping degrades carrier mobility through impurity scattering and drastically alters the threshold voltage, negating previous high-frequency gains. As visualized, a concentration of $2\times10^{18} \text{ cm}^{-3}$ yields the optimum balance, reducing DIBL to a remarkable 28.4 mV/V.
-                    </p>
-                </div>
-                
-                <div class="lg:col-span-7">
-                    <h4 class="font-serifHead font-bold text-lg mb-4 text-center">Impact of Halo Concentration on Electrostatics</h4>
-                    <div class="chart-wrapper">
-                        <canvas id="chartHalo"></canvas>
-                    </div>
-                    <p class="figure-caption text-center border-none mt-2"><strong>Fig 14.</strong> DIBL and Subthreshold Swing evolution as a function of Halo Doping Concentration.</p>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <footer class="bg-ink text-paper py-8 text-center mt-12">
-        <div class="max-w-4xl mx-auto px-4 font-mono text-sm opacity-80">
-            <p>&copy; 2026 TCAD Simulation Research Portfolio. All rights reserved.</p>
-            <p class="mt-2">Generated for Academic Review &bull; Double-Gate MOSFET Scaling Methodologies</p>
-        </div>
-    </footer>
-
-    <!-- Interactive Stage Switcher Script -->
-    <script>
-        let currentStage = 0;
-        const totalStages = 4;
-        const stageDescriptions = [
-            "Stage 1 of 4: Uniform Oxide Baseline",
-            "Stage 2 of 4: Asymmetric Step-Oxide",
-            "Stage 3 of 4: Dual-Material Gate (DMG)",
-            "Stage 4 of 4: Halo Doping Optimization"
-        ];
-
-        function switchStage(n) {
-            currentStage = (n + totalStages) % totalStages;
-            
-            // Hide all stages & remove active classes
-            for (let i = 0; i < totalStages; i++) {
-                document.getElementById(`stage-${i}`).classList.add('hidden');
-                document.getElementById(`btn-stage-${i}`).classList.remove('active');
-            }
-            
-            // Show current stage & set active button
-            document.getElementById(`stage-${currentStage}`).classList.remove('hidden');
-            document.getElementById(`btn-stage-${currentStage}`).classList.add('active');
-            
-            // Update indicator text
-            document.getElementById('stage-indicator').innerText = stageDescriptions[currentStage];
-        }
-
-        function nextStage() {
-            switchStage(currentStage + 1);
-        }
-
-        function prevStage() {
-            switchStage(currentStage - 1);
-        }
-    </script>
-
-    <!-- Chart Configuration Scripts -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Global Chart defaults for Academic Aesthetic
-            Chart.defaults.font.family = "'Merriweather', serif";
-            Chart.defaults.color = '#111111';
-            Chart.defaults.scale.grid.color = '#e5e5e5';
-            
-            const redColor = '#8b0000'; // Classic Deep Red
-            const blueColor = '#000080'; // Classic Navy Blue
-
-            // --------------------------------------------------------
-            // CHART 1: Uniform Oxide Trends
-            // --------------------------------------------------------
-            const ctxUO = document.getElementById('chartUO').getContext('2d');
-            new Chart(ctxUO, {
-                type: 'line',
-                data: {
-                    labels: ['0.8', '1.2', '1.6', '2.0'],
-                    datasets: [
-                        {
-                            label: 'DIBL (mV/V)',
-                            data: [43.5, 50.5, 58.5, 67.5],
-                            borderColor: redColor,
-                            backgroundColor: redColor,
-                            borderWidth: 2,
-                            pointStyle: 'rect', // academic style point
-                            pointRadius: 6,
-                            yAxisID: 'y',
-                            tension: 0
-                        },
-                        {
-                            label: 'SS (mV/dec)',
-                            data: [69, 70.8, 72.8, 74.8],
-                            borderColor: blueColor,
-                            backgroundColor: blueColor,
-                            borderWidth: 2,
-                            borderDash: [5, 5], // dashed line for secondary metric
-                            pointStyle: 'triangle',
-                            pointRadius: 7,
-                            yAxisID: 'y1',
-                            tension: 0
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { position: 'top', labels: { usePointStyle: true, font: { family: "'Merriweather', serif", size: 13 } } }
-                    },
-                    scales: {
-                        x: {
-                            title: { display: true, text: 'Gate Oxide Thickness, tox (nm)', font: { family: "'Playfair Display', serif", size: 14, weight: 'bold' } }
-                        },
-                        y: {
-                            type: 'linear',
-                            display: true,
-                            position: 'left',
-                    title: { display: true, text: 'DIBL (mV/V)', color: redColor, font: { family: "'Playfair Display', serif", size: 14, weight: 'bold' } },
-                            ticks: { color: redColor }
-                        },
-                        y1: {
-                            type: 'linear',
-                            display: true,
-                            position: 'right',
-                    title: { display: true, text: 'SS (mV/dec)', color: blueColor, font: { family: "'Playfair Display', serif", size: 14, weight: 'bold' } },
-                            ticks: { color: blueColor },
-                            grid: { drawOnChartArea: false } // only draw grid lines for first axis
-                        }
-                    }
-                }
-            });
-
-            // --------------------------------------------------------
-            // CHART 2: Halo Doping Trends
-            // --------------------------------------------------------
-            const ctxHalo = document.getElementById('chartHalo').getContext('2d');
-            new Chart(ctxHalo, {
-                type: 'line',
-                data: {
-                    labels: ['No halo', '2e18', '6e18', '1e19'],
-                    datasets: [
-                        {
-                            label: 'DIBL (mV/V)',
-                            data: [33, 28.4, 27.6, 26.8],
-                            borderColor: redColor,
-                            backgroundColor: redColor,
-                            borderWidth: 2,
-                            pointStyle: 'circle',
-                            pointRadius: 6,
-                            yAxisID: 'y',
-                            tension: 0
-                        },
-                        {
-                            label: 'SS (mV/dec)',
-                            data: [77.8, 77.1, 77.25, 77.27],
-                            borderColor: blueColor,
-                            backgroundColor: blueColor,
-                            borderWidth: 2,
-                            borderDash: [5, 5],
-                            pointStyle: 'rectRot',
-                            pointRadius: 7,
-                            yAxisID: 'y1',
-                            tension: 0
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { position: 'top', labels: { usePointStyle: true, font: { family: "'Merriweather', serif", size: 13 } } }
-                    },
-                    scales: {
-                        x: {
-                            title: { display: true, text: 'Halo Concentration (cm⁻³)', font: { family: "'Playfair Display', serif", size: 14, weight: 'bold' } }
-                        },
-                        y: {
-                            type: 'linear',
-                            display: true,
-                            position: 'left',
-                    title: { display: true, text: 'DIBL (mV/V)', color: redColor, font: { family: "'Playfair Display', serif", size: 14, weight: 'bold' } },
-                            ticks: { color: redColor }
-                        },
-                        y1: {
-                            type: 'linear',
-                            display: true,
-                            position: 'right',
-                    title: { display: true, text: 'SS (mV/dec)', color: blueColor, font: { family: "'Playfair Display', serif", size: 14, weight: 'bold' } },
-                            ticks: { color: blueColor },
-                            grid: { drawOnChartArea: false }
-                        }
-                    }
-                }
-            });
-        });
-    </script>
+/* charts */
+addEventListener('DOMContentLoaded',()=>{if(!window.Chart)return;
+ Chart.defaults.font.family="'Merriweather',serif";Chart.defaults.color='#111';Chart.defaults.scale.grid.color='#e5e5e5';
+ const R='#8b0000',N='#000080',tf={family:"'Playfair Display',serif",size:13,weight:'bold'};
+ const mk=(id,labels,d,s,xt,ps)=>new Chart(document.getElementById('c-'+id),{type:'line',data:{labels,datasets:[
+  {label:'DIBL (mV/V)',data:d,borderColor:R,backgroundColor:R,borderWidth:2,pointStyle:ps[0],pointRadius:6,yAxisID:'y',tension:0},
+  {label:'SS (mV/dec)',data:s,borderColor:N,backgroundColor:N,borderWidth:2,borderDash:[5,5],pointStyle:ps[1],pointRadius:7,yAxisID:'y1',tension:0}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{usePointStyle:true}}},scales:{
+   x:{title:{display:true,text:xt,font:tf}},
+   y:{position:'left',title:{display:true,text:'DIBL (mV/V)',color:R,font:tf},ticks:{color:R}},
+   y1:{position:'right',title:{display:true,text:'SS (mV/dec)',color:N,font:tf},ticks:{color:N},grid:{drawOnChartArea:false}}}}});
+ mk('uo',['0.8','1.2','1.6','2.0'],[43.5,50.5,58.5,67.5],[69,70.8,72.8,74.8],'Gate oxide thickness, tox (nm)',['rect','triangle']);
+ mk('halo',['No halo','2e18','6e18','1e19'],[33,28.4,27.6,26.8],[77.8,77.1,77.25,77.27],'Halo concentration (cm⁻³)',['circle','rectRot']);
+});
+</script>
 </body>
 </html>

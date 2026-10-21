@@ -70,6 +70,9 @@ sub,sup{line-height:0}a{color:inherit}
 .fi{all:unset;cursor:zoom-in;display:flex;align-items:center;justify-content:center;flex:1;padding:.4rem;background:#fff}
 .fi img{display:block;width:100%;height:auto;max-height:340px;object-fit:contain}
 .full .fi img{max-height:none}
+/* wide schematics (stacking table, FET): full width but capped so they do not tower over the page */
+.full.big .fi img{max-height:520px}
+.miss{font:400 .78rem/1.5 var(--mono);color:var(--red);padding:2rem 1rem;text-align:center;border:1px dashed var(--red);width:100%;word-break:break-all}
 .fig figcaption{font-size:.72rem;line-height:1.4;color:var(--muted);padding:.4rem .75rem;border-top:1px solid #e5e5e5}
 dialog{border:1px solid var(--ink);padding:0;max-width:94vw;background:#fff}
 dialog::backdrop{background:rgba(0,0,0,.7)}
@@ -111,6 +114,7 @@ footer p{margin:0;opacity:.85}
 body{background:#fff}
 .stage,.fig,.chartbox,.txt,.keys,.tab{box-shadow:none!important}
 .top{background:#fff;backdrop-filter:none}
+.r4{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:900px){.r4{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
@@ -148,7 +152,8 @@ body{background:#fff}
 <tr><td>FET</td><td>Local gates, flexible substrate</td><td>Concept only</td><td>No transport or contact-resistance calculation yet</td></tr>
 </table></div>
 <h3>Selected operating points (eV)</h3>
-<div class="tw"><table class="nums">
+<div class="tw">
+<table class="nums">
 <tr><th>Condition</th><th>&Phi;<sub>n</sub></th><th>&Phi;<sub>p</sub></th><th>E<sub>g</sub><sup>eff</sup></th><th>Contact</th></tr>
 <tr><td>Equilibrium</td><td>0.477</td><td>0.850</td><td>1.327</td><td>n-type Schottky</td></tr>
 <tr><td>+0.5 V/&Aring;</td><td>0.020</td><td>1.213</td><td>1.233</td><td>n, below k<sub>B</sub>T</td></tr>
@@ -167,47 +172,71 @@ body{background:#fff}
 <footer><p>&copy; 2026 Mohammad Al Hosan &middot; First-principles DFT project</p></footer>
 <dialog id="lb"><img alt=""></dialog>
 <script>
-const B='../assets/img/graphene-mosete-thesis/';
+/* Image folder, relative to THIS html file. If your page lives in the project root use 'img/graphene-mosete-thesis/'. */
+const B='../img/graphene-mosete-thesis/';
 const F={
-'4':{s:'fig4-fatband-pdos.png',t:'Electronic structure, Gr/SeMoTe',c:'Projected fat bands (graphene blue, MoSeTe red) with &Phi;<sub>n</sub> and &Phi;<sub>p</sub> marked, and the projected and total density of states. The MoSeTe gap stays clear and the Dirac cone stays intact.'},
-'5':{s:'fig5-alignment-potential.png',t:'Band alignment and interfacial dipole',c:'(a) Graphene work function, MoSeTe electron affinity and work function, &Phi;<sub>n</sub>, &Phi;<sub>p</sub> and the vacuum offset &Delta;V = 0.504&nbsp;eV. (b) Planar-averaged electrostatic potential.'},
-'6':{s:'fig6-bonding.png',t:'Interfacial bonding character',c:'(a) Charge density difference, (b) its planar average and (c) the ELF cross-section. Charge moves from graphene to MoSeTe within about 1.5&nbsp;&Aring; of each layer, and the gap ELF falls to 0.050.'},
-'7m':{s:'fig7m-field-trend.png',t:'Barrier heights vs. electric field',c:'&Phi;<sub>n</sub>, &Phi;<sub>p</sub> and E<sub>g</sub><sup>eff</sup> from &minus;0.4 to +0.6 V/&Aring;. E<sub>g</sub><sup>eff</sup> is flat except near the positive-field Ohmic crossing.'},
-'7':{s:'fig7-field.png',t:'Fat bands under perpendicular field',c:'Positive fields (+0.1 to +0.6 V/&Aring;) lower the CBM; negative fields (&minus;0.05 to &minus;0.40 V/&Aring;) give a sharp n-to-p transition near &minus;0.20 V/&Aring;.'},
-'8i':{s:'fig8i-strain-trend.png',t:'Barrier heights vs. biaxial strain',c:'&Phi;<sub>n</sub>, &Phi;<sub>p</sub> and E<sub>g</sub><sup>eff</sup> from &minus;8 to +8&nbsp;%. E<sub>g</sub><sup>eff</sup> contracts in both directions.'},
-'8':{s:'fig8-strain.png',t:'Fat bands under biaxial strain',c:'Tensile strain (+2 to +8&nbsp;%) drives a sharp n-to-p transition between +4 and +6&nbsp;%; compressive strain (&minus;2 to &minus;8&nbsp;%) approaches n-type Ohmic character.'},
-'9':{s:'fig9-proposed-fet.png',t:'Proposed contact-tunable FET',c:'Design concept, not a simulated device: top gate V<sub>G</sub> and grounded back gate set the channel, local gates V<sub>LG1</sub> and V<sub>LG2</sub> tune the source and drain barriers, a flexible substrate applies strain, and the contacts are biased at &#8723;V<sub>DS</sub>/2.'}};
+'stk':{l:'Stacking',s:'stacking.png',t:'Stacking registries, both terminations',c:'Top and side views of the three lateral registries (I hollow site, II Mo-top, III outer chalcogen-top) for Gr/SeMoTe and Gr/TeMoSe. Stacking III is the lowest-energy registry in both terminations, though II and III are nearly degenerate.'},
+'4':{s:'fig4-fatband-pdos.png',t:'Fat bands, Gr/SeMoTe',c:'Projected fat bands (graphene blue, MoSeTe red) with &Phi;<sub>n</sub> and &Phi;<sub>p</sub> marked. The MoSeTe gap stays clear and the Dirac cone stays intact.'},
+'5a':{s:'fig6a_band_alignment.png',t:'Band alignment',c:'Graphene work function, MoSeTe electron affinity and work function, &Phi;<sub>n</sub>, &Phi;<sub>p</sub> and the vacuum offset &Delta;V = 0.504&nbsp;eV.'},
+'5b':{s:'fig6_potential_macro.png',t:'Interfacial dipole',c:'Planar-averaged electrostatic potential; the two vacuum plateaus differ by &Delta;V.'},
+'6a':{s:'fig7a_cdd_3d.png',t:'Charge density difference',c:'Charge accumulation (yellow) on the MoSeTe Se plane and depletion (cyan) on the graphene &pi; orbitals.'},
+'6b':{s:'fig7b_cdd_planar.png',t:'Planar-averaged &Delta;&rho;',c:'The redistribution stays within about 1.5&nbsp;&Aring; of each layer.'},
+'6c':{s:'fig8_elf_combined.png',t:'Electron localization function',c:'The interlayer ELF falls to 0.050, so there is no covalent bond across the gap.'},
+'7m':{s:'efield_total_trend.png',t:'Barrier heights vs. electric field',c:'&Phi;<sub>n</sub>, &Phi;<sub>p</sub> and E<sub>g</sub><sup>eff</sup> from &minus;0.4 to +0.6 V/&Aring;. E<sub>g</sub><sup>eff</sup> is flat except near the positive-field Ohmic crossing.'},
+'7a':{s:'hetero_p0.1_burai_fatband_efield_%2B0.1.png',t:'Fat bands, +0.1 V/&Aring;',c:'Perpendicular field of +0.1 V/&Aring;.'},
+'7b':{s:'hetero_p0.2_burai_fatband_efield_%2B0.2.png',t:'Fat bands, +0.2 V/&Aring;',c:'Perpendicular field of +0.2 V/&Aring;.'},
+'7c':{s:'hetero_p0.3_burai_fatband_efield_%2B0.3.png',t:'Fat bands, +0.3 V/&Aring;',c:'Perpendicular field of +0.3 V/&Aring;.'},
+'7d':{s:'hetero_p0.4_burai_fatband_efield_%2B0.4.png',t:'Fat bands, +0.4 V/&Aring;',c:'Perpendicular field of +0.4 V/&Aring;.'},
+'7e':{s:'hetero_p0.5_burai_fatband_efield_%2B0.5.png',t:'Fat bands, +0.5 V/&Aring;',c:'Perpendicular field of +0.5 V/&Aring;.'},
+'7f':{s:'hetero_p0.6_burai_fatband_efield_%2B0.6.png',t:'Fat bands, +0.6 V/&Aring;',c:'Perpendicular field of +0.6 V/&Aring;.'},
+'7g':{s:'hetero_n0.05_burai_fatband_efield_-0.05.png',t:'Fat bands, &minus;0.05 V/&Aring;',c:'Perpendicular field of &minus;0.05 V/&Aring;.'},
+'7h':{s:'hetero_n0.1_burai_fatband_efield_-0.1.png',t:'Fat bands, &minus;0.1 V/&Aring;',c:'Perpendicular field of &minus;0.1 V/&Aring;.'},
+'7i':{s:'hetero_n0.15_burai_fatband_efield_-0.15.png',t:'Fat bands, &minus;0.15 V/&Aring;',c:'Perpendicular field of &minus;0.15 V/&Aring;.'},
+'7j':{s:'hetero_n0.2_burai_fatband_efield_-0.2.png',t:'Fat bands, &minus;0.2 V/&Aring;',c:'Perpendicular field of &minus;0.2 V/&Aring;.'},
+'7k':{s:'hetero_n0.3_burai_fatband_efield_-0.3.png',t:'Fat bands, &minus;0.3 V/&Aring;',c:'Perpendicular field of &minus;0.3 V/&Aring;.'},
+'7l':{s:'hetero_n0.4_burai_fatband_efield_-0.4.png',t:'Fat bands, &minus;0.4 V/&Aring;',c:'Perpendicular field of &minus;0.4 V/&Aring;.'},
+'8i':{s:'strain_total_trend.png',t:'Barrier heights vs. biaxial strain',c:'&Phi;<sub>n</sub>, &Phi;<sub>p</sub> and E<sub>g</sub><sup>eff</sup> from &minus;8 to +8&nbsp;%. E<sub>g</sub><sup>eff</sup> contracts in both directions.'},
+'8a':{s:'hetero_strain_p2_burai_fatband_strain_%2B2.png',t:'Fat bands, +2&nbsp;% strain',c:'Biaxial strain of +2&nbsp;%.'},
+'8b':{s:'hetero_strain_p4_burai_fatband_strain_%2B4.png',t:'Fat bands, +4&nbsp;% strain',c:'Biaxial strain of +4&nbsp;%.'},
+'8c':{s:'hetero_strain_p6_burai_fatband_strain_%2B6.png',t:'Fat bands, +6&nbsp;% strain',c:'Biaxial strain of +6&nbsp;%.'},
+'8d':{s:'hetero_strain_p8_burai_fatband_strain_%2B8.png',t:'Fat bands, +8&nbsp;% strain',c:'Biaxial strain of +8&nbsp;%.'},
+'8e':{s:'hetero_strain_n2_burai_fatband_strain_-2.png',t:'Fat bands, &minus;2&nbsp;% strain',c:'Biaxial strain of &minus;2&nbsp;%.'},
+'8f':{s:'hetero_strain_n4_burai_fatband_strain_-4.png',t:'Fat bands, &minus;4&nbsp;% strain',c:'Biaxial strain of &minus;4&nbsp;%.'},
+'8g':{s:'hetero_strain_n6_burai_fatband_strain_-6.png',t:'Fat bands, &minus;6&nbsp;% strain',c:'Biaxial strain of &minus;6&nbsp;%.'},
+'8h':{s:'hetero_strain_n8_burai_fatband_strain_-8.png',t:'Fat bands, &minus;8&nbsp;% strain',c:'Biaxial strain of &minus;8&nbsp;%.'},
+'9':{l:'Concept',s:'fig9-proposed-fet.png',t:'Proposed contact-tunable FET',c:'Design concept, not a simulated device: top gate V<sub>G</sub> and grounded back gate set the channel, local gates V<sub>LG1</sub> and V<sub>LG2</sub> tune the source and drain barriers, a flexible substrate applies strain, and the contacts are biased at &#8723;V<sub>DS</sub>/2.'}};
+const BIG={'stk':1,'9':1};
 const T=(a,b,c)=>[a,b,c];
 const S=[
-{k:'eq',tab:'Baseline',nm:'Equilibrium contact',now:'An n-type Schottky contact at zero field.',hero:['5'],
+{k:'eq',tab:'Baseline',nm:'Equilibrium contact',now:'An n-type Schottky contact at zero field.',hero:['5a','5b'],
  p:'The interface starts with a barrier for both carriers.',m:'Se-face MoSeTe on graphene, no field, no strain.',r:'&Phi;<sub>n</sub> 0.477&nbsp;eV, &Phi;<sub>p</sub> 0.850&nbsp;eV.',
  title:'I. Equilibrium contact of the Se-face interface',sum:'The barrier comes from work-function mismatch and the Janus dipole, not from defects or hybridization.',
  pts:['Graphene (4.22&nbsp;eV) and the MoSeTe Se face (4.66&nbsp;eV) differ by 0.44&nbsp;eV, so electrons move from graphene to MoSeTe.','The Janus dipole (1.15&nbsp;Debye) gives a 0.504&nbsp;eV vacuum step, reduced from 0.601&nbsp;eV in the isolated layer by graphene screening.','The gap ELF falls to 0.050, so the bonding is van der Waals.','The Te-face termination is already p-type Ohmic (E<sub>F</sub> 18.5&nbsp;meV above the VBM), so only the Se face has a barrier to tune.'],
  tr:[['Se-face interface, equilibrium',[T('&Phi;<sub>n</sub>','','0.477 eV'),T('&Phi;<sub>p</sub>','','0.850 eV'),T('E<sub>g</sub><sup>eff</sup>','','1.327 eV'),T('&Delta;V','','0.504 eV'),T('P<sub>TB</sub>','','&asymp; 1.8&times;10<sup>-2</sup>')]]],
- rows:[['txt','4'],['6']]},
+ rows:[['stk'],['txt','4'],['5a','5b'],['6a','6b','6c']]},
 {k:'field',tab:'Field',nm:'Electric field',now:'A field moves the Fermi level.',hero:['7m'],
  p:'One interface needs both Ohmic contact types.',m:'Field from &minus;0.4 to +0.6 V/&Aring;, positive from MoSeTe toward graphene.',r:'+0.6 V/&Aring;: n-Ohmic. &minus;0.20 V/&Aring;: near p-Ohmic.',
  title:'II. Barrier modulation by perpendicular electric field',sum:'Both Ohmic contact types are reachable from the same interface by changing the field sign.',
  pts:['Positive field reinforces the dipole: &Phi;<sub>n</sub> falls to 0.020&nbsp;eV at +0.5 V/&Aring;, below k<sub>B</sub>T (0.026&nbsp;eV).','At +0.6 V/&Aring; the CBM crosses E<sub>F</sub> (&Phi;<sub>n</sub> = &minus;0.024&nbsp;eV): full n-type Ohmic contact.','Negative field changes the barriers smoothly to &minus;0.15 V/&Aring;, then &Phi;<sub>p</sub> collapses from 0.648 to 0.005&nbsp;eV by &minus;0.20 V/&Aring;.','E<sub>g</sub><sup>eff</sup> stays near 1.32&ndash;1.34&nbsp;eV, so the field acts as a near-rigid Fermi-level shift.'],
  tr:[['Positive field, 0 to +0.4 V/&Aring;',[T('&Phi;<sub>n</sub>','&darr;','0.477 &rarr; 0.090 eV'),T('&Phi;<sub>p</sub>','&uarr;','0.850 &rarr; 1.223 eV'),T('E<sub>g</sub><sup>eff</sup>','&asymp;','1.327 &rarr; 1.313 eV')]],['Positive field, +0.5 and +0.6 V/&Aring;',[T('&Phi;<sub>n</sub>','&darr;','0.020 &rarr; &minus;0.024 eV'),T('E<sub>g</sub><sup>eff</sup>','&darr;','1.233 &rarr; 1.122 eV')]],['Negative field, 0 to &minus;0.15 V/&Aring;',[T('&Phi;<sub>n</sub>','&uarr;','0.477 &rarr; 0.684 eV'),T('&Phi;<sub>p</sub>','&darr;','0.850 &rarr; 0.648 eV')]],['Negative field, &minus;0.15 to &minus;0.20 V/&Aring;',[T('&Phi;<sub>p</sub>','&darr;','0.648 &rarr; 0.005 eV'),T('&Phi;<sub>n</sub>','&uarr;','&rarr; 1.318 eV'),T('E<sub>g</sub><sup>eff</sup>','&asymp;','1.331 &rarr; 1.323 eV')]]],
- rows:[['txt','7']]},
+ rows:[['txt','7m'],['7a','7b','7c'],['7d','7e','7f'],['7g','7h','7i'],['7j','7k','7l']]},
 {k:'strain',tab:'Strain',nm:'Biaxial strain',now:'Strain reshapes the bandgap itself.',hero:['8i'],
  p:'Field alone leaves the MoSeTe gap almost unchanged.',m:'Biaxial strain from &minus;8 to +8&nbsp;%, relative to the relaxed heterostructure.',r:'+4 to +6&nbsp;%: near p-Ohmic. &minus;8&nbsp;%: &Phi;<sub>n</sub> 0.055&nbsp;eV.',
  title:'III. Barrier modulation by biaxial strain',sum:'Strain is a second, mechanistically different handle: it renormalizes the gap rather than shifting the Fermi level.',
  pts:['Tensile strain changes the barriers smoothly to +4&nbsp;%, then &Phi;<sub>p</sub> drops from 0.623 to 0.060&nbsp;eV between +4 and +6&nbsp;%, and stays low to +8&nbsp;%.','Compressive strain lowers &Phi;<sub>n</sub> monotonically to 0.055&nbsp;eV at &minus;8&nbsp;%, short of Ohmic. Linear extrapolation puts the crossing near &minus;9 to &minus;10&nbsp;%.','E<sub>g</sub><sup>eff</sup> falls to 0.586&nbsp;eV at &minus;8&nbsp;% and 0.908&nbsp;eV at +8&nbsp;%.','The strain zero is the relaxed heterostructure, where MoSeTe is already compressed 3.46&nbsp;% and graphene stretched 0.87&nbsp;%.'],
  tr:[['Tensile, 0 to +4&nbsp;%',[T('&Phi;<sub>p</sub>','&darr;','0.850 &rarr; 0.623 eV'),T('&Phi;<sub>n</sub>','&uarr;','0.477 &rarr; 0.638 eV'),T('E<sub>g</sub><sup>eff</sup>','&darr;','1.327 &rarr; 1.261 eV')]],['Tensile, +4 to +6&nbsp;%',[T('&Phi;<sub>p</sub>','&darr;','0.623 &rarr; 0.060 eV'),T('&Phi;<sub>n</sub>','&uarr;','0.638 &rarr; 1.062 eV'),T('E<sub>g</sub><sup>eff</sup>','&darr;','1.261 &rarr; 1.122 eV')]],['Compressive, 0 to &minus;8&nbsp;%',[T('&Phi;<sub>n</sub>','&darr;','0.477 &rarr; 0.055 eV'),T('&Phi;<sub>p</sub>','&uarr;','0.850 &rarr; 0.932 eV at &minus;2&nbsp;%, then 0.531 eV'),T('E<sub>g</sub><sup>eff</sup>','&darr;','1.327 &rarr; 0.586 eV')]]],
- rows:[['txt','8']]},
+ rows:[['txt','8i'],['8a','8b','8c','8d'],['8e','8f','8g','8h']]},
 {k:'fet',tab:'FET',nm:'Proposed device',now:'Two gates for the contacts, two for the channel.',hero:['9'],
  p:'The tunable contact needs a device that can use it.',m:'Local gates set the field at each contact; a flexible substrate sets the strain.',r:'Source and drain barriers tuned apart from the channel gating.',
  title:'IV. Proposed contact-tunable FET',sum:'A device concept built on the field and strain results. It is a proposal, not a simulated device.',
  pts:['The top gate V<sub>G</sub> and grounded back gate jointly set the channel carrier density.','Local gates V<sub>LG1</sub> and V<sub>LG2</sub> under the source and drain contacts apply the perpendicular field of Section II independently at each contact.','A flexible substrate applies the biaxial strain of Section III, and the contacts are biased symmetrically at &#8723;V<sub>DS</sub>/2.','No transport or contact-resistance calculation backs this yet; NEGF and hybrid-functional checks are listed as future work.'],
  tr:[['Contact states from the DFT thresholds',[T('n-Ohmic','','+0.6 V/&Aring; field'),T('p-Ohmic','','&minus;0.20 V/&Aring; field, or +4 to +6&nbsp;% strain'),T('Switching window','','&asymp; 0.05 V/&Aring; (field), &asymp; 2&nbsp;% (strain)')]]],
- rows:[['txt']]}
+ rows:[['9'],['txt']]}
 ];
-const C={};
+const C={},CC={};
 const $=s=>document.querySelector(s);
 const nt=t=>t.replace(/<[^>]+>/g,'');
-const fig=(id,full)=>{const f=F[id];return `<figure class="fig${full?' full':''}"><div class="fh"><b>Fig ${id}</b><span>${f.t}</span></div><button class="fi" data-z="${f.s}" aria-label="Enlarge: ${nt(f.t)}"><img src="${B+f.s}" alt="${nt(f.t)}" loading="lazy"></button><figcaption>${f.c}</figcaption></figure>`};
+const fig=(id,full)=>{const f=F[id];const big=BIG[id]?' big':'';return `<figure class="fig${full?' full':''}${big}"><div class="fh"><b>${f.l||'Fig '+id}</b><span>${f.t}</span></div><button class="fi" data-z="${f.s}" aria-label="Enlarge: ${nt(f.t)}"><img src="${B+f.s}" alt="${nt(f.t)}" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'miss',textContent:'Image not found: '+this.getAttribute('src')}))"></button><figcaption>${f.c}</figcaption></figure>`};
 const cb=id=>`<figure class="chartbox"><div class="fh"><b>Trend</b><span>${C[id]}</span></div><div class="cv"><canvas id="c-${id}"></canvas></div><figcaption>${CC[id]}</figcaption></figure>`;
 const txt=s=>`<div class="txt"><ul class="pts">${s.pts.map(x=>`<li>${x}</li>`).join('')}</ul><div class="trd"><b>Trends</b>${s.tr.map(g=>`<p class="sw">${g[0]}</p><ul>${g[1].map(r=>`<li><span>${r[0]}</span><i>${r[1]}</i><em>${r[2]}</em></li>`).join('')}</ul>`).join('')}</div></div>`;
 const cell=(x,s,n)=>x==='txt'?txt(s):x.startsWith('c:')?cb(x.slice(2)):fig(x,n===1);
@@ -226,6 +255,7 @@ const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
 const DUR=4000,MOVE=800,EASE='cubic-bezier(.7,0,.2,1)';
 let cur=0,busy=false,prog=0,last=0,playing=!reduce,hover=false,inView=true;
 slides[0].classList.add('on');
+const st=$('#stage');
 function mark(){tabs.forEach((t,i)=>{t.classList.toggle('on',i===cur);t.classList.toggle('done',i<cur);t.setAttribute('aria-selected',i===cur);t.querySelector('i').style.width=i===cur?prog*100+'%':''});$('#count').textContent=`Stage ${cur+1} of 4: ${S[cur].nm}`}
 function go(n,dir){n=(n+4)%4;if(n===cur||busy)return;
  const o=slides[cur],a=slides[n];a.classList.add('on');a.style.zIndex=2;o.style.zIndex=1;
@@ -250,7 +280,6 @@ tabs.forEach((t,i)=>t.onclick=()=>go(i,i>cur?1:-1));
 const pb=$('#play');
 function setPlay(v){playing=v;pb.textContent=v?'Pause':'Play';pb.setAttribute('aria-pressed',v)}
 pb.onclick=()=>setPlay(!playing);setPlay(playing);
-const st=$('#stage');
 st.onmouseenter=()=>hover=true;st.onmouseleave=()=>hover=false;
 st.addEventListener('focusin',()=>hover=true);st.addEventListener('focusout',()=>hover=false);
 new IntersectionObserver(e=>inView=e[0].isIntersecting,{threshold:.35}).observe(st);
@@ -263,8 +292,6 @@ const lb=$('#lb');document.addEventListener('click',e=>{const b=e.target.closest
 const links=[...document.querySelectorAll('#spy a')];
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(l=>l.classList.toggle('on',l.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-40% 0px -55% 0px'});
 ['overview','eq','field','strain','fet'].forEach(id=>io.observe(document.getElementById(id)));
-
-
 </script>
 </body>
 </html>

@@ -102,6 +102,13 @@
             padding: 1rem;
             box-shadow: 4px 4px 0px 0px rgba(17,17,17,0.1);
         }
+
+        /* Carousel / Stage Switcher Styles */
+        .stage-btn.active {
+            background-color: #111111;
+            color: #f9f9f7;
+            border-color: #111111;
+        }
     </style>
 </head>
 <body class="font-serifBody text-ink antialiased selection:bg-accentRed selection:text-white">
@@ -124,38 +131,79 @@
 
     <main class="max-w-7xl mx-auto px-4 sm:px-8 py-8">
         
-        <!-- Abstract & Architectures -->
+        <!-- Abstract & Interactive Structural Evolution Animation / Stage Switcher -->
         <section class="mb-16">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
                 
-                <div class="md:col-span-1 border-r border-gray-300 pr-8">
+                <!-- Abstract Column -->
+                <div class="md:col-span-4 border-r border-gray-300 pr-8">
                     <h3 class="font-serifHead text-xl font-bold mb-4 uppercase tracking-wider border-b border-ink pb-2">Abstract</h3>
-                    <p class="text-sm leading-relaxed drop-cap text-justify">
+                    <p class="text-sm leading-relaxed drop-cap text-justify mb-4">
                         The continued scaling of Double-Gate (DG) MOSFETs is severely constrained by short-channel effects (SCEs), predominantly Drain-Induced Barrier Lowering (DIBL). This study investigates a sequential structural engineering methodology to decouple source and drain electrostatics. By integrating an asymmetric Step-Oxide (SO), a Dual-Material Gate (DMG), and localized Halo Doping, the device achieves a DIBL reduction from a baseline of 67.21 mV/V down to sub-30 mV/V, whilst preserving ON-state performance and RF metrics.
+                    </p>
+                    <p class="text-sm leading-relaxed text-justify text-muted">
+                        Use the interactive stage viewer on the right to examine the sequential architectural progression from standard uniform oxide to fully optimized halo-engineered profiles.
                     </p>
                 </div>
 
-                <div class="md:col-span-2">
-                    <h3 class="font-serifHead text-xl font-bold mb-4 uppercase tracking-wider border-b border-ink pb-2">Structural Evolution</h3>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="figure-box">
-                            <img src="../assets/img/dg-mosfet-short-channel/Step_Oxide.png" alt="Step Oxide Structure">
-                            <p class="figure-caption"><strong>Fig 1.</strong> Step Oxide (SO) integration, featuring a thicker source-side oxide to suppress tunneling while maintaining drain-side control.</p>
-                        </div>
-                        <div class="figure-box">
-                            <img src="../assets/img/dg-mosfet-short-channel/Dual_Metal.png" alt="Dual Material Gate Structure">
-                            <p class="figure-caption"><strong>Fig 2.</strong> Dual Material Gate (DMG) configuration layered over the Step-Oxide to modulate channel potential.</p>
-                        </div>
-                        <div class="figure-box">
-                            <img src="../assets/img/dg-mosfet-short-channel/Halo_Doping.png" alt="Halo Doping Structure">
-                            <p class="figure-caption"><strong>Fig 3.</strong> Integration of highly concentrated localized Halo (pocket) doping at the source and drain junctions.</p>
-                        </div>
-                        <div class="figure-box flex flex-col justify-center">
-                            <img src="../assets/img/dg-mosfet-short-channel/fig12-halo-schematic.png" alt="Halo Schematic Definition" class="mb-2">
-                            <p class="figure-caption"><strong>Fig 4.</strong> Schematic representation of the localized P+ pocket implant constraining the depletion region.</p>
+                <!-- Interactive Structural Evolution Stage Viewer -->
+                <div class="md:col-span-8">
+                    <div class="flex justify-between items-center border-b border-ink pb-2 mb-4">
+                        <h3 class="font-serifHead text-xl font-bold uppercase tracking-wider">Structural Evolution Stages</h3>
+                        <div class="flex gap-2 text-xs font-mono">
+                            <button onclick="switchStage(0)" id="btn-stage-0" class="stage-btn active px-3 py-1 border border-ink transition-all">1. UO</button>
+                            <button onclick="switchStage(1)" id="btn-stage-1" class="stage-btn px-3 py-1 border border-ink transition-all">2. SO</button>
+                            <button onclick="switchStage(2)" id="btn-stage-2" class="stage-btn px-3 py-1 border border-ink transition-all">3. DMG</button>
+                            <button onclick="switchStage(3)" id="btn-stage-3" class="stage-btn px-3 py-1 border border-ink transition-all">4. Halo</button>
                         </div>
                     </div>
+
+                    <!-- Stage 0: Uniform Oxide -->
+                    <div class="evolution-stage" id="stage-0">
+                        <div class="figure-box">
+                            <img src="../assets/img/dg-mosfet-short-channel/Uniform_Oxide.png" alt="Uniform Oxide Baseline Structure">
+                            <p class="figure-caption"><strong>Fig 1.</strong> Baseline Uniform Oxide (UO) structure showing standard gate oxide thickness $t_{ox}$ across the channel region between source and drain.</p>
+                        </div>
+                    </div>
+
+                    <!-- Stage 1: Step Oxide -->
+                    <div class="evolution-stage hidden" id="stage-1">
+                        <div class="figure-box">
+                            <img src="../assets/img/dg-mosfet-short-channel/Step_Oxide.png" alt="Step Oxide Structure">
+                            <p class="figure-caption"><strong>Fig 2.</strong> Step Oxide (SO) integration, featuring a thicker source-side oxide to suppress tunneling while maintaining drain-side control.</p>
+                        </div>
+                    </div>
+
+                    <!-- Stage 2: Dual Material Gate -->
+                    <div class="evolution-stage hidden" id="stage-2">
+                        <div class="figure-box">
+                            <img src="../assets/img/dg-mosfet-short-channel/Dual_Metal.png" alt="Dual Material Gate Structure">
+                            <p class="figure-caption"><strong>Fig 3.</strong> Dual Material Gate (DMG) configuration layered over the Step-Oxide to modulate channel potential.</p>
+                        </div>
+                    </div>
+
+                    <!-- Stage 3: Halo Doping & Schematic -->
+                    <div class="evolution-stage hidden" id="stage-3">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="figure-box mb-0">
+                                <img src="../assets/img/dg-mosfet-short-channel/Halo_Doping.png" alt="Halo Doping Structure">
+                                <p class="figure-caption"><strong>Fig 4a.</strong> Integration of highly concentrated localized Halo (pocket) doping at the source and drain junctions.</p>
+                            </div>
+                            <div class="figure-box mb-0">
+                                <img src="../assets/img/dg-mosfet-short-channel/fig12-halo-schematic.png" alt="Halo Schematic Definition">
+                                <p class="figure-caption"><strong>Fig 4b.</strong> Schematic representation of the localized P+ pocket implant constraining the depletion region.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stage Navigation Controls -->
+                    <div class="flex justify-between items-center mt-4">
+                        <button onclick="prevStage()" class="font-mono text-xs uppercase px-4 py-2 border border-ink hover:bg-ink hover:text-paper transition-all">&larr; Previous Stage</button>
+                        <span id="stage-indicator" class="font-mono text-xs text-muted">Stage 1 of 4: Uniform Oxide Baseline</span>
+                        <button onclick="nextStage()" class="font-mono text-xs uppercase px-4 py-2 border border-ink hover:bg-ink hover:text-paper transition-all">Next Stage &rarr;</button>
+                    </div>
                 </div>
+
             </div>
         </section>
 
@@ -292,6 +340,43 @@
         </div>
     </footer>
 
+    <!-- Interactive Stage Switcher Script -->
+    <script>
+        let currentStage = 0;
+        const totalStages = 4;
+        const stageDescriptions = [
+            "Stage 1 of 4: Uniform Oxide Baseline",
+            "Stage 2 of 4: Asymmetric Step-Oxide",
+            "Stage 3 of 4: Dual-Material Gate (DMG)",
+            "Stage 4 of 4: Halo Doping Optimization"
+        ];
+
+        function switchStage(n) {
+            currentStage = (n + totalStages) % totalStages;
+            
+            // Hide all stages & remove active classes
+            for (let i = 0; i < totalStages; i++) {
+                document.getElementById(`stage-${i}`).classList.add('hidden');
+                document.getElementById(`btn-stage-${i}`).classList.remove('active');
+            }
+            
+            // Show current stage & set active button
+            document.getElementById(`stage-${currentStage}`).classList.remove('hidden');
+            document.getElementById(`btn-stage-${currentStage}`).classList.add('active');
+            
+            // Update indicator text
+            document.getElementById('stage-indicator').innerText = stageDescriptions[currentStage];
+        }
+
+        function nextStage() {
+            switchStage(currentStage + 1);
+        }
+
+        function prevStage() {
+            switchStage(currentStage - 1);
+        }
+    </script>
+
     <!-- Chart Configuration Scripts -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -351,14 +436,14 @@
                             type: 'linear',
                             display: true,
                             position: 'left',
-                            title: { display: true, text: 'DIBL (mV/V)', color: redColor, font: { family: "'Playfair Display', serif", size: 14, weight: 'bold' } },
+                    title: { display: true, text: 'DIBL (mV/V)', color: redColor, font: { family: "'Playfair Display', serif", size: 14, weight: 'bold' } },
                             ticks: { color: redColor }
                         },
                         y1: {
                             type: 'linear',
                             display: true,
                             position: 'right',
-                            title: { display: true, text: 'SS (mV/dec)', color: blueColor, font: { family: "'Playfair Display', serif", size: 14, weight: 'bold' } },
+                    title: { display: true, text: 'SS (mV/dec)', color: blueColor, font: { family: "'Playfair Display', serif", size: 14, weight: 'bold' } },
                             ticks: { color: blueColor },
                             grid: { drawOnChartArea: false } // only draw grid lines for first axis
                         }
@@ -414,14 +499,14 @@
                             type: 'linear',
                             display: true,
                             position: 'left',
-                            title: { display: true, text: 'DIBL (mV/V)', color: redColor, font: { family: "'Playfair Display', serif", size: 14, weight: 'bold' } },
+                    title: { display: true, text: 'DIBL (mV/V)', color: redColor, font: { family: "'Playfair Display', serif", size: 14, weight: 'bold' } },
                             ticks: { color: redColor }
                         },
                         y1: {
                             type: 'linear',
                             display: true,
                             position: 'right',
-                            title: { display: true, text: 'SS (mV/dec)', color: blueColor, font: { family: "'Playfair Display', serif", size: 14, weight: 'bold' } },
+                    title: { display: true, text: 'SS (mV/dec)', color: blueColor, font: { family: "'Playfair Display', serif", size: 14, weight: 'bold' } },
                             ticks: { color: blueColor },
                             grid: { drawOnChartArea: false }
                         }

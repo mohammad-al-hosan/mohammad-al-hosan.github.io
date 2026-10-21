@@ -98,6 +98,75 @@ dict(slug="iot-fruit-storage",kind="Academic project &middot; Level 4, Term 1",
  links=[("GitHub","https://github.com/mohammad-al-hosan/IOT_Fruit_Storage_System.git"),("IEEE Xplore","https://doi.org/10.1109/ICECTE69292.2026.11429225")]),
 ]
 
+
+STORY={"dg-mosfet-short-channel":dict(
+ intro="The study starts from a plain 20&nbsp;nm double-gate MOSFET and adds one fix at a time: step oxide, then a dual-material gate, then halo doping. Every stage is measured with the same metrics (DIBL, SS, I<sub>ON</sub>, I<sub>OFF</sub>, with V<sub>th</sub> and f<sub>T</sub> where relevant), so each technique's gain has a visible price, and each next stage is chosen because of what the previous one left unsolved.",
+ introfigs=[("fig1-structure.png","Device structures","The four simulated variants, each adding one technique to the one before: UO-DG, SO-DG, DMSO-DG and Halo-DMSO-DG.",1)],
+ setup="Silvaco Atlas, drift-diffusion transport with Van Dort quantum correction and a Gummel&ndash;Newton solver; same mesh and models for every variant; V<sub>DD</sub>&nbsp;=&nbsp;0.8&nbsp;V. V<sub>th</sub> by constant current; DIBL from V<sub>th</sub> at V<sub>DS</sub>&nbsp;=&nbsp;0.08 and 0.8&nbsp;V; SS over one decade below threshold; f<sub>T</sub>&nbsp;=&nbsp;g<sub>m</sub>/[2&pi;(C<sub>gs</sub>+C<sub>gd</sub>)] from a 1&nbsp;MHz small-signal sweep at V<sub>GS</sub>&nbsp;=&nbsp;V<sub>DS</sub>&nbsp;=&nbsp;V<sub>DD</sub>. I<sub>OFF</sub> is subthreshold channel leakage at V<sub>GS</sub>&nbsp;=&nbsp;0. The drift-diffusion model has no tunneling component, so gate tunneling is estimated separately with a WKB expression.",
+ stages=[
+ dict(n="Stage 1",title="Why not just make the oxide thinner?",
+  q="A thinner gate oxide gives the gate a firmer grip on the channel, so it is the obvious first fix. Does it work, and what does it cost?",
+  did="Top and bottom HfO<sub>2</sub> oxides of equal thickness (UO-DG), swept from 0.8 to 2.0&nbsp;nm, with channel length, body thickness and doping fixed.",
+  read="In the OFF state, the 0.8&nbsp;nm device has the highest and flattest source-side barrier. As the oxide gets thicker, drain-induced band bending reaches further toward the source and lowers that barrier, which is why DIBL, SS and I<sub>OFF</sub> all grow.",
+  figs=[("fig2-uo-transfer.png","Transfer characteristics","Thicker oxide raises I<sub>OFF</sub> and lowers I<sub>ON</sub>.",0),("fig3-uo-bands.png","Band profiles in the OFF state","Thicker oxide gives stronger drain-side band bending and a lower source-side barrier.",0),("fig4-uo-trends.png","DIBL, SS and f<sub>T</sub> vs oxide thickness","DIBL and SS rise with thickness; f<sub>T</sub> rises too.",1)],
+  stats=[("DIBL","67.21 &rarr; 43.48 mV/V","2.0 &rarr; 0.8 nm"),("SS","74.89 &rarr; 69.10 mV/dec",""),("I<sub>ON</sub>/I<sub>OFF</sub>","3.05 &rarr; 19.23 &times;10<sup>4</sup>",""),("f<sub>T</sub>","491 &rarr; 432 GHz","")],
+  got="Yes, it works. Going from 2.0 to 0.8&nbsp;nm cuts DIBL from 67.21 to 43.48&nbsp;mV/V, improves SS, raises I<sub>ON</sub> from 4.10 to 5.28&nbsp;mA/&micro;m and cuts I<sub>OFF</sub> from 134.4 to 27.5&nbsp;nA/&micro;m.",
+  cost="Tunneling and speed. The WKB tunneling estimate grows from 0.008% at 2.0&nbsp;nm to 2.34% at 0.8&nbsp;nm, about 280 times higher, and f<sub>T</sub> falls from 491 to 432&nbsp;GHz.",
+  nxt="Thin oxide gives the best control but is tunneling-unsafe, so the 0.8&nbsp;nm device stays only as a reference. The question becomes: can that control be had without a thin oxide on both sides?"),
+ dict(n="Stage 2",title="Thick oxide at the source, thin oxide at the drain",
+  q="The drain is where the damage starts. Can a thin oxide on the drain side alone do most of the job, while the source side stays thick and safe?",
+  did="A step oxide (SO-DG) with two sweeps to separate the effects: source oxide fixed at 2.0&nbsp;nm with drain oxide from 0.8 to 1.6&nbsp;nm, then drain oxide fixed at 0.8&nbsp;nm with source oxide from 1.2 to 2.0&nbsp;nm.",
+  read="The drain-side oxide has the strong effect: with the source fixed at 2.0&nbsp;nm, thinning the drain oxide from 1.6 to 0.8&nbsp;nm improves DIBL from 62.96 to 55.10&nbsp;mV/V. The source side shows the trade-off: raising it from 1.2 to 2.0&nbsp;nm adds 7.43&nbsp;mV/V of DIBL and cuts I<sub>ON</sub>/I<sub>OFF</sub> by about 42%, but going from 1.6 to 2.0&nbsp;nm cuts the tunneling estimate by about 43 times. So 2.0&nbsp;nm source / 0.8&nbsp;nm drain is selected. The plots show the drain-induced potential change staying more confined to the drain side.",
+  figs=[("fig5-so-current-density.png","OFF-state current density","Atlas total current density at V<sub>GS</sub>&nbsp;=&nbsp;0, V<sub>DS</sub>&nbsp;=&nbsp;0.8&nbsp;V for the uniform-oxide and step-oxide devices.",1),("fig6-so-potential.png","How far the drain's influence reaches","&Delta;&psi;(x) between V<sub>DS</sub>&nbsp;=&nbsp;0 and 0.8&nbsp;V. The drain-induced change stays more confined to the drain side in the step-oxide device.",0),("fig7-so-bands.png","Band shift near the source barrier","The change between V<sub>DS</sub>&nbsp;=&nbsp;0.08 and 0.8&nbsp;V is smaller for SO-DG near the source-side barrier, consistent with its lower DIBL.",0)],
+  stats=[("DIBL","67.21 &rarr; 55.10 mV/V","&minus;18%"),("SS","74.89 &rarr; 71.22 mV/dec",""),("I<sub>ON</sub>","4.10 &rarr; 4.34 mA/&micro;m",""),("f<sub>T</sub>","491 &rarr; 478 GHz","")],
+  got="Against the 2.0&nbsp;nm uniform device, DIBL falls 18% to 55.10&nbsp;mV/V, SS improves to 71.22&nbsp;mV/dec, I<sub>ON</sub> rises slightly, I<sub>OFF</sub> falls from 134.4 to 52.9&nbsp;nA/&micro;m and I<sub>ON</sub>/I<sub>OFF</sub> goes from 3.05 to 8.19&times;10<sup>4</sup>.",
+  cost="It is less effective than the 0.8&nbsp;nm uniform oxide (DIBL 55.10 against 43.48&nbsp;mV/V), and f<sub>T</sub> drops about 13&nbsp;GHz, though it stays at about 97% of the uniform value. The thick source oxide is what keeps tunneling low.",
+  nxt="Asymmetric oxide improves the electrostatics without a thin oxide on both sides. The remaining DIBL is addressed next with a dual-material gate."),
+ dict(n="Stage 3",title="Raise the source barrier with a dual-material gate",
+  q="Can a gate made of two materials, with a higher work function over the source side, create a potential step that reduces the drain's grip on the source barrier?",
+  did="The selected SO-DG geometry (2.0&nbsp;nm / 0.8&nbsp;nm, no further oxide thinning) with the gate split 1:1 into a high-work-function source half and a low-work-function drain half (DMSO-DG). The difference &Delta;&Phi; is swept from 0.1 to 0.3&nbsp;eV.",
+  read="The boundary between the two gate materials produces a step in the channel potential, and the source-side barrier rises as &Delta;&Phi; increases, which matches the fall in I<sub>OFF</sub>. A smaller step remains visible in the ON state. The f<sub>T</sub> peak moves to higher V<sub>GS</sub> as &Delta;&Phi; grows, following the rise in V<sub>th</sub>.",
+  figs=[("fig8-dmg-bands.png","Conduction band along the gate","OFF state (left) and ON state (right). The gate-material boundary creates a potential step, and the source-side barrier rises as &Delta;&Phi; increases.",1),("fig9-dmg-current.png","ON and OFF current density","&Delta;&Phi; from 0.1 to 0.3&nbsp;eV. OFF-state current falls as &Delta;&Phi; rises; in the ON state a change is visible near the gate-material boundary.",0),("fig10-dmg-ft.png","f<sub>T</sub> vs V<sub>GS</sub>","The f<sub>T</sub> peak moves to higher V<sub>GS</sub> as &Delta;&Phi; increases, following the rise in V<sub>th</sub>.",0),("fig11-dmg-potential.png","Potential maps","Atlas potential at V<sub>GS</sub>&nbsp;=&nbsp;V<sub>DS</sub>&nbsp;=&nbsp;0.8&nbsp;V for &Delta;&Phi;&nbsp;=&nbsp;0.1, 0.2 and 0.3&nbsp;eV.",1)],
+  stats=[("DIBL","55.10 &rarr; 32.95 mV/V","&minus;40%"),("I<sub>OFF</sub>","52.9 &rarr; 37.5 nA/&micro;m",""),("I<sub>ON</sub>","4.34 &rarr; 3.34 mA/&micro;m",""),("SS","71.22 &rarr; 77.82 mV/dec","")],
+  got="This is the biggest single DIBL cut. At &Delta;&Phi;&nbsp;=&nbsp;0.3&nbsp;eV DIBL falls about 40% to 32.95&nbsp;mV/V, lower even than the 0.8&nbsp;nm uniform oxide, and I<sub>OFF</sub> falls to 37.54&nbsp;nA/&micro;m. &Delta;&Phi;&nbsp;=&nbsp;0.3&nbsp;eV has the lowest DIBL and I<sub>OFF</sub> of the three and is carried forward.",
+  cost="A real one. I<sub>ON</sub> falls from 4.34 to 3.34&nbsp;mA/&micro;m (17% across the &Delta;&Phi; sweep alone), SS worsens to 77.82&nbsp;mV/dec and V<sub>th</sub> rises from 0.358 to 0.463&nbsp;V. The gain also tapers: DIBL goes 40.57, 34.81, 32.95&nbsp;mV/V for &Delta;&Phi; of 0.1, 0.2, 0.3&nbsp;eV.",
+  nxt="DIBL is much lower, but a lightly doped channel (8&times;10<sup>14</sup>&nbsp;cm<sup>&minus;3</sup>) still lets the drain depletion region reach toward the source barrier as V<sub>DS</sub> rises. That is what the halo targets."),
+ dict(n="Stage 4",title="Confine the depletion region with halo doping",
+  q="Can a heavily doped pocket next to each junction keep the drain depletion region from reaching into the channel?",
+  did="A 4&nbsp;nm uniform P<sup>+</sup> halo at each source/drain junction, through the full body thickness, on the &Delta;&Phi;&nbsp;=&nbsp;0.3&nbsp;eV device (Halo-DMSO-DG). Three concentrations: 2&times;10<sup>18</sup>, 6&times;10<sup>18</sup> and 1&times;10<sup>19</sup>&nbsp;cm<sup>&minus;3</sup>, compared with the no-halo device.",
+  read="Higher local doping narrows the depletion width, roughly as N<sup>&minus;1/2</sup>, so the drain-side depletion boundary stays close to the junction. That also means diminishing returns: DIBL drops 4.58&nbsp;mV/V from no halo to 2&times;10<sup>18</sup>, but only 1.60&nbsp;mV/V more going to 1&times;10<sup>19</sup>.",
+  figs=[("fig12-halo-schematic.png","Why a halo helps","Depletion-region extent without and with P<sup>+</sup> halo. The higher doping keeps the drain-side depletion boundary closer to the junction.",1),("fig13-halo-trends.png","Halo concentration sweep","DIBL and SS (left), I<sub>ON</sub>/I<sub>OFF</sub> (middle) and f<sub>T</sub> (right) versus halo concentration. Look for where the curves flatten.",1)],
+  stats=[("DIBL","32.95 &rarr; 26.77 mV/V","&minus;18.8%"),("I<sub>OFF</sub>","37.54 &rarr; 14.94 nA/&micro;m","&minus;60.2%"),("I<sub>ON</sub>/I<sub>OFF</sub>","8.91 &rarr; 18.05 &times;10<sup>4</sup>",""),("I<sub>ON</sub>","3.34 &rarr; 2.70 mA/&micro;m","")],
+  got="The halo is particularly good at suppressing the drain-induced rise in OFF-state current: I<sub>OFF</sub> falls 60.2% and DIBL falls to 26.77&nbsp;mV/V at 1&times;10<sup>19</sup>&nbsp;cm<sup>&minus;3</sup>. Because I<sub>OFF</sub> falls faster than I<sub>ON</sub>, I<sub>ON</sub>/I<sub>OFF</sub> roughly doubles.",
+  cost="I<sub>ON</sub> falls 19.3% at the highest concentration. V<sub>th</sub> stays at 0.463&nbsp;V at 2&times;10<sup>18</sup> but rises to 0.490&nbsp;V at 1&times;10<sup>19</sup>, and f<sub>T</sub> goes from 475.2 to 476.7&nbsp;GHz at the lowest level and down to 466.1&nbsp;GHz at the highest. SS barely moves (77.08&ndash;77.27&nbsp;mV/dec).",
+  nxt="2&times;10<sup>18</sup>&nbsp;cm<sup>&minus;3</sup> is the best trade-off: I<sub>OFF</sub> 20.19&nbsp;nA/&micro;m, DIBL 28.37&nbsp;mV/V, V<sub>th</sub> unchanged and f<sub>T</sub> slightly higher. The halo is another design trade-off, not a free improvement."),
+ ],
+ outro="DIBL falls 67.21 &rarr; 55.10 &rarr; 32.95 &rarr; 26.77&nbsp;mV/V across the stages, 60% below the 2.0&nbsp;nm baseline, while SS never improves beyond the Stage&nbsp;2 value of 71.22&nbsp;mV/dec. The three techniques act as complementary controls with different penalties. The step oxide is the cheap one and even raises I<sub>ON</sub>. The dual-material gate gives the largest DIBL cut but costs I<sub>ON</sub>, V<sub>th</sub> and SS. The halo does the most for leakage but costs I<sub>ON</sub>, and at high concentration V<sub>th</sub> and f<sub>T</sub> as well.",
+ compare="The step-oxide gain matches the direction reported by Al-Jawadi et al. for a source-thick, drain-thin 20&nbsp;nm MOSFET, which improved leakage and drive current (they did not report DIBL). The DMG trade-off of lower DIBL with higher SS and lower I<sub>ON</sub> is consistent with work on DMG junctionless FinFETs. The halo gain is smaller than the near-zero DIBL reported for a 14&nbsp;nm p<sup>+</sup>-pocket DG MOSFET, but the structures and halo profiles differ. Unlike earlier studies that use these techniques alone or in pairs, this one applies them in sequence on the same planar 20&nbsp;nm structure.",
+ limits=["The DMG segment ratio is fixed at 1:1; other ratios could shift the trade-off.","The halo is a uniform box profile; non-uniform profiles have been reported to give different trade-offs.","The drift-diffusion model has no tunneling, so I<sub>OFF</sub> is channel leakage only and gate tunneling appears only through the WKB estimate."]
+)}
+
+def fig(s,f,t,c,w):
+    return f'<figure class="{"wide" if w else ""}"><img src="../assets/img/{s}/{f}" alt="{t}" loading="lazy"><figcaption><b>{t}.</b> {c}</figcaption></figure>'
+
+def story_html(p):
+    st=STORY[p['slug']]; s=p['slug']
+    out=f'<section><h2>The approach</h2><p class="lead">{st["intro"]}</p><div class="figs one">'+''.join(fig(s,*f) for f in st["introfigs"])+f'</div><details class="setup"><summary>Simulation setup and metrics</summary><p>{st["setup"]}</p></details></section>'
+    for g in st["stages"]:
+        stats=''.join(f'<div class="stat"><span>{a}</span><b>{b}</b></div>' for a,b,_ in g["stats"])
+        out+=(f'<section class="stage"><div class="stage-h"><span class="stage-n">{g["n"]}</span><h2>{g["title"]}</h2></div>'
+          f'<p class="q"><b>The question.</b> {g["q"]}</p><p><b>What was done.</b> {g["did"]}</p><p><b>What the plots show.</b> {g["read"]}</p>'
+          f'<div class="figs">'+''.join(fig(s,*f) for f in g["figs"])+'</div>'
+          f'<div class="stats">{stats}</div>'
+          f'<div class="callout got"><b>What it buys.</b> {g["got"]}</div>'
+          f'<div class="callout cost"><b>What it costs.</b> {g["cost"]}</div>'
+          f'<p class="next">&darr; {g["nxt"]}</p></section>')
+    out+='<!--RES-->'
+    out+=f'<section><h2>Putting it together</h2><p class="lead">{st["outro"]}</p></section>'
+    out+=f'<section><h2>How it compares</h2><p class="lead">{st["compare"]}</p></section>'
+    out+='<section><h2>Limits</h2><div class="card"><ul>'+''.join(f'<li>{l}</li>' for l in st["limits"])+'</ul></div></section>'
+    return out
+
 def page(p):
     s=p['slug']
     facts=''.join(f'<div class="fact"><b>{b}</b><span>{a}</span></div>' for a,b in p['facts'])
@@ -107,6 +176,7 @@ def page(p):
     tbl=(f'<div class="tblw"><table class="tbl"><caption>{t["caption"]}</caption><thead><tr>'+''.join(f'<th>{h}</th>' for h in t['head'])+'</tr></thead><tbody>'+''.join('<tr>'+''.join(f'<td>{c}</td>' for c in r)+'</tr>' for r in t['rows'])+'</tbody></table></div>') if t else ''
     res=(f'<section><h2>Results</h2><ul class="res">'+''.join(f'<li>{r}</li>' for r in p['results'])+f'</ul>{tbl}</section>') if p['results'] else ''
     figs=''.join(f'<figure class="{"wide" if w else ""}"><img src="../assets/img/{s}/{f}" alt="{t}" loading="lazy"><figcaption><b>{t}.</b> {c}</figcaption></figure>' for f,t,c,w in p['figs'])
+    body=story_html(p).replace('<!--RES-->',res) if p['slug'] in STORY else f'<section><h2>How it was done</h2><ol class="steps">{steps}</ol></section>\n<section><h2>Figures</h2><div class="figs">{figs}</div></section>\n{res}'
     chips=''.join(f'<span class="chip">{t}</span>' for t in p['tools'])
     links=''.join((f'<a class="btn" href="{u}" target="_blank" rel="noopener">{t}</a>' if u else f'<p class="note">{t}</p>') for t,u in p['links'])
     links=f'<section><h2>Links</h2><div class="links">{links}</div></section>' if links else ''
@@ -125,9 +195,7 @@ def page(p):
 <div class="ph"><div class="kind">{p['kind']}</div><h1>{p['title']}</h1><p class="lede">{p['lede']}</p>
 <div class="facts pf">{facts}</div></div>
 <section><h2>Motivation</h2><div class="card"><ul>{why}</ul></div></section>
-<section><h2>How it was done</h2><ol class="steps">{steps}</ol></section>
-<section><h2>Figures</h2><div class="figs">{figs}</div></section>
-{res}
+{body}
 <section><h2>Tools</h2><div class="chips">{chips}</div></section>
 {links}
 </main><footer><div class="wrap"><p class="fine">&copy; Mohammad Al Hosan Kanon &middot; <a href="../index.html">Portfolio</a></p></div></footer>

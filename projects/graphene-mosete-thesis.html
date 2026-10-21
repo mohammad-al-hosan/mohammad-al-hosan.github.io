@@ -73,6 +73,8 @@ sub,sup{line-height:0}a{color:inherit}
 .full .fi img{max-height:none}
 /* wide schematics (stacking table, FET): full width but capped so they do not tower over the page */
 .full.big .fi img{max-height:520px}
+/* fat-band figures beside the text box: same frame for Se and Te so they look identical */
+.row .fig.tall .fi img{height:560px;max-height:none;object-fit:contain}
 .miss{font:400 .78rem/1.5 var(--mono);color:var(--red);padding:2rem 1rem;text-align:center;border:1px dashed var(--red);width:100%;word-break:break-all}
 .fig figcaption{font-size:.72rem;line-height:1.4;color:var(--muted);padding:.4rem .75rem;border-top:1px solid #e5e5e5}
 dialog{border:1px solid var(--ink);padding:0;max-width:94vw;background:#fff}
@@ -182,11 +184,11 @@ body{background:#fff}
 /* Image folder, relative to THIS html file (projects/ -> assets/img/graphene-mosete-thesis/ at the repo root). */
 const B='../assets/img/graphene-mosete-thesis/';
 const F={
-'stk':{l:'Stacking',s:'stacking.png',t:'Stacking registries, both terminations',c:'Top and side views of the three lateral registries (I hollow site, II Mo-top, III outer chalcogen-top) for Gr/SeMoTe and Gr/TeMoSe. Stacking II and III are nearly degenerate; III is used throughout.'},
+'stk':{s:'stacking.png',t:'Stacking registries, both terminations',c:'Top and side views of the three lateral registries (I hollow site, II Mo-top, III outer chalcogen-top) for Gr/SeMoTe and Gr/TeMoSe. Stacking II and III are nearly degenerate; III is used throughout.'},
 /* CONFIRM before publishing: this plot has about 15 branches and tops out near 11.5 THz, which does not match a 59-atom graphene/MoSeTe cell (177 branches, graphene G mode near 47 THz). State exactly which cell it is in the caption. */
-'phn':{l:'Phonon',s:'phonon_dispersion.png',t:'Phonon dispersion, Se-face interface',c:'Phonon dispersion along &Gamma;&ndash;M&ndash;K&ndash;&Gamma;; acoustic branches (ZA, TA, LA) in red, optical in blue-grey. There are no imaginary frequencies, and the acoustic branches go to zero at &Gamma;.'},
-'aimd':{l:'AIMD',s:'aimd_temperature.png',t:'AIMD temperature at 300 K, Se-face interface',c:'Temperature trace of a 1&nbsp;ps ab initio molecular dynamics run (Andersen thermostat at 300&nbsp;K, 1&nbsp;fs step, &Gamma;-point sampling). The temperature fluctuates about 300&nbsp;K without drift.'},
-'te2':{l:'Te face',s:'te_strain_p2_fatband.png',t:'Fat bands, Te face, +2&nbsp;% strain',c:'Projected fat bands of the Te-face interface at +2&nbsp;% biaxial strain (graphene blue, MoSeTe orange). The MoSeTe valence band edge near &Gamma; sits above E<sub>F</sub>, giving a p-type Ohmic contact.'},
+'phn':{s:'phonon_dispersion.png',t:'Phonon dispersion, Se-face interface',c:'Phonon dispersion along &Gamma;&ndash;M&ndash;K&ndash;&Gamma;; acoustic branches (ZA, TA, LA) in red, optical in blue-grey. There are no imaginary frequencies, and the acoustic branches go to zero at &Gamma;.'},
+'aimd':{s:'aimd_temperature.png',t:'AIMD temperature at 300 K, Se-face interface',c:'Temperature trace of a 1&nbsp;ps ab initio molecular dynamics run (Andersen thermostat at 300&nbsp;K, 1&nbsp;fs step, &Gamma;-point sampling). The temperature fluctuates about 300&nbsp;K without drift.'},
+'te2':{s:'te_strain_p2_fatband.png',t:'Fat bands, Te face, +2&nbsp;% strain',c:'Projected fat bands of the Te-face interface at +2&nbsp;% biaxial strain (graphene blue, MoSeTe orange). The MoSeTe valence band edge near &Gamma; sits above E<sub>F</sub>, giving a p-type Ohmic contact.'},
 '4':{s:'fig4-fatband-pdos.png',t:'Fat bands, Gr/SeMoTe',c:'Projected fat bands (graphene blue, MoSeTe red) with &Phi;<sub>n</sub> and &Phi;<sub>p</sub> marked. The MoSeTe gap stays clear and the Dirac cone stays intact.'},
 '5a':{s:'fig6a_band_alignment.png',t:'Band alignment',c:'Graphene work function, MoSeTe electron affinity and work function, &Phi;<sub>n</sub>, &Phi;<sub>p</sub> and the vacuum offset &Delta;V = 0.504&nbsp;eV.'},
 '5b':{s:'fig6_potential_macro.png',t:'Interfacial dipole',c:'Planar-averaged electrostatic potential; the two vacuum plateaus differ by &Delta;V.'},
@@ -215,8 +217,13 @@ const F={
 '8f':{s:'hetero_strain_n4_burai_fatband_strain_-4.png',t:'Fat bands, &minus;4&nbsp;% strain',c:'Biaxial strain of &minus;4&nbsp;%.'},
 '8g':{s:'hetero_strain_n6_burai_fatband_strain_-6.png',t:'Fat bands, &minus;6&nbsp;% strain',c:'Biaxial strain of &minus;6&nbsp;%.'},
 '8h':{s:'hetero_strain_n8_burai_fatband_strain_-8.png',t:'Fat bands, &minus;8&nbsp;% strain',c:'Biaxial strain of &minus;8&nbsp;%.'},
-'9':{l:'Concept',s:'fig9-proposed-fet.png',t:'Proposed contact-tunable FET',c:'Design concept, not a simulated device: top gate V<sub>G</sub> and grounded back gate set the channel, local gates V<sub>LG1</sub> and V<sub>LG2</sub> tune the source and drain barriers, a flexible substrate applies strain, and the contacts are biased at &#8723;V<sub>DS</sub>/2.'}};
+'9':{s:'fig9-proposed-fet.png',t:'Proposed contact-tunable FET',c:'Design concept, not a simulated device: top gate V<sub>G</sub> and grounded back gate set the channel, local gates V<sub>LG1</sub> and V<sub>LG2</sub> tune the source and drain barriers, a flexible substrate applies strain, and the contacts are biased at &#8723;V<sub>DS</sub>/2.'}};
 const BIG={'stk':1,'9':1};
+const TALL={'4':1,'te2':1};
+/* Figure numbers follow the order they appear on the page. Panels keep their letters. */
+const LBL={stk:'Fig 1',phn:'Fig 2',aimd:'Fig 3',te2:'Fig 4','4':'Fig 5','5a':'Fig 6a','5b':'Fig 6b','6a':'Fig 7a','6b':'Fig 7b','6c':'Fig 7c','7m':'Fig 8','8i':'Fig 9','9':'Fig 10'};
+'abcdefghijkl'.split('').forEach(c=>LBL['7'+c]='Fig 8'+c);
+'abcdefgh'.split('').forEach(c=>LBL['8'+c]='Fig 9'+c);
 const T=(a,b,c)=>[a,b,c];
 const S=[
 {k:'stab',tab:'Stability',nm:'Structure and stability',now:'The Se-face interface is bound and stable.',hero:['phn','aimd'],
@@ -260,7 +267,7 @@ const N=S.length;
 const C={},CC={};
 const $=s=>document.querySelector(s);
 const nt=t=>t.replace(/<[^>]+>/g,'');
-const fig=(id,full)=>{const f=F[id];const big=BIG[id]?' big':'';return `<figure class="fig${full?' full':''}${big}"><div class="fh"><b>${f.l||'Fig '+id}</b><span>${f.t}</span></div><button class="fi" data-z="${f.s}" aria-label="Enlarge: ${nt(f.t)}"><img src="${B+f.s}" alt="${nt(f.t)}" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'miss',textContent:'Image not found: '+this.getAttribute('src')}))"></button><figcaption>${f.c}</figcaption></figure>`};
+const fig=(id,full)=>{const f=F[id];const big=(BIG[id]?' big':'')+(TALL[id]?' tall':'');return `<figure class="fig${full?' full':''}${big}"><div class="fh"><b>${LBL[id]}</b><span>${f.t}</span></div><button class="fi" data-z="${f.s}" aria-label="Enlarge: ${nt(f.t)}"><img src="${B+f.s}" alt="${nt(f.t)}" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'miss',textContent:'Image not found: '+this.getAttribute('src')}))"></button><figcaption>${f.c}</figcaption></figure>`};
 const cb=id=>`<figure class="chartbox"><div class="fh"><b>Trend</b><span>${C[id]}</span></div><div class="cv"><canvas id="c-${id}"></canvas></div><figcaption>${CC[id]}</figcaption></figure>`;
 const txt=s=>`<div class="txt"><ul class="pts">${s.pts.map(x=>`<li>${x}</li>`).join('')}</ul><div class="trd"><b>Trends</b>${s.tr.map(g=>`<p class="sw">${g[0]}</p><ul>${g[1].map(r=>`<li><span>${r[0]}</span><i>${r[1]}</i><em>${r[2]}</em></li>`).join('')}</ul>`).join('')}</div></div>`;
 const cell=(x,s,n)=>x==='txt'?txt(s):x.startsWith('c:')?cb(x.slice(2)):fig(x,n===1);

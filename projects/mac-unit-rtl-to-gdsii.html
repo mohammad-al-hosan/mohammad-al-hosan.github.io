@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RTL-to-GDSII Implementation of an Optimised Multiply-Accumulate Unit | M. A. H. Kanon</title>
+<meta name="description" content="A parameterized MAC unit taken from RTL to GDSII on two independent flows, one commercial and one open-source, to check whether synthesis conclusions hold across toolchains.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,72,400;0,72,500;0,72,600;1,72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css"></head><body>
+<header class="nav"><div class="nav-in"><span class="mark"><b>M. A. H. Kanon</b> / EEE, BUET</span>
+<nav><a href="../index.html">Home</a><a href="../index.html#research">Research</a><a href="../index.html#projects">Projects</a><a href="../index.html#contact">Contact</a><button class="tt" id="tt" type="button" aria-label="Toggle dark mode">&#9789;</button></nav></div></header>
+<main class="wrap">
+<a class="back" href="../index.html#projects">&larr; Back to portfolio</a>
+<div class="ph"><div class="kind">Academic project &middot; Level 4, Term 2</div><h1>RTL-to-GDSII Implementation of an Optimised Multiply-Accumulate Unit</h1><p class="lede">A parameterized MAC unit taken from RTL to GDSII on two independent flows, one commercial and one open-source, to check whether synthesis conclusions hold across toolchains.</p>
+<div class="facts pf"><div class="fact"><b>2026</b><span>Year</span></div><div class="fact"><b>Cadence Genus/Innovus, GPDK045 (45&nbsp;nm)</b><span>Flow A</span></div><div class="fact"><b>OpenROAD, IHP SG13G2 (130&nbsp;nm)</b><span>Flow B</span></div><div class="fact"><b>ICECE 2026 paper, under review</b><span>Outcome</span></div></div></div>
+<section><h2>Motivation</h2><div class="card"><ul><li>The MAC is the core of DSP and ML accelerators; its area, timing, and power depend heavily on synthesis constraints.</li><li>Most results come from a single toolchain. Repeating the study on a second flow tests whether the trends are real or tool artifacts.</li></ul></div></section>
+<section><h2>How it was done</h2><ol class="steps"><li><h3>Parameterized RTL</h3><ul><li>SystemVerilog MAC unit with configurable parameters.</li></ul></li><li><h3>Synthesis constraint sweep</h3><ul><li>Constraints varied and the resulting area, timing, and power compared.</li></ul></li><li><h3>Physical implementation</h3><ul><li>Place and route to GDSII in Innovus on GPDK045 and in OpenROAD on IHP SG13G2.</li></ul></li><li><h3>Cross-toolchain validation</h3><ul><li>Same design and sweeps on both flows to compare trends.</li></ul></li></ol></section>
+<section><h2>Figures</h2><div class="figs"><figure class="wide"><img src="../assets/img/mac-unit-rtl-to-gdsii/fig1-flow.png" alt="Design flow" loading="lazy"><figcaption><b>Design flow.</b> RTL-to-GDSII flow on both toolchains.</figcaption></figure><figure class=""><img src="../assets/img/mac-unit-rtl-to-gdsii/fig2-layout.png" alt="Final layout" loading="lazy"><figcaption><b>Final layout.</b> GDSII layout of the MAC unit.</figcaption></figure><figure class=""><img src="../assets/img/mac-unit-rtl-to-gdsii/fig3-sweep.png" alt="Constraint sweep" loading="lazy"><figcaption><b>Constraint sweep.</b> Area/timing trade-off from the synthesis sweep.</figcaption></figure></div></section>
+
+<section><h2>Tools</h2><div class="chips"><span class="chip">SystemVerilog</span><span class="chip">Cadence Genus</span><span class="chip">Cadence Innovus</span><span class="chip">OpenROAD</span></div></section>
+
+</main><footer><div class="wrap"><p class="fine">&copy; Mohammad Al Hosan Kanon &middot; <a href="../index.html">Portfolio</a></p></div></footer>
+<script src="../assets/site.js"></script></body></html>

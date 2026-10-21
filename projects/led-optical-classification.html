@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Optical Quality Classification of LEDs Using KNN and Random Forest | M. A. H. Kanon</title>
+<meta name="description" content="A low-cost optical characterization rig and a machine-learning pipeline that classifies LED quality from measured optical features.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,72,400;0,72,500;0,72,600;1,72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css"></head><body>
+<header class="nav"><div class="nav-in"><span class="mark"><b>M. A. H. Kanon</b> / EEE, BUET</span>
+<nav><a href="../index.html">Home</a><a href="../index.html#research">Research</a><a href="../index.html#projects">Projects</a><a href="../index.html#contact">Contact</a><button class="tt" id="tt" type="button" aria-label="Toggle dark mode">&#9789;</button></nav></div></header>
+<main class="wrap">
+<a class="back" href="../index.html#projects">&larr; Back to portfolio</a>
+<div class="ph"><div class="kind">Academic project &middot; Level 4, Term 2</div><h1>Optical Quality Classification of LEDs Using KNN and Random Forest</h1><p class="lede">A low-cost optical characterization rig and a machine-learning pipeline that classifies LED quality from measured optical features.</p>
+<div class="facts pf"><div class="fact"><b>2026</b><span>Year</span></div><div class="fact"><b>BPW34 photodiode, TCS34725 sensor, Arduino</b><span>Hardware</span></div><div class="fact"><b>KNN, Random Forest</b><span>Models</span></div><div class="fact"><b>ICECE 2026 paper, under review</b><span>Outcome</span></div></div></div>
+<section><h2>Motivation</h2><div class="card"><ul><li>Visual or spectrometer-based LED screening is slow or expensive.</li><li>A cheap sensor setup plus a classifier could grade LEDs consistently.</li></ul></div></section>
+<section><h2>How it was done</h2><ol class="steps"><li><h3>Measurement rig</h3><ul><li>BPW34 photodiode and TCS34725 colour sensor read by an Arduino.</li><li>Readings streamed to the PC over serial (PySerial).</li></ul></li><li><h3>Feature engineering</h3><ul><li>Features derived from the raw optical readings before training.</li></ul></li><li><h3>Classification</h3><ul><li>KNN and Random Forest models trained and compared (scikit-learn, pandas).</li></ul></li><li><h3>Interface</h3><ul><li>Streamlit app for live measurement and classification.</li></ul></li></ol></section>
+<section><h2>Figures</h2><div class="figs"><figure class=""><img src="../assets/img/led-optical-classification/fig1-rig.jpg" alt="Measurement rig" loading="lazy"><figcaption><b>Measurement rig.</b> Arduino with photodiode and colour sensor.</figcaption></figure><figure class=""><img src="../assets/img/led-optical-classification/fig2-app.png" alt="Streamlit interface" loading="lazy"><figcaption><b>Streamlit interface.</b> Live classification interface.</figcaption></figure><figure class=""><img src="../assets/img/led-optical-classification/fig3-results.png" alt="Model comparison" loading="lazy"><figcaption><b>Model comparison.</b> KNN versus Random Forest performance.</figcaption></figure></div></section>
+
+<section><h2>Tools</h2><div class="chips"><span class="chip">Python</span><span class="chip">scikit-learn</span><span class="chip">pandas</span><span class="chip">Streamlit</span><span class="chip">Arduino</span><span class="chip">PySerial</span></div></section>
+
+</main><footer><div class="wrap"><p class="fine">&copy; Mohammad Al Hosan Kanon &middot; <a href="../index.html">Portfolio</a></p></div></footer>
+<script src="../assets/site.js"></script></body></html>

@@ -1,19 +1,461 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mitigation of Short-Channel Effects in 20 nm Double-Gate MOSFETs via Step Oxide, Dual-Material Gate, and Halo Doping | M. A. H. Kanon</title>
-<meta name="description" content="A TCAD study that adds step-oxide, dual-material-gate, and halo-doping engineering to a 20 nm double-gate MOSFET one stage at a time, so the contribution and the cost of each technique can be read off separately.">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,72,400;0,72,500;0,72,600;1,72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/style.css"></head><body>
-<header class="nav"><div class="nav-in"><span class="mark"><b>M. A. H. Kanon</b> / EEE, BUET</span>
-<nav><a href="../index.html">Home</a><a href="../index.html#research">Research</a><a href="../index.html#projects">Projects</a><a href="../index.html#contact">Contact</a><button class="tt" id="tt" type="button" aria-label="Toggle dark mode">&#9789;</button></nav></div></header>
-<main class="wrap">
-<a class="back" href="../index.html#research">&larr; Back to portfolio</a>
-<div class="ph"><div class="kind">Research project</div><h1>Mitigation of Short-Channel Effects in 20&nbsp;nm Double-Gate MOSFETs via Step Oxide, Dual-Material Gate, and Halo Doping</h1><p class="lede">A TCAD study that adds step-oxide, dual-material-gate, and halo-doping engineering to a 20&nbsp;nm double-gate MOSFET one stage at a time, so the contribution and the cost of each technique can be read off separately.</p>
-<div class="facts pf"><div class="fact"><b>Feb 2026 &ndash; Aug 2026</b><span>Period</span></div><div class="fact"><b>Prof. S. M. Mominuzzaman, BUET</b><span>Supervisor</span></div><div class="fact"><b>Silvaco Atlas TCAD</b><span>Tool</span></div><div class="fact"><b>ICECE 2026, under review</b><span>Status</span></div></div></div>
-<section><h2>Motivation</h2><div class="card"><ul><li>At a 20&nbsp;nm channel length, drain-induced barrier lowering (DIBL), subthreshold-swing degradation and leakage all get worse. A thinner gate oxide restores gate control, but very thin oxides raise direct-tunneling leakage and reliability risk.</li><li>Step-oxide, dual-material-gate (DMG) and halo techniques are usually reported alone or in pairs. Here they are applied in sequence on the same planar 20&nbsp;nm DG structure, so the gain from each stage, and what it costs in I<sub>ON</sub>, V<sub>th</sub>, SS and f<sub>T</sub>, is visible.</li><li>Goal: reduce DIBL without relying on a uniformly thin oxide.</li></ul></div></section>
-<section><h2>The approach</h2><p class="lead">The study starts from a plain 20&nbsp;nm double-gate MOSFET and adds one fix at a time: step oxide, then a dual-material gate, then halo doping. Every stage is measured with the same metrics (DIBL, SS, I<sub>ON</sub>, I<sub>OFF</sub>, with V<sub>th</sub> and f<sub>T</sub> where relevant), so each technique's gain has a visible price, and each next stage is chosen because of what the previous one left unsolved.</p><div class="figs one"><figure class="wide"><img src="../assets/img/dg-mosfet-short-channel/fig1-structure.png" alt="Device structures" loading="lazy"><figcaption><b>Device structures.</b> The four simulated variants, each adding one technique to the one before: UO-DG, SO-DG, DMSO-DG and Halo-DMSO-DG.</figcaption></figure></div><details class="setup"><summary>Simulation setup and metrics</summary><p>Silvaco Atlas, drift-diffusion transport with Van Dort quantum correction and a Gummel&ndash;Newton solver; same mesh and models for every variant; V<sub>DD</sub>&nbsp;=&nbsp;0.8&nbsp;V. V<sub>th</sub> by constant current; DIBL from V<sub>th</sub> at V<sub>DS</sub>&nbsp;=&nbsp;0.08 and 0.8&nbsp;V; SS over one decade below threshold; f<sub>T</sub>&nbsp;=&nbsp;g<sub>m</sub>/[2&pi;(C<sub>gs</sub>+C<sub>gd</sub>)] from a 1&nbsp;MHz small-signal sweep at V<sub>GS</sub>&nbsp;=&nbsp;V<sub>DS</sub>&nbsp;=&nbsp;V<sub>DD</sub>. I<sub>OFF</sub> is subthreshold channel leakage at V<sub>GS</sub>&nbsp;=&nbsp;0. The drift-diffusion model has no tunneling component, so gate tunneling is estimated separately with a WKB expression.</p></details></section><section class="stage"><div class="stage-h"><span class="stage-n">Stage 1</span><h2>Why not just make the oxide thinner?</h2></div><p class="q"><b>The question.</b> A thinner gate oxide gives the gate a firmer grip on the channel, so it is the obvious first fix. Does it work, and what does it cost?</p><p><b>What was done.</b> Top and bottom HfO<sub>2</sub> oxides of equal thickness (UO-DG), swept from 0.8 to 2.0&nbsp;nm, with channel length, body thickness and doping fixed.</p><p><b>What the plots show.</b> In the OFF state, the 0.8&nbsp;nm device has the highest and flattest source-side barrier. As the oxide gets thicker, drain-induced band bending reaches further toward the source and lowers that barrier, which is why DIBL, SS and I<sub>OFF</sub> all grow.</p><div class="figs"><figure class=""><img src="../assets/img/dg-mosfet-short-channel/fig2-uo-transfer.png" alt="Transfer characteristics" loading="lazy"><figcaption><b>Transfer characteristics.</b> Thicker oxide raises I<sub>OFF</sub> and lowers I<sub>ON</sub>.</figcaption></figure><figure class=""><img src="../assets/img/dg-mosfet-short-channel/fig3-uo-bands.png" alt="Band profiles in the OFF state" loading="lazy"><figcaption><b>Band profiles in the OFF state.</b> Thicker oxide gives stronger drain-side band bending and a lower source-side barrier.</figcaption></figure><figure class="wide"><img src="../assets/img/dg-mosfet-short-channel/fig4-uo-trends.png" alt="DIBL, SS and f<sub>T</sub> vs oxide thickness" loading="lazy"><figcaption><b>DIBL, SS and f<sub>T</sub> vs oxide thickness.</b> DIBL and SS rise with thickness; f<sub>T</sub> rises too.</figcaption></figure></div><div class="stats"><div class="stat"><span>DIBL</span><b>67.21 &rarr; 43.48 mV/V</b></div><div class="stat"><span>SS</span><b>74.89 &rarr; 69.10 mV/dec</b></div><div class="stat"><span>I<sub>ON</sub>/I<sub>OFF</sub></span><b>3.05 &rarr; 19.23 &times;10<sup>4</sup></b></div><div class="stat"><span>f<sub>T</sub></span><b>491 &rarr; 432 GHz</b></div></div><div class="callout got"><b>What it buys.</b> Yes, it works. Going from 2.0 to 0.8&nbsp;nm cuts DIBL from 67.21 to 43.48&nbsp;mV/V, improves SS, raises I<sub>ON</sub> from 4.10 to 5.28&nbsp;mA/&micro;m and cuts I<sub>OFF</sub> from 134.4 to 27.5&nbsp;nA/&micro;m.</div><div class="callout cost"><b>What it costs.</b> Tunneling and speed. The WKB tunneling estimate grows from 0.008% at 2.0&nbsp;nm to 2.34% at 0.8&nbsp;nm, about 280 times higher, and f<sub>T</sub> falls from 491 to 432&nbsp;GHz.</div><p class="next">&darr; Thin oxide gives the best control but is tunneling-unsafe, so the 0.8&nbsp;nm device stays only as a reference. The question becomes: can that control be had without a thin oxide on both sides?</p></section><section class="stage"><div class="stage-h"><span class="stage-n">Stage 2</span><h2>Thick oxide at the source, thin oxide at the drain</h2></div><p class="q"><b>The question.</b> The drain is where the damage starts. Can a thin oxide on the drain side alone do most of the job, while the source side stays thick and safe?</p><p><b>What was done.</b> A step oxide (SO-DG) with two sweeps to separate the effects: source oxide fixed at 2.0&nbsp;nm with drain oxide from 0.8 to 1.6&nbsp;nm, then drain oxide fixed at 0.8&nbsp;nm with source oxide from 1.2 to 2.0&nbsp;nm.</p><p><b>What the plots show.</b> The drain-side oxide has the strong effect: with the source fixed at 2.0&nbsp;nm, thinning the drain oxide from 1.6 to 0.8&nbsp;nm improves DIBL from 62.96 to 55.10&nbsp;mV/V. The source side shows the trade-off: raising it from 1.2 to 2.0&nbsp;nm adds 7.43&nbsp;mV/V of DIBL and cuts I<sub>ON</sub>/I<sub>OFF</sub> by about 42%, but going from 1.6 to 2.0&nbsp;nm cuts the tunneling estimate by about 43 times. So 2.0&nbsp;nm source / 0.8&nbsp;nm drain is selected. The plots show the drain-induced potential change staying more confined to the drain side.</p><div class="figs"><figure class="wide"><img src="../assets/img/dg-mosfet-short-channel/fig5-so-current-density.png" alt="OFF-state current density" loading="lazy"><figcaption><b>OFF-state current density.</b> Atlas total current density at V<sub>GS</sub>&nbsp;=&nbsp;0, V<sub>DS</sub>&nbsp;=&nbsp;0.8&nbsp;V for the uniform-oxide and step-oxide devices.</figcaption></figure><figure class=""><img src="../assets/img/dg-mosfet-short-channel/fig6-so-potential.png" alt="How far the drain's influence reaches" loading="lazy"><figcaption><b>How far the drain's influence reaches.</b> &Delta;&psi;(x) between V<sub>DS</sub>&nbsp;=&nbsp;0 and 0.8&nbsp;V. The drain-induced change stays more confined to the drain side in the step-oxide device.</figcaption></figure><figure class=""><img src="../assets/img/dg-mosfet-short-channel/fig7-so-bands.png" alt="Band shift near the source barrier" loading="lazy"><figcaption><b>Band shift near the source barrier.</b> The change between V<sub>DS</sub>&nbsp;=&nbsp;0.08 and 0.8&nbsp;V is smaller for SO-DG near the source-side barrier, consistent with its lower DIBL.</figcaption></figure></div><div class="stats"><div class="stat"><span>DIBL</span><b>67.21 &rarr; 55.10 mV/V</b></div><div class="stat"><span>SS</span><b>74.89 &rarr; 71.22 mV/dec</b></div><div class="stat"><span>I<sub>ON</sub></span><b>4.10 &rarr; 4.34 mA/&micro;m</b></div><div class="stat"><span>f<sub>T</sub></span><b>491 &rarr; 478 GHz</b></div></div><div class="callout got"><b>What it buys.</b> Against the 2.0&nbsp;nm uniform device, DIBL falls 18% to 55.10&nbsp;mV/V, SS improves to 71.22&nbsp;mV/dec, I<sub>ON</sub> rises slightly, I<sub>OFF</sub> falls from 134.4 to 52.9&nbsp;nA/&micro;m and I<sub>ON</sub>/I<sub>OFF</sub> goes from 3.05 to 8.19&times;10<sup>4</sup>.</div><div class="callout cost"><b>What it costs.</b> It is less effective than the 0.8&nbsp;nm uniform oxide (DIBL 55.10 against 43.48&nbsp;mV/V), and f<sub>T</sub> drops about 13&nbsp;GHz, though it stays at about 97% of the uniform value. The thick source oxide is what keeps tunneling low.</div><p class="next">&darr; Asymmetric oxide improves the electrostatics without a thin oxide on both sides. The remaining DIBL is addressed next with a dual-material gate.</p></section><section class="stage"><div class="stage-h"><span class="stage-n">Stage 3</span><h2>Raise the source barrier with a dual-material gate</h2></div><p class="q"><b>The question.</b> Can a gate made of two materials, with a higher work function over the source side, create a potential step that reduces the drain's grip on the source barrier?</p><p><b>What was done.</b> The selected SO-DG geometry (2.0&nbsp;nm / 0.8&nbsp;nm, no further oxide thinning) with the gate split 1:1 into a high-work-function source half and a low-work-function drain half (DMSO-DG). The difference &Delta;&Phi; is swept from 0.1 to 0.3&nbsp;eV.</p><p><b>What the plots show.</b> The boundary between the two gate materials produces a step in the channel potential, and the source-side barrier rises as &Delta;&Phi; increases, which matches the fall in I<sub>OFF</sub>. A smaller step remains visible in the ON state. The f<sub>T</sub> peak moves to higher V<sub>GS</sub> as &Delta;&Phi; grows, following the rise in V<sub>th</sub>.</p><div class="figs"><figure class="wide"><img src="../assets/img/dg-mosfet-short-channel/fig8-dmg-bands.png" alt="Conduction band along the gate" loading="lazy"><figcaption><b>Conduction band along the gate.</b> OFF state (left) and ON state (right). The gate-material boundary creates a potential step, and the source-side barrier rises as &Delta;&Phi; increases.</figcaption></figure><figure class=""><img src="../assets/img/dg-mosfet-short-channel/fig9-dmg-current.png" alt="ON and OFF current density" loading="lazy"><figcaption><b>ON and OFF current density.</b> &Delta;&Phi; from 0.1 to 0.3&nbsp;eV. OFF-state current falls as &Delta;&Phi; rises; in the ON state a change is visible near the gate-material boundary.</figcaption></figure><figure class=""><img src="../assets/img/dg-mosfet-short-channel/fig10-dmg-ft.png" alt="f<sub>T</sub> vs V<sub>GS</sub>" loading="lazy"><figcaption><b>f<sub>T</sub> vs V<sub>GS</sub>.</b> The f<sub>T</sub> peak moves to higher V<sub>GS</sub> as &Delta;&Phi; increases, following the rise in V<sub>th</sub>.</figcaption></figure><figure class="wide"><img src="../assets/img/dg-mosfet-short-channel/fig11-dmg-potential.png" alt="Potential maps" loading="lazy"><figcaption><b>Potential maps.</b> Atlas potential at V<sub>GS</sub>&nbsp;=&nbsp;V<sub>DS</sub>&nbsp;=&nbsp;0.8&nbsp;V for &Delta;&Phi;&nbsp;=&nbsp;0.1, 0.2 and 0.3&nbsp;eV.</figcaption></figure></div><div class="stats"><div class="stat"><span>DIBL</span><b>55.10 &rarr; 32.95 mV/V</b></div><div class="stat"><span>I<sub>OFF</sub></span><b>52.9 &rarr; 37.5 nA/&micro;m</b></div><div class="stat"><span>I<sub>ON</sub></span><b>4.34 &rarr; 3.34 mA/&micro;m</b></div><div class="stat"><span>SS</span><b>71.22 &rarr; 77.82 mV/dec</b></div></div><div class="callout got"><b>What it buys.</b> This is the biggest single DIBL cut. At &Delta;&Phi;&nbsp;=&nbsp;0.3&nbsp;eV DIBL falls about 40% to 32.95&nbsp;mV/V, lower even than the 0.8&nbsp;nm uniform oxide, and I<sub>OFF</sub> falls to 37.54&nbsp;nA/&micro;m. &Delta;&Phi;&nbsp;=&nbsp;0.3&nbsp;eV has the lowest DIBL and I<sub>OFF</sub> of the three and is carried forward.</div><div class="callout cost"><b>What it costs.</b> A real one. I<sub>ON</sub> falls from 4.34 to 3.34&nbsp;mA/&micro;m (17% across the &Delta;&Phi; sweep alone), SS worsens to 77.82&nbsp;mV/dec and V<sub>th</sub> rises from 0.358 to 0.463&nbsp;V. The gain also tapers: DIBL goes 40.57, 34.81, 32.95&nbsp;mV/V for &Delta;&Phi; of 0.1, 0.2, 0.3&nbsp;eV.</div><p class="next">&darr; DIBL is much lower, but a lightly doped channel (8&times;10<sup>14</sup>&nbsp;cm<sup>&minus;3</sup>) still lets the drain depletion region reach toward the source barrier as V<sub>DS</sub> rises. That is what the halo targets.</p></section><section class="stage"><div class="stage-h"><span class="stage-n">Stage 4</span><h2>Confine the depletion region with halo doping</h2></div><p class="q"><b>The question.</b> Can a heavily doped pocket next to each junction keep the drain depletion region from reaching into the channel?</p><p><b>What was done.</b> A 4&nbsp;nm uniform P<sup>+</sup> halo at each source/drain junction, through the full body thickness, on the &Delta;&Phi;&nbsp;=&nbsp;0.3&nbsp;eV device (Halo-DMSO-DG). Three concentrations: 2&times;10<sup>18</sup>, 6&times;10<sup>18</sup> and 1&times;10<sup>19</sup>&nbsp;cm<sup>&minus;3</sup>, compared with the no-halo device.</p><p><b>What the plots show.</b> Higher local doping narrows the depletion width, roughly as N<sup>&minus;1/2</sup>, so the drain-side depletion boundary stays close to the junction. That also means diminishing returns: DIBL drops 4.58&nbsp;mV/V from no halo to 2&times;10<sup>18</sup>, but only 1.60&nbsp;mV/V more going to 1&times;10<sup>19</sup>.</p><div class="figs"><figure class="wide"><img src="../assets/img/dg-mosfet-short-channel/fig12-halo-schematic.png" alt="Why a halo helps" loading="lazy"><figcaption><b>Why a halo helps.</b> Depletion-region extent without and with P<sup>+</sup> halo. The higher doping keeps the drain-side depletion boundary closer to the junction.</figcaption></figure><figure class="wide"><img src="../assets/img/dg-mosfet-short-channel/fig13-halo-trends.png" alt="Halo concentration sweep" loading="lazy"><figcaption><b>Halo concentration sweep.</b> DIBL and SS (left), I<sub>ON</sub>/I<sub>OFF</sub> (middle) and f<sub>T</sub> (right) versus halo concentration. Look for where the curves flatten.</figcaption></figure></div><div class="stats"><div class="stat"><span>DIBL</span><b>32.95 &rarr; 26.77 mV/V</b></div><div class="stat"><span>I<sub>OFF</sub></span><b>37.54 &rarr; 14.94 nA/&micro;m</b></div><div class="stat"><span>I<sub>ON</sub>/I<sub>OFF</sub></span><b>8.91 &rarr; 18.05 &times;10<sup>4</sup></b></div><div class="stat"><span>I<sub>ON</sub></span><b>3.34 &rarr; 2.70 mA/&micro;m</b></div></div><div class="callout got"><b>What it buys.</b> The halo is particularly good at suppressing the drain-induced rise in OFF-state current: I<sub>OFF</sub> falls 60.2% and DIBL falls to 26.77&nbsp;mV/V at 1&times;10<sup>19</sup>&nbsp;cm<sup>&minus;3</sup>. Because I<sub>OFF</sub> falls faster than I<sub>ON</sub>, I<sub>ON</sub>/I<sub>OFF</sub> roughly doubles.</div><div class="callout cost"><b>What it costs.</b> I<sub>ON</sub> falls 19.3% at the highest concentration. V<sub>th</sub> stays at 0.463&nbsp;V at 2&times;10<sup>18</sup> but rises to 0.490&nbsp;V at 1&times;10<sup>19</sup>, and f<sub>T</sub> goes from 475.2 to 476.7&nbsp;GHz at the lowest level and down to 466.1&nbsp;GHz at the highest. SS barely moves (77.08&ndash;77.27&nbsp;mV/dec).</div><p class="next">&darr; 2&times;10<sup>18</sup>&nbsp;cm<sup>&minus;3</sup> is the best trade-off: I<sub>OFF</sub> 20.19&nbsp;nA/&micro;m, DIBL 28.37&nbsp;mV/V, V<sub>th</sub> unchanged and f<sub>T</sub> slightly higher. The halo is another design trade-off, not a free improvement.</p></section><section><h2>Results</h2><ul class="res"><li><b>DIBL cut by 60%</b> versus the 2.0&nbsp;nm uniform-oxide baseline: 67.21 &rarr; 55.10 &rarr; 32.95 &rarr; 26.77&nbsp;mV/V across the step-oxide, DMG and halo stages.</li><li><b>I<sub>ON</sub>/I<sub>OFF</sub> improved nearly sixfold</b>, from 3.05&times;10<sup>4</sup> to 18.05&times;10<sup>4</sup>, with I<sub>OFF</sub> falling from 134.4 to 14.94&nbsp;nA/&micro;m.</li><li><b>The gains cost something.</b> I<sub>ON</sub> falls from 4.10 to 2.70&nbsp;mA/&micro;m, SS ends at 77.27&nbsp;mV/dec (best was 71.22 at the step-oxide stage), V<sub>th</sub> rises to 0.490&nbsp;V and f<sub>T</sub> drops from 491 to 466&nbsp;GHz at the highest halo level.</li><li><b>Best halo trade-off at 2&times;10<sup>18</sup>&nbsp;cm<sup>&minus;3</sup></b>: DIBL 28.37&nbsp;mV/V, I<sub>OFF</sub> 20.19&nbsp;nA/&micro;m, V<sub>th</sub> unchanged and f<sub>T</sub> slightly higher. Beyond that the returns shrink while penalties grow.</li></ul><div class="tblw"><table class="tbl"><caption>Selected operating point at each stage (V<sub>DD</sub>&nbsp;=&nbsp;0.8&nbsp;V)</caption><thead><tr><th>Stage</th><th>I<sub>ON</sub>/I<sub>OFF</sub> (&times;10<sup>4</sup>)</th><th>V<sub>th</sub> (V)</th><th>SS (mV/dec)</th><th>DIBL (mV/V)</th><th>f<sub>T</sub> (GHz)</th></tr></thead><tbody><tr><td>UO-DG, 2.0&nbsp;nm uniform (baseline)</td><td>3.05</td><td>0.344</td><td>74.89</td><td>67.21</td><td>491.43</td></tr><tr><td>UO-DG, 0.8&nbsp;nm (tunneling-unsafe, reference)</td><td>19.23</td><td>0.364</td><td>69.10</td><td>43.48</td><td>431.81</td></tr><tr><td>SO-DG, 2.0&nbsp;nm source / 0.8&nbsp;nm drain</td><td>8.19</td><td>0.358</td><td>71.22</td><td>55.10</td><td>478.09</td></tr><tr><td>DMSO-DG, &Delta;&Phi;&nbsp;=&nbsp;0.3&nbsp;eV</td><td>8.91</td><td>0.463</td><td>77.82</td><td>32.95</td><td>475.19</td></tr><tr><td>Halo-DMSO-DG, 2&times;10<sup>18</sup>&nbsp;cm<sup>&minus;3</sup></td><td>15.38</td><td>0.463</td><td>77.08</td><td>28.37</td><td>476.66</td></tr><tr><td>Halo-DMSO-DG, 1&times;10<sup>19</sup>&nbsp;cm<sup>&minus;3</sup></td><td>18.05</td><td>0.490</td><td>77.27</td><td>26.77</td><td>466.13</td></tr></tbody></table></div></section><section><h2>Putting it together</h2><p class="lead">DIBL falls 67.21 &rarr; 55.10 &rarr; 32.95 &rarr; 26.77&nbsp;mV/V across the stages, 60% below the 2.0&nbsp;nm baseline, while SS never improves beyond the Stage&nbsp;2 value of 71.22&nbsp;mV/dec. The three techniques act as complementary controls with different penalties. The step oxide is the cheap one and even raises I<sub>ON</sub>. The dual-material gate gives the largest DIBL cut but costs I<sub>ON</sub>, V<sub>th</sub> and SS. The halo does the most for leakage but costs I<sub>ON</sub>, and at high concentration V<sub>th</sub> and f<sub>T</sub> as well.</p></section><section><h2>How it compares</h2><p class="lead">The step-oxide gain matches the direction reported by Al-Jawadi et al. for a source-thick, drain-thin 20&nbsp;nm MOSFET, which improved leakage and drive current (they did not report DIBL). The DMG trade-off of lower DIBL with higher SS and lower I<sub>ON</sub> is consistent with work on DMG junctionless FinFETs. The halo gain is smaller than the near-zero DIBL reported for a 14&nbsp;nm p<sup>+</sup>-pocket DG MOSFET, but the structures and halo profiles differ. Unlike earlier studies that use these techniques alone or in pairs, this one applies them in sequence on the same planar 20&nbsp;nm structure.</p></section><section><h2>Limits</h2><div class="card"><ul><li>The DMG segment ratio is fixed at 1:1; other ratios could shift the trade-off.</li><li>The halo is a uniform box profile; non-uniform profiles have been reported to give different trade-offs.</li><li>The drift-diffusion model has no tunneling, so I<sub>OFF</sub> is channel leakage only and gate tunneling appears only through the WKB estimate.</li></ul></div></section>
-<section><h2>Tools</h2><div class="chips"><span class="chip">Silvaco Atlas</span><span class="chip">DeckBuild</span><span class="chip">TonyPlot</span><span class="chip">Python</span></div></section>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sequential Electrostatic Engineering in 20 nm DG-MOSFETs | M. A. H. Kanon</title>
+    <meta name="description" content="A TCAD simulation study investigating the sequential mitigation of short-channel effects in 20 nm double-gate MOSFETs via step-oxide, dual-material gate, and halo doping.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-page: #f8fafc;
+            --bg-surface: #ffffff;
+            --bg-surface-alt: #f1f5f9;
+            --text-main: #1e293b;
+            --text-muted: #475569;
+            --text-light: #64748b;
+            --accent-primary: #0f172a;
+            --accent-secondary: #2563eb;
+            --accent-tertiary: #0284c7;
+            --border-color: #e2e8f0;
+            --success: #059669;
+            --warning: #ea580c;
+            
+            --font-ui: 'Inter', system-ui, sans-serif;
+            --font-prose: 'Merriweather', Georgia, serif;
+            
+            --content-reading: 72ch;
+            --content-wide: 90vw;
+        }
 
-</main><footer><div class="wrap"><p class="fine">&copy; Mohammad Al Hosan Kanon &middot; <a href="../index.html">Portfolio</a></p></div></footer>
-<script src="../assets/site.js"></script></body></html>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-page: #0f172a;
+                --bg-surface: #1e293b;
+                --bg-surface-alt: #334155;
+                --text-main: #f8fafc;
+                --text-muted: #cbd5e1;
+                --text-light: #94a3b8;
+                --accent-primary: #f8fafc;
+                --accent-secondary: #3b82f6;
+                --border-color: #334155;
+            }
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font-prose);
+            color: var(--text-main);
+            background-color: var(--bg-page);
+            line-height: 1.7;
+            font-size: 1.125rem;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .ui-text { font-family: var(--font-ui); }
+        
+        a { color: var(--accent-secondary); text-decoration: none; transition: color 0.2s; }
+        a:hover { color: var(--accent-tertiary); text-decoration: underline; }
+
+        /* Fluid Layout Strategy */
+        .container {
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 5vw;
+        }
+        
+        .reading-width {
+            max-width: var(--content-reading);
+            margin: 0 auto;
+        }
+
+        /* Narrative Journey Layout */
+        .journey-step {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4rem;
+            padding: 6rem 0;
+            border-bottom: 1px solid var(--border-color);
+            align-items: center;
+        }
+        
+        @media (min-width: 1024px) {
+            .journey-step {
+                grid-template-columns: 1fr 1fr;
+                max-width: var(--content-wide);
+                margin: 0 auto;
+            }
+            .journey-step:nth-child(even) .step-content {
+                order: 2;
+            }
+            .journey-step:nth-child(even) .step-visuals {
+                order: 1;
+            }
+        }
+
+        .step-content { max-width: 65ch; }
+        .step-visuals { width: 100%; }
+
+        /* Headers and Typography */
+        header { padding: 2rem 5vw; font-family: var(--font-ui); font-size: 0.9rem; border-bottom: 1px solid var(--border-color); background: var(--bg-surface); }
+        .nav-inner { display: flex; justify-content: space-between; align-items: center; max-width: var(--content-wide); margin: 0 auto; }
+        .nav-brand { font-weight: 600; color: var(--text-main); }
+        .nav-brand span { color: var(--text-light); font-weight: 400; }
+
+        .hero { padding: 8rem 5vw 6rem; text-align: left; background: var(--bg-surface); }
+        .hero-inner { max-width: var(--content-wide); margin: 0 auto; display: grid; gap: 3rem; grid-template-columns: 1fr; }
+        @media (min-width: 1024px) {
+            .hero-inner { grid-template-columns: 1.5fr 1fr; align-items: center; }
+        }
+
+        .tagline { font-family: var(--font-ui); text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.85rem; font-weight: 600; color: var(--accent-secondary); margin-bottom: 1rem; display: block; }
+        .hero h1 { font-size: clamp(2.5rem, 4vw, 4rem); line-height: 1.1; margin-bottom: 1.5rem; color: var(--accent-primary); letter-spacing: -0.02em; }
+        .hero .lede { font-size: 1.25rem; color: var(--text-muted); margin-bottom: 2rem; }
+
+        h2 { font-size: 2.25rem; margin-bottom: 1.25rem; color: var(--accent-primary); letter-spacing: -0.02em; }
+        p { margin-bottom: 1.5rem; }
+
+        /* Stage Badges */
+        .stage-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.4rem 1rem;
+            background: var(--bg-surface-alt);
+            color: var(--accent-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 999px;
+            font-family: var(--font-ui);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.5rem;
+        }
+        .stage-badge .num {
+            background: var(--accent-secondary);
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 0.75rem;
+        }
+
+        /* Scientific Figures */
+        figure {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.05);
+        }
+
+        .fig-header { padding: 1.5rem; border-bottom: 1px solid var(--border-color); background: var(--bg-surface-alt); }
+        .fig-title { font-family: var(--font-ui); font-size: 1.05rem; font-weight: 600; color: var(--text-main); margin: 0 0 0.25rem 0; }
+        .fig-subtitle { font-family: var(--font-ui); font-size: 0.85rem; color: var(--text-muted); margin: 0; }
+        
+        .fig-img-container { padding: 2rem; display: flex; justify-content: center; background: #fff; }
+        .fig-img-container img { max-width: 100%; height: auto; display: block; }
+        
+        figcaption { padding: 1.5rem; font-size: 0.9rem; color: var(--text-muted); border-top: 1px solid var(--border-color); line-height: 1.6; }
+        figcaption strong { color: var(--text-main); font-family: var(--font-ui); }
+
+        /* Animations */
+        .sweep-right {
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .sweep-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Tables & Results */
+        .results-section { padding: 6rem 5vw; background: var(--bg-surface-alt); }
+        .table-wrapper { width: 100%; overflow-x: auto; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 12px; margin-top: 3rem; }
+        table { width: 100%; border-collapse: collapse; font-family: var(--font-ui); font-size: 0.95rem; text-align: left; }
+        th, td { padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border-color); }
+        th { background: var(--bg-surface); font-weight: 600; color: var(--text-main); white-space: nowrap; border-bottom: 2px solid var(--border-color); }
+        tr:last-child td { border-bottom: none; }
+        .highlight-row { background-color: rgba(37, 99, 235, 0.05); }
+
+        /* Data Callouts */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            font-family: var(--font-ui);
+            margin-top: 2rem;
+        }
+        .metric-card {
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-secondary);
+            background: var(--bg-surface-alt);
+        }
+        .metric-label { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+        .metric-value { font-size: 1.75rem; font-weight: 700; color: var(--text-main); line-height: 1.1; }
+
+        footer { padding: 4rem 5vw; text-align: center; font-family: var(--font-ui); font-size: 0.9rem; color: var(--text-light); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-inner">
+            <div class="nav-brand">M. A. H. Kanon <span>/ EEE, BUET</span></div>
+            <nav>
+                <a href="../index.html">&larr; Back to Portfolio</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- The Hook -->
+        <section class="hero">
+            <div class="hero-inner">
+                <div>
+                    <span class="tagline">TCAD Simulation Research</span>
+                    <h1>Sequential Electrostatic Engineering in 20&nbsp;nm DG-MOSFETs</h1>
+                    <p class="lede">A systematic investigation into mitigating drain-induced barrier lowering (DIBL) via step-oxide, dual-material gate, and halo doping without relying on uniform, tunneling-unsafe oxide scaling.</p>
+                    
+                    <div class="metrics-grid">
+                        <div class="metric-card" style="border-left-color: var(--success);">
+                            <div class="metric-label">DIBL Reduction</div>
+                            <div class="metric-value">-57.8%</div>
+                        </div>
+                        <div class="metric-card" style="border-left-color: var(--success);">
+                            <div class="metric-label">ON/OFF Ratio</div>
+                            <div class="metric-value">5.04&times;</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sweep-right">
+                    <figure style="margin: 0;">
+                        <div class="fig-img-container" style="background: transparent; padding: 0;">
+                            <img src="../assets/img/dg-mosfet-short-channel/Halo_Doping.png" alt="Halo-DMSO-DG Device Structure" style="border-radius: 8px;">
+                        </div>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Journey -->
+        <section class="container">
+            
+            <!-- Stage 1 -->
+            <div class="journey-step">
+                <div class="step-content">
+                    <div class="stage-badge"><span class="num">1</span> UO-DG Baseline</div>
+                    <h2>The Oxide Scaling Limit</h2>
+                    <p>To establish a baseline, the uniform gate oxide (top and bottom HfO<sub>2</sub>) was swept from 2.0&nbsp;nm down to 0.8&nbsp;nm. While the 0.8&nbsp;nm device exhibits excellent electrostatic control, analytical WKB approximation reveals the tunneling probability increases ~280&times;, rendering it unviable for low-power applications.</p>
+                    <p>The 2.0&nbsp;nm device remains safe from gate tunneling but suffers from severe short-channel effects, establishing our engineering target: <strong>67.21 mV/V DIBL</strong>.</p>
+                </div>
+                <div class="step-visuals">
+                    <figure class="sweep-right">
+                        <div class="fig-header">
+                            <h3 class="fig-title">Uniform Oxide Structure</h3>
+                        </div>
+                        <div class="fig-img-container">
+                            <img src="../assets/img/dg-mosfet-short-channel/Uniform_Oxide.png" alt="Uniform Oxide Device Structure" loading="lazy">
+                        </div>
+                    </figure>
+                    <figure class="sweep-right" style="transition-delay: 150ms;">
+                        <div class="fig-header">
+                            <h3 class="fig-title">OFF-State Band Profile Degradation</h3>
+                            <p class="fig-subtitle">Conduction and valence band edges along the channel.</p>
+                        </div>
+                        <div class="fig-img-container">
+                            <img src="../assets/img/dg-mosfet-short-channel/fig3-uo-bands.png" alt="Band profiles for UO-DG" loading="lazy">
+                        </div>
+                        <figcaption><strong>Interpretation:</strong> As oxide thickness increases to 2.0 nm, drain-induced band bending penetrates deeper toward the source, fundamentally explaining the DIBL increase.</figcaption>
+                    </figure>
+                </div>
+            </div>
+
+            <!-- Stage 2 -->
+            <div class="journey-step">
+                <div class="step-content">
+                    <div class="stage-badge"><span class="num">2</span> SO-DG</div>
+                    <h2>Geometric Decoupling</h2>
+                    <p>To retain tunneling safety at the source while improving electrostatic control, an asymmetric oxide was introduced. Keeping the source-side oxide at a safer 2.0&nbsp;nm, the drain-side oxide was scaled down to 0.8&nbsp;nm.</p>
+                    <p>This configuration confines the drain-induced potential perturbation largely to the drain side. By decoupling the source and drain electrostatics, the Step-Oxide (SO-DG) design achieves an 18% reduction in DIBL compared to the baseline, at the cost of a minor f<sub>T</sub> penalty.</p>
+                </div>
+                <div class="step-visuals">
+                    <figure class="sweep-right">
+                        <div class="fig-header">
+                            <h3 class="fig-title">Step-Oxide Structure</h3>
+                        </div>
+                        <div class="fig-img-container">
+                            <img src="../assets/img/dg-mosfet-short-channel/Step_Oxide.png" alt="Step Oxide Device Structure" loading="lazy">
+                        </div>
+                    </figure>
+                    <figure class="sweep-right" style="transition-delay: 150ms;">
+                        <div class="fig-header">
+                            <h3 class="fig-title">Potential Perturbation Containment</h3>
+                            <p class="fig-subtitle">Δψ(x) between V<sub>DS</sub> = 0 V and 0.8 V.</p>
+                        </div>
+                        <div class="fig-img-container">
+                            <img src="../assets/img/dg-mosfet-short-channel/fig6-so-potential.png" alt="Potential perturbation graph" loading="lazy">
+                        </div>
+                        <figcaption><strong>Evidence:</strong> The step oxide restricts the drain field's influence. Unlike the baseline, the SO-DG configuration shields the source barrier.</figcaption>
+                    </figure>
+                </div>
+            </div>
+
+            <!-- Stage 3 -->
+            <div class="journey-step">
+                <div class="step-content">
+                    <div class="stage-badge"><span class="num">3</span> DMSO-DG</div>
+                    <h2>Barrier Modulation via Dual-Metal</h2>
+                    <p>Further DIBL reduction requires direct manipulation of the channel potential. A dual-material gate (1:1 split) was applied over the SO-DG structure. Using a higher work-function metal (M1) near the source forms an abrupt step in the conduction band, elevating the source-side barrier against drain influence.</p>
+                    <p>A work-function difference (ΔΦ) of 0.3 eV yielded the strongest DIBL suppression (cutting it to 32.95 mV/V), though it introduced a distinct trade-off, lowering drive current by 17%.</p>
+                </div>
+                <div class="step-visuals">
+                    <figure class="sweep-right">
+                        <div class="fig-header">
+                            <h3 class="fig-title">Dual-Material Gate Structure</h3>
+                        </div>
+                        <div class="fig-img-container">
+                            <img src="../assets/img/dg-mosfet-short-channel/Dual_Metal.png" alt="Dual Metal Device Structure" loading="lazy">
+                        </div>
+                    </figure>
+                    <figure class="sweep-right" style="transition-delay: 150ms;">
+                        <div class="fig-header">
+                            <h3 class="fig-title">Conduction Band Step Formation</h3>
+                            <p class="fig-subtitle">OFF-state band profile showing the barrier rise.</p>
+                        </div>
+                        <div class="fig-img-container">
+                            <img src="../assets/img/dg-mosfet-short-channel/fig8-dmg-bands.png" alt="Dual Metal band profiles" loading="lazy">
+                        </div>
+                        <figcaption><strong>Evidence:</strong> A higher ΔΦ maximizes the source barrier height, effectively cutting subthreshold leakage and slashing DIBL by an additional 40% over the SO-DG design.</figcaption>
+                    </figure>
+                </div>
+            </div>
+
+            <!-- Stage 4 -->
+            <div class="journey-step">
+                <div class="step-content">
+                    <div class="stage-badge"><span class="num">4</span> Halo-DMSO-DG</div>
+                    <h2>Depletion Width Confinement</h2>
+                    <p>Despite the DMG implementation, the lightly doped channel still permits the drain depletion region to expand toward the source under high drain bias. Localized heavily-doped P<sup>+</sup> halos were introduced at the junctions to limit this expansion.</p>
+                    <p>While a concentration of 1&times;10<sup>19</sup> cm<sup>-3</sup> provided the absolute lowest leakage, the <strong>2&times;10<sup>18</sup> cm<sup>-3</sup> configuration</strong> was selected as the optimal engineering trade-off. It secures massive DIBL reduction without severely degrading the cutoff frequency (f<sub>T</sub>) or unnecessarily shifting the threshold voltage.</p>
+                </div>
+                <div class="step-visuals">
+                    <figure class="sweep-right">
+                        <div class="fig-header">
+                            <h3 class="fig-title">Halo Doping Trends</h3>
+                            <p class="fig-subtitle">DIBL and SS vs. Halo Concentration.</p>
+                        </div>
+                        <div class="fig-img-container">
+                            <img src="../assets/img/dg-mosfet-short-channel/fig13-halo-trends.png" alt="Halo doping trends" loading="lazy">
+                        </div>
+                        <figcaption><strong>Interpretation:</strong> Pushing the halo doping to its maximum yields diminishing returns on DIBL while penalizing drive current. The 2&times;10<sup>18</sup> cm<sup>-3</sup> level balances the physical limits.</figcaption>
+                    </figure>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Results Table -->
+        <section class="results-section">
+            <div class="container reading-width" style="text-align: center;">
+                <h2>Quantitative Progression</h2>
+                <p>The sequential application of these three techniques quantifies the "cost" of electrostatic improvements. The step oxide is a low-cost intervention. The dual-material gate provides the dominant DIBL cut but costs drive current. The balanced halo minimizes leakage without sacrificing high-frequency performance.</p>
+            </div>
+            
+            <div class="container" style="max-width: var(--content-wide);">
+                <div class="table-wrapper sweep-right">
+                    <table>
+                        <caption>Consolidated simulation metrics across engineering stages (V<sub>DD</sub> = 0.8 V). Data extracted via Atlas TCAD.</caption>
+                        <thead>
+                            <tr>
+                                <th>Design Stage</th>
+                                <th>DIBL (mV/V)</th>
+                                <th>I<sub>ON</sub>/I<sub>OFF</sub> (&times;10<sup>4</sup>)</th>
+                                <th>SS (mV/dec)</th>
+                                <th>V<sub>th</sub> (V)</th>
+                                <th>f<sub>T</sub> (GHz)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1. UO-DG (2.0 nm baseline)</td>
+                                <td>67.21</td>
+                                <td>3.05</td>
+                                <td>74.89</td>
+                                <td>0.344</td>
+                                <td>491.43</td>
+                            </tr>
+                            <tr>
+                                <td>2. SO-DG</td>
+                                <td>55.10</td>
+                                <td>8.19</td>
+                                <td>71.22</td>
+                                <td>0.358</td>
+                                <td>478.09</td>
+                            </tr>
+                            <tr>
+                                <td>3. DMSO-DG (ΔΦ = 0.3 eV)</td>
+                                <td>32.95</td>
+                                <td>8.91</td>
+                                <td>77.82</td>
+                                <td>0.463</td>
+                                <td>475.19</td>
+                            </tr>
+                            <tr class="highlight-row">
+                                <td><strong>4. Halo-DMSO-DG (Balanced: 2&times;10<sup>18</sup>)</strong></td>
+                                <td><strong>28.37</strong></td>
+                                <td><strong>15.38</strong></td>
+                                <td><strong>77.08</strong></td>
+                                <td><strong>0.463</strong></td>
+                                <td><strong>476.66</strong></td>
+                            </tr>
+                            <tr style="color: var(--text-light);">
+                                <td>4. Halo-DMSO-DG (Max Halo: 1&times;10<sup>19</sup>)</td>
+                                <td>26.77</td>
+                                <td>18.05</td>
+                                <td>77.27</td>
+                                <td>0.490</td>
+                                <td>466.13</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Mohammad Al Hosan Kanon. Designed as a technical research portfolio case study.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
+
+            document.querySelectorAll('.sweep-right').forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>

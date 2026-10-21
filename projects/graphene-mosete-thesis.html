@@ -16,7 +16,7 @@ sub,sup{line-height:0}a{color:inherit}
 .top{position:sticky;top:0;z-index:20;background:rgba(249,249,247,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--ink)}
 .top .wrap{display:flex;justify-content:space-between;align-items:center;gap:1rem;min-height:3rem}
 .top b{font:600 .8rem var(--mono)}
-.top nav{display:flex;gap:.25rem}
+.top nav{display:flex;gap:.25rem;flex-wrap:wrap}
 .top nav a{font:400 .8rem var(--mono);text-decoration:none;padding:.3rem .7rem;border:1px solid transparent}
 .top nav a:hover{border-color:var(--ink)}
 .top nav a.on{background:var(--ink);color:var(--paper)}
@@ -26,13 +26,14 @@ sub,sup{line-height:0}a{color:inherit}
 .hg{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:2.5rem;align-items:start}
 .abs p{margin:0 0 1.25rem;font-size:.95rem;text-align:justify;hyphens:auto}
 .abs p::first-letter{font:700 3.4rem/.9 var(--head);float:left;padding:.3rem .5rem 0 0}
+.abs p+p::first-letter{all:unset}
 .keys{margin:0;padding:0;list-style:none;border:1px solid var(--ink);background:#fff}
 .keys li{display:flex;justify-content:space-between;gap:1rem;padding:.7rem 1rem;font-size:.85rem;border-bottom:1px solid var(--rule)}
-.keys li:last-child{border:0}.keys b{font:600 .85rem var(--mono);white-space:nowrap}
-.rail{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-bottom:.75rem}
-.tab{all:unset;cursor:pointer;display:block;border:1px solid var(--ink);background:#fff;padding:.5rem .7rem .8rem;position:relative;overflow:hidden}
-.tab b{display:block;font:600 .9rem var(--mono)}
-.tab small{display:block;font:400 .72rem/1.3 var(--serif);color:var(--muted)}
+.keys li:last-child{border:0}.keys b{font:600 .85rem var(--mono);text-align:right}
+.rail{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:.4rem;margin-bottom:.75rem}
+.tab{all:unset;cursor:pointer;display:block;border:1px solid var(--ink);background:#fff;padding:.45rem .5rem .75rem;position:relative;overflow:hidden;min-width:0}
+.tab b{display:block;font:600 .8rem var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tab small{display:block;font:400 .68rem/1.3 var(--serif);color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .tab i{position:absolute;left:0;bottom:0;height:4px;width:0;background:var(--red)}
 .tab.done i{width:100%;background:var(--ink)}
 .tab.on{background:var(--ink);color:var(--paper)}.tab.on small{color:#bbb}
@@ -119,7 +120,7 @@ body{background:#fff}
 </head>
 <body>
 <div class="top"><div class="wrap"><b>Janus MoSeTe/Graphene &middot; DFT study</b>
-<nav id="spy"><a href="#overview">Overview</a><a href="#eq">Baseline</a><a href="#field">Field</a><a href="#strain">Strain</a><a href="#fet">FET</a></nav></div></div>
+<nav id="spy"><a href="#overview">Overview</a><a href="#stab">Stability</a><a href="#term">Termination</a><a href="#eq">Baseline</a><a href="#field">Field</a><a href="#strain">Strain</a><a href="#fet">FET</a></nav></div></div>
 
 <header class="hero" id="overview"><div class="wrap">
 <h1>Schottky-to-Ohmic Contact Modulation in Janus MoSeTe/Graphene van der Waals Heterostructure</h1>
@@ -127,10 +128,13 @@ body{background:#fff}
 <div class="hg">
 <div class="abs">
 <p>Systematic multi-pathway Ohmic contact engineering from a single van der Waals heterostructure has not been shown. Using DFT (PBE with D3 dispersion, Quantum ESPRESSO), this study follows the Se-face Janus MoSeTe/graphene interface from an n-type Schottky contact (&Phi;<sub>n</sub> = 0.477&nbsp;eV, &Phi;<sub>p</sub> = 0.850&nbsp;eV) to Ohmic contact by two mechanistically different routes. A perpendicular field acts almost as a rigid Fermi-level shift, while biaxial strain renormalizes the MoSeTe bandgap.</p>
+<p>The Te-face interface is already close to p-type Ohmic at zero strain (&Phi;<sub>p</sub> = 0.0185&nbsp;eV) and becomes fully p-type Ohmic at +2&nbsp;% strain. The Se face is the one with a sizeable barrier for both carriers, so it is the interface tuned in detail.</p>
 <ul class="keys">
-<li><span>Equilibrium contact</span><b>n-type Schottky, &Phi;<sub>n</sub> 0.477&nbsp;eV</b></li>
+<li><span>Equilibrium contact (Se face)</span><b>n-type Schottky, &Phi;<sub>n</sub> 0.477&nbsp;eV</b></li>
+<li><span>Te-face contact</span><b>&Phi;<sub>p</sub> 0.0185&nbsp;eV, p-Ohmic at +2&nbsp;%</b></li>
 <li><span>Field to Ohmic (n / p)</span><b>+0.6 / &minus;0.20 V/&Aring;</b></li>
-<li><span>Strain to p-type Ohmic</span><b>+4 to +6&nbsp;%</b></li>
+<li><span>Strain to p-type Ohmic (Se face)</span><b>switches at +4 to +6&nbsp;%</b></li>
+<li><span>Stability (Se face)</span><b>no imaginary phonons; 300 K AIMD</b></li>
 <li><span>Method</span><b>DFT, PBE-D3, scalar-relativistic</b></li>
 </ul></div>
 <div>
@@ -143,26 +147,29 @@ body{background:#fff}
 <main id="secs"></main>
 
 <section class="sum"><div class="wrap">
-<h2>What each perturbation did to the barriers</h2>
+<h2>What each stage showed</h2>
 <div class="tw"><table>
 <tr><th>Stage</th><th>Perturbation</th><th>Result</th><th>Mechanism / caveat</th></tr>
+<tr><td>Stability</td><td>Phonons, 300 K AIMD</td><td>No imaginary phonon frequencies; temperature stays near 300 K over 1&nbsp;ps</td><td>Run for the Se-face interface only; AIMD is 1&nbsp;ps with &Gamma;-point sampling</td></tr>
+<tr><td>Termination</td><td>Te face vs. Se face; Te face at +2&nbsp;% strain</td><td>Te face: &Phi;<sub>p</sub> 0.0185&nbsp;eV, p-Ohmic at +2&nbsp;%. Se face: Schottky for both carriers</td><td>18.5&nbsp;meV is within the uncertainty of scalar-relativistic PBE; Te face not studied further</td></tr>
 <tr><td>Baseline</td><td>None, Se-face stacking</td><td>n-type Schottky, &Phi;<sub>n</sub> 0.477&nbsp;eV</td><td>0.44&nbsp;eV work-function mismatch; 1.15&nbsp;D Janus dipole</td></tr>
 <tr><td>Field</td><td>&minus;0.4 to +0.6 V/&Aring;</td><td>n-Ohmic at +0.6, near p-Ohmic at &minus;0.20 V/&Aring;</td><td>Mostly rigid Fermi-level shift; gap shrinks only near the +0.6 crossing</td></tr>
-<tr><td>Strain</td><td>&minus;8 to +8&nbsp;%</td><td>Near p-Ohmic at +4 to +6&nbsp;%; &Phi;<sub>n</sub> 0.055&nbsp;eV at &minus;8&nbsp;%</td><td>Genuine gap renormalization; strain is relative to the relaxed heterostructure, where MoSeTe is already &minus;3.46&nbsp;% strained</td></tr>
+<tr><td>Strain</td><td>&minus;8 to +8&nbsp;%</td><td>Near p-Ohmic at +6&nbsp;% (switch between +4 and +6&nbsp;%); &Phi;<sub>n</sub> 0.055&nbsp;eV at &minus;8&nbsp;%</td><td>Genuine gap renormalization; strain is relative to the relaxed heterostructure, where MoSeTe is already &minus;3.46&nbsp;% strained</td></tr>
 <tr><td>FET</td><td>Local gates, flexible substrate</td><td>Concept only</td><td>No transport or contact-resistance calculation yet</td></tr>
 </table></div>
 <h3>Selected operating points (eV)</h3>
 <div class="tw">
 <table class="nums">
 <tr><th>Condition</th><th>&Phi;<sub>n</sub></th><th>&Phi;<sub>p</sub></th><th>E<sub>g</sub><sup>eff</sup></th><th>Contact</th></tr>
-<tr><td>Equilibrium</td><td>0.477</td><td>0.850</td><td>1.327</td><td>n-type Schottky</td></tr>
-<tr><td>+0.5 V/&Aring;</td><td>0.020</td><td>1.213</td><td>1.233</td><td>n, below k<sub>B</sub>T</td></tr>
-<tr><td>+0.6 V/&Aring;</td><td>&minus;0.024</td><td>1.146</td><td>1.122</td><td>n-type Ohmic</td></tr>
-<tr><td>&minus;0.15 V/&Aring;</td><td>0.684</td><td>0.648</td><td>1.331</td><td>n-type Schottky</td></tr>
-<tr><td>&minus;0.20 V/&Aring;</td><td>1.318</td><td>0.005</td><td>1.323</td><td>near p-type Ohmic</td></tr>
-<tr><td>+4&nbsp;% strain</td><td>0.638</td><td>0.623</td><td>1.261</td><td>Schottky</td></tr>
-<tr><td>+6&nbsp;% strain</td><td>1.062</td><td>0.060</td><td>1.122</td><td>near p-type Ohmic</td></tr>
-<tr><td>&minus;8&nbsp;% strain</td><td>0.055</td><td>0.531</td><td>0.586</td><td>approaching n-Ohmic</td></tr>
+<tr><td>Te face, equilibrium</td><td>1.2265</td><td>0.0185</td><td>1.245</td><td>near p-type Ohmic</td></tr>
+<tr><td>Se face, equilibrium</td><td>0.477</td><td>0.850</td><td>1.327</td><td>n-type Schottky</td></tr>
+<tr><td>Se, +0.5 V/&Aring;</td><td>0.020</td><td>1.213</td><td>1.233</td><td>n, below k<sub>B</sub>T</td></tr>
+<tr><td>Se, +0.6 V/&Aring;</td><td>&minus;0.024</td><td>1.146</td><td>1.122</td><td>n-type Ohmic</td></tr>
+<tr><td>Se, &minus;0.15 V/&Aring;</td><td>0.684</td><td>0.648</td><td>1.331</td><td>n-type Schottky</td></tr>
+<tr><td>Se, &minus;0.20 V/&Aring;</td><td>1.318</td><td>0.005</td><td>1.323</td><td>near p-type Ohmic</td></tr>
+<tr><td>Se, +4&nbsp;% strain</td><td>0.638</td><td>0.623</td><td>1.261</td><td>Schottky</td></tr>
+<tr><td>Se, +6&nbsp;% strain</td><td>1.062</td><td>0.060</td><td>1.122</td><td>near p-type Ohmic</td></tr>
+<tr><td>Se, &minus;8&nbsp;% strain</td><td>0.055</td><td>0.531</td><td>0.586</td><td>approaching n-Ohmic</td></tr>
 </table></div>
 <ul class="tl"><li>Field-driven transitions leave E<sub>g</sub><sup>eff</sup> near 1.32&ndash;1.34&nbsp;eV except close to the positive-field crossing.</li>
 <li>Strain-driven transitions shrink E<sub>g</sub><sup>eff</sup> to 0.59&ndash;0.91&nbsp;eV at &plusmn;8&nbsp;%.</li>
@@ -175,7 +182,11 @@ body{background:#fff}
 /* Image folder, relative to THIS html file (projects/ -> assets/img/graphene-mosete-thesis/ at the repo root). */
 const B='../assets/img/graphene-mosete-thesis/';
 const F={
-'stk':{l:'Stacking',s:'stacking.png',t:'Stacking registries, both terminations',c:'Top and side views of the three lateral registries (I hollow site, II Mo-top, III outer chalcogen-top) for Gr/SeMoTe and Gr/TeMoSe. Stacking III is the lowest-energy registry in both terminations, though II and III are nearly degenerate.'},
+'stk':{l:'Stacking',s:'stacking.png',t:'Stacking registries, both terminations',c:'Top and side views of the three lateral registries (I hollow site, II Mo-top, III outer chalcogen-top) for Gr/SeMoTe and Gr/TeMoSe. Stacking II and III are nearly degenerate; III is used throughout.'},
+/* CONFIRM before publishing: this plot has about 15 branches and tops out near 11.5 THz, which does not match a 59-atom graphene/MoSeTe cell (177 branches, graphene G mode near 47 THz). State exactly which cell it is in the caption. */
+'phn':{l:'Phonon',s:'phonon_dispersion.png',t:'Phonon dispersion, Se-face interface',c:'Phonon dispersion along &Gamma;&ndash;M&ndash;K&ndash;&Gamma;; acoustic branches (ZA, TA, LA) in red, optical in blue-grey. There are no imaginary frequencies, and the acoustic branches go to zero at &Gamma;.'},
+'aimd':{l:'AIMD',s:'aimd_temperature.png',t:'AIMD temperature at 300 K, Se-face interface',c:'Temperature trace of a 1&nbsp;ps ab initio molecular dynamics run (Andersen thermostat at 300&nbsp;K, 1&nbsp;fs step, &Gamma;-point sampling). The temperature fluctuates about 300&nbsp;K without drift.'},
+'te2':{l:'Te face',s:'te_strain_p2_fatband.png',t:'Fat bands, Te face, +2&nbsp;% strain',c:'Projected fat bands of the Te-face interface at +2&nbsp;% biaxial strain (graphene blue, MoSeTe orange). The MoSeTe valence band edge near &Gamma; sits above E<sub>F</sub>, giving a p-type Ohmic contact.'},
 '4':{s:'fig4-fatband-pdos.png',t:'Fat bands, Gr/SeMoTe',c:'Projected fat bands (graphene blue, MoSeTe red) with &Phi;<sub>n</sub> and &Phi;<sub>p</sub> marked. The MoSeTe gap stays clear and the Dirac cone stays intact.'},
 '5a':{s:'fig6a_band_alignment.png',t:'Band alignment',c:'Graphene work function, MoSeTe electron affinity and work function, &Phi;<sub>n</sub>, &Phi;<sub>p</sub> and the vacuum offset &Delta;V = 0.504&nbsp;eV.'},
 '5b':{s:'fig6_potential_macro.png',t:'Interfacial dipole',c:'Planar-averaged electrostatic potential; the two vacuum plateaus differ by &Delta;V.'},
@@ -208,31 +219,44 @@ const F={
 const BIG={'stk':1,'9':1};
 const T=(a,b,c)=>[a,b,c];
 const S=[
+{k:'stab',tab:'Stability',nm:'Structure and stability',now:'The Se-face interface is bound and stable.',hero:['phn','aimd'],
+ p:'A tunable contact only matters if the interface exists and holds together.',m:'Six stacking registries compared; phonons and a 300&nbsp;K AIMD run on the Se-face interface.',r:'No imaginary phonon modes; temperature stays near 300&nbsp;K over 1&nbsp;ps.',
+ title:'I. Structure and stability of the interface',sum:'Stacking, lattice strain, phonons and molecular dynamics, before any contact physics.',
+ pts:['Three lateral registries (hollow, Mo-top, chalcogen-top) were tried on each termination, six in all, with a 4&times;4 graphene cell on a 3&times;3 MoSeTe cell.','All six are bound. On the Se face, Stacking II and III differ by about 0.03&nbsp;meV in total energy, so they are degenerate; Stacking III is used throughout.','In the relaxed Se-face cell MoSeTe is compressed 3.46&nbsp;% and graphene stretched 0.87&nbsp;%, so the softer layer absorbs the mismatch.','The phonon dispersion shows no imaginary frequencies along &Gamma;&ndash;M&ndash;K&ndash;&Gamma;, and the acoustic branches go to zero at &Gamma;.','The 1&nbsp;ps AIMD run at 300&nbsp;K stays stable, with the temperature fluctuating about 300&nbsp;K without drift.'],
+ tr:[['Dynamical stability (phonons)',[T('Imag. modes','','none along &Gamma;&ndash;M&ndash;K&ndash;&Gamma;'),T('Acoustic','','&rarr; 0 at &Gamma;')]],['Thermal stability (AIMD)',[T('Target T','','300 K, Andersen thermostat'),T('Length','','1 ps, 1 fs step, &Gamma;-point')]],['Relaxed Se-face cell',[T('MoSeTe','','&minus;3.46 % (compressive)'),T('Graphene','','+0.87 % (tensile)')]]],
+ rows:[['stk'],['phn','aimd'],['txt']]},
+{k:'term',tab:'Termination',nm:'Te face vs. Se face',now:'Only the Se face has barriers for both carriers.',hero:['te2'],
+ p:'Janus MoSeTe can face graphene with either chalcogen.',m:'Te-face and Se-face contacts compared at zero strain; the Te face is then strained to +2&nbsp;%.',r:'Te face: &Phi;<sub>p</sub> 0.0185&nbsp;eV, p-Ohmic at +2&nbsp;%. Se face: &Phi;<sub>n</sub> 0.477, &Phi;<sub>p</sub> 0.850&nbsp;eV.',
+ title:'II. Termination: why the Se face is the one studied',sum:'The Te face is already close to p-type Ohmic, so the Se face is the interface with something to tune in both directions.',
+ pts:['With the Te face toward graphene, &Phi;<sub>p</sub> = 0.0185&nbsp;eV and &Phi;<sub>n</sub> = 1.2265&nbsp;eV, with a MoSeTe gap of 1.245&nbsp;eV: holes see almost no barrier and electrons see about 1.2&nbsp;eV.','The Te-face &Phi;<sub>p</sub> is below k<sub>B</sub>T (about 0.026&nbsp;eV), but 18.5&nbsp;meV is within the uncertainty of scalar-relativistic PBE without spin-orbit coupling, so it is best read as near p-Ohmic.','At +2&nbsp;% tensile strain the MoSeTe valence band edge rises above E<sub>F</sub> near &Gamma; (fat bands), so the Te-face contact becomes full p-type Ohmic.','The Se face has sizeable barriers for both carriers (&Phi;<sub>n</sub> 0.477, &Phi;<sub>p</sub> 0.850&nbsp;eV), so it can be tuned toward either Ohmic type. That is why the field and strain study follows the Se face only.','Strain on the Te face is measured against its own relaxed heterostructure, in which MoSeTe is already compressed 3.45&nbsp;%.'],
+ tr:[['Te face, equilibrium',[T('&Phi;<sub>p</sub>','','0.0185 eV'),T('&Phi;<sub>n</sub>','','1.2265 eV'),T('E<sub>g</sub>','','1.245 eV')]],['Te face, +2&nbsp;% strain',[T('VBM','&uarr;','crosses E<sub>F</sub>: p-type Ohmic')]],['Se face, equilibrium',[T('&Phi;<sub>n</sub>','','0.477 eV'),T('&Phi;<sub>p</sub>','','0.850 eV')]]],
+ rows:[['txt','te2']]},
 {k:'eq',tab:'Baseline',nm:'Equilibrium contact',now:'An n-type Schottky contact at zero field.',hero:['5a','5b'],
- p:'The interface starts with a barrier for both carriers.',m:'Se-face MoSeTe on graphene, no field, no strain.',r:'&Phi;<sub>n</sub> 0.477&nbsp;eV, &Phi;<sub>p</sub> 0.850&nbsp;eV.',
- title:'I. Equilibrium contact of the Se-face interface',sum:'The barrier comes from work-function mismatch and the Janus dipole, not from defects or hybridization.',
- pts:['Graphene (4.22&nbsp;eV) and the MoSeTe Se face (4.66&nbsp;eV) differ by 0.44&nbsp;eV, so electrons move from graphene to MoSeTe.','The Janus dipole (1.15&nbsp;Debye) gives a 0.504&nbsp;eV vacuum step, reduced from 0.601&nbsp;eV in the isolated layer by graphene screening.','The gap ELF falls to 0.050, so the bonding is van der Waals.','The Te-face termination is already p-type Ohmic (E<sub>F</sub> 18.5&nbsp;meV above the VBM), so only the Se face has a barrier to tune.'],
+ p:'The Se-face interface starts with a barrier for both carriers.',m:'Se-face MoSeTe on graphene, no field, no strain.',r:'&Phi;<sub>n</sub> 0.477&nbsp;eV, &Phi;<sub>p</sub> 0.850&nbsp;eV.',
+ title:'III. Equilibrium contact of the Se-face interface',sum:'The barrier comes from work-function mismatch and the Janus dipole, not from defects or hybridization.',
+ pts:['Graphene (4.22&nbsp;eV) and the MoSeTe Se face (4.66&nbsp;eV) differ by 0.44&nbsp;eV, so electrons move from graphene to MoSeTe.','The Janus dipole (1.15&nbsp;Debye) gives a 0.504&nbsp;eV vacuum step, reduced from 0.601&nbsp;eV in the isolated layer by graphene screening.','The gap ELF falls to 0.050, so the bonding is van der Waals.'],
  tr:[['Se-face interface, equilibrium',[T('&Phi;<sub>n</sub>','','0.477 eV'),T('&Phi;<sub>p</sub>','','0.850 eV'),T('E<sub>g</sub><sup>eff</sup>','','1.327 eV'),T('&Delta;V','','0.504 eV'),T('P<sub>TB</sub>','','&asymp; 1.8&times;10<sup>-2</sup>')]]],
- rows:[['stk'],['txt','4'],['5a','5b'],['6a','6b','6c']]},
+ rows:[['txt','4'],['5a','5b'],['6a','6b','6c']]},
 {k:'field',tab:'Field',nm:'Electric field',now:'A field moves the Fermi level.',hero:['7m'],
  p:'One interface needs both Ohmic contact types.',m:'Field from &minus;0.4 to +0.6 V/&Aring;, positive from MoSeTe toward graphene.',r:'+0.6 V/&Aring;: n-Ohmic. &minus;0.20 V/&Aring;: near p-Ohmic.',
- title:'II. Barrier modulation by perpendicular electric field',sum:'Both Ohmic contact types are reachable from the same interface by changing the field sign.',
+ title:'IV. Barrier modulation by perpendicular electric field',sum:'Both Ohmic contact types are reachable from the same interface by changing the field sign.',
  pts:['Positive field reinforces the dipole: &Phi;<sub>n</sub> falls to 0.020&nbsp;eV at +0.5 V/&Aring;, below k<sub>B</sub>T (0.026&nbsp;eV).','At +0.6 V/&Aring; the CBM crosses E<sub>F</sub> (&Phi;<sub>n</sub> = &minus;0.024&nbsp;eV): full n-type Ohmic contact.','Negative field changes the barriers smoothly to &minus;0.15 V/&Aring;, then &Phi;<sub>p</sub> collapses from 0.648 to 0.005&nbsp;eV by &minus;0.20 V/&Aring;.','E<sub>g</sub><sup>eff</sup> stays near 1.32&ndash;1.34&nbsp;eV, so the field acts as a near-rigid Fermi-level shift.'],
  tr:[['Positive field, 0 to +0.4 V/&Aring;',[T('&Phi;<sub>n</sub>','&darr;','0.477 &rarr; 0.090 eV'),T('&Phi;<sub>p</sub>','&uarr;','0.850 &rarr; 1.223 eV'),T('E<sub>g</sub><sup>eff</sup>','&asymp;','1.327 &rarr; 1.313 eV')]],['Positive field, +0.5 and +0.6 V/&Aring;',[T('&Phi;<sub>n</sub>','&darr;','0.020 &rarr; &minus;0.024 eV'),T('E<sub>g</sub><sup>eff</sup>','&darr;','1.233 &rarr; 1.122 eV')]],['Negative field, 0 to &minus;0.15 V/&Aring;',[T('&Phi;<sub>n</sub>','&uarr;','0.477 &rarr; 0.684 eV'),T('&Phi;<sub>p</sub>','&darr;','0.850 &rarr; 0.648 eV')]],['Negative field, &minus;0.15 to &minus;0.20 V/&Aring;',[T('&Phi;<sub>p</sub>','&darr;','0.648 &rarr; 0.005 eV'),T('&Phi;<sub>n</sub>','&uarr;','&rarr; 1.318 eV'),T('E<sub>g</sub><sup>eff</sup>','&asymp;','1.331 &rarr; 1.323 eV')]]],
  rows:[['txt','7m'],['7a','7b','7c'],['7d','7e','7f'],['7g','7h','7i'],['7j','7k','7l']]},
 {k:'strain',tab:'Strain',nm:'Biaxial strain',now:'Strain reshapes the bandgap itself.',hero:['8i'],
- p:'Field alone leaves the MoSeTe gap almost unchanged.',m:'Biaxial strain from &minus;8 to +8&nbsp;%, relative to the relaxed heterostructure.',r:'+4 to +6&nbsp;%: near p-Ohmic. &minus;8&nbsp;%: &Phi;<sub>n</sub> 0.055&nbsp;eV.',
- title:'III. Barrier modulation by biaxial strain',sum:'Strain is a second, mechanistically different handle: it renormalizes the gap rather than shifting the Fermi level.',
+ p:'Field alone leaves the MoSeTe gap almost unchanged.',m:'Biaxial strain from &minus;8 to +8&nbsp;%, relative to the relaxed heterostructure.',r:'+4 to +6&nbsp;%: switch to near p-Ohmic. &minus;8&nbsp;%: &Phi;<sub>n</sub> 0.055&nbsp;eV.',
+ title:'V. Barrier modulation by biaxial strain',sum:'Strain is a second, mechanistically different handle: it renormalizes the gap rather than shifting the Fermi level.',
  pts:['Tensile strain changes the barriers smoothly to +4&nbsp;%, then &Phi;<sub>p</sub> drops from 0.623 to 0.060&nbsp;eV between +4 and +6&nbsp;%, and stays low to +8&nbsp;%.','Compressive strain lowers &Phi;<sub>n</sub> monotonically to 0.055&nbsp;eV at &minus;8&nbsp;%, short of Ohmic. Linear extrapolation puts the crossing near &minus;9 to &minus;10&nbsp;%.','E<sub>g</sub><sup>eff</sup> falls to 0.586&nbsp;eV at &minus;8&nbsp;% and 0.908&nbsp;eV at +8&nbsp;%.','The strain zero is the relaxed heterostructure, where MoSeTe is already compressed 3.46&nbsp;% and graphene stretched 0.87&nbsp;%.'],
  tr:[['Tensile, 0 to +4&nbsp;%',[T('&Phi;<sub>p</sub>','&darr;','0.850 &rarr; 0.623 eV'),T('&Phi;<sub>n</sub>','&uarr;','0.477 &rarr; 0.638 eV'),T('E<sub>g</sub><sup>eff</sup>','&darr;','1.327 &rarr; 1.261 eV')]],['Tensile, +4 to +6&nbsp;%',[T('&Phi;<sub>p</sub>','&darr;','0.623 &rarr; 0.060 eV'),T('&Phi;<sub>n</sub>','&uarr;','0.638 &rarr; 1.062 eV'),T('E<sub>g</sub><sup>eff</sup>','&darr;','1.261 &rarr; 1.122 eV')]],['Compressive, 0 to &minus;8&nbsp;%',[T('&Phi;<sub>n</sub>','&darr;','0.477 &rarr; 0.055 eV'),T('&Phi;<sub>p</sub>','&uarr;','0.850 &rarr; 0.932 eV at &minus;2&nbsp;%, then 0.531 eV'),T('E<sub>g</sub><sup>eff</sup>','&darr;','1.327 &rarr; 0.586 eV')]]],
  rows:[['txt','8i'],['8a','8b','8c','8d'],['8e','8f','8g','8h']]},
 {k:'fet',tab:'FET',nm:'Proposed device',now:'Two gates for the contacts, two for the channel.',hero:['9'],
  p:'The tunable contact needs a device that can use it.',m:'Local gates set the field at each contact; a flexible substrate sets the strain.',r:'Source and drain barriers tuned apart from the channel gating.',
- title:'IV. Proposed contact-tunable FET',sum:'A device concept built on the field and strain results. It is a proposal, not a simulated device.',
- pts:['The top gate V<sub>G</sub> and grounded back gate jointly set the channel carrier density.','Local gates V<sub>LG1</sub> and V<sub>LG2</sub> under the source and drain contacts apply the perpendicular field of Section II independently at each contact.','A flexible substrate applies the biaxial strain of Section III, and the contacts are biased symmetrically at &#8723;V<sub>DS</sub>/2.','No transport or contact-resistance calculation backs this yet; NEGF and hybrid-functional checks are listed as future work.'],
- tr:[['Contact states from the DFT thresholds',[T('n-Ohmic','','+0.6 V/&Aring; field'),T('p-Ohmic','','&minus;0.20 V/&Aring; field, or +4 to +6&nbsp;% strain'),T('Switching window','','&asymp; 0.05 V/&Aring; (field), &asymp; 2&nbsp;% (strain)')]]],
+ title:'VI. Proposed contact-tunable FET',sum:'A device concept built on the field and strain results. It is a proposal, not a simulated device.',
+ pts:['The top gate V<sub>G</sub> and grounded back gate jointly set the channel carrier density.','Local gates V<sub>LG1</sub> and V<sub>LG2</sub> under the source and drain contacts apply the perpendicular field of Section IV independently at each contact.','A flexible substrate applies the biaxial strain of Section V, and the contacts are biased symmetrically at &#8723;V<sub>DS</sub>/2.','No transport or contact-resistance calculation backs this yet; NEGF and hybrid-functional checks are listed as future work.'],
+ tr:[['Contact states from the DFT thresholds (Se face)',[T('n-Ohmic','','+0.6 V/&Aring; field'),T('p-Ohmic','','&minus;0.20 V/&Aring; field, or about +6&nbsp;% strain'),T('Switching window','','&asymp; 0.05 V/&Aring; (field), &asymp; 2&nbsp;% (strain)')]]],
  rows:[['9'],['txt']]}
 ];
+const N=S.length;
 const C={},CC={};
 const $=s=>document.querySelector(s);
 const nt=t=>t.replace(/<[^>]+>/g,'');
@@ -241,6 +265,7 @@ const cb=id=>`<figure class="chartbox"><div class="fh"><b>Trend</b><span>${C[id]
 const txt=s=>`<div class="txt"><ul class="pts">${s.pts.map(x=>`<li>${x}</li>`).join('')}</ul><div class="trd"><b>Trends</b>${s.tr.map(g=>`<p class="sw">${g[0]}</p><ul>${g[1].map(r=>`<li><span>${r[0]}</span><i>${r[1]}</i><em>${r[2]}</em></li>`).join('')}</ul>`).join('')}</div></div>`;
 const cell=(x,s,n)=>x==='txt'?txt(s):x.startsWith('c:')?cb(x.slice(2)):fig(x,n===1);
 
+$('#rail').style.gridTemplateColumns=`repeat(${N},minmax(0,1fr))`;
 $('#rail').innerHTML=S.map((s,i)=>`<button class="tab" role="tab" data-i="${i}"><b>${i+1}. ${s.tab}</b><small>${s.nm}</small><i></i></button>`).join('');
 $('#stage').innerHTML=S.map(s=>{
  if(s.k==='halo'){
@@ -256,8 +281,8 @@ const DUR=4000,MOVE=800,EASE='cubic-bezier(.7,0,.2,1)';
 let cur=0,busy=false,prog=0,last=0,playing=!reduce,hover=false,inView=true;
 slides[0].classList.add('on');
 const st=$('#stage');
-function mark(){tabs.forEach((t,i)=>{t.classList.toggle('on',i===cur);t.classList.toggle('done',i<cur);t.setAttribute('aria-selected',i===cur);t.querySelector('i').style.width=i===cur?prog*100+'%':''});$('#count').textContent=`Stage ${cur+1} of 4: ${S[cur].nm}`}
-function go(n,dir){n=(n+4)%4;if(n===cur||busy)return;
+function mark(){tabs.forEach((t,i)=>{t.classList.toggle('on',i===cur);t.classList.toggle('done',i<cur);t.setAttribute('aria-selected',i===cur);t.querySelector('i').style.width=i===cur?prog*100+'%':''});$('#count').textContent=`Stage ${cur+1} of ${N}: ${S[cur].nm}`}
+function go(n,dir){n=(n+N)%N;if(n===cur||busy)return;
  const o=slides[cur],a=slides[n];a.classList.add('on');a.style.zIndex=2;o.style.zIndex=1;
  const d=reduce?0:MOVE;busy=true;
  const hb=st.offsetHeight;
@@ -291,7 +316,7 @@ document.addEventListener('keydown',e=>{if(!inView||e.target.closest('dialog'))r
 const lb=$('#lb');document.addEventListener('click',e=>{const b=e.target.closest('[data-z]');if(b){lb.querySelector('img').src=B+b.dataset.z;lb.showModal()}else if(e.target.closest('#lb'))lb.close()});
 const links=[...document.querySelectorAll('#spy a')];
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(l=>l.classList.toggle('on',l.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-40% 0px -55% 0px'});
-['overview','eq','field','strain','fet'].forEach(id=>io.observe(document.getElementById(id)));
+['overview',...S.map(s=>s.k)].forEach(id=>io.observe(document.getElementById(id)));
 </script>
 </body>
 </html>

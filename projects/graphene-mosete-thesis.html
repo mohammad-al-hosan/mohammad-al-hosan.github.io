@@ -1,21 +1,270 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Schottky-to-Ohmic Contact Modulation in Graphene/Janus MoSeTe van der Waals Heterostructures | M. A. H. Kanon</title>
-<meta name="description" content="A first-principles study of how a perpendicular electric field and biaxial strain tune the Schottky barrier at a graphene/Janus MoSeTe contact, and how the barrier can be driven to a fully Ohmic contact.">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,72,400;0,72,500;0,72,600;1,72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/style.css"></head><body>
-<header class="nav"><div class="nav-in"><span class="mark"><b>M. A. H. Kanon</b> / EEE, BUET</span>
-<nav><a href="../index.html">Home</a><a href="../index.html#research">Research</a><a href="../index.html#projects">Projects</a><a href="../index.html#contact">Contact</a><button class="tt" id="tt" type="button" aria-label="Toggle dark mode">&#9789;</button></nav></div></header>
-<main class="wrap">
-<a class="back" href="../index.html#research">&larr; Back to portfolio</a>
-<div class="ph"><div class="kind">Undergraduate thesis</div><h1>Schottky-to-Ohmic Contact Modulation in Graphene/Janus MoSeTe van der Waals Heterostructures</h1><p class="lede">A first-principles study of how a perpendicular electric field and biaxial strain tune the Schottky barrier at a graphene/Janus MoSeTe contact, and how the barrier can be driven to a fully Ohmic contact.</p>
-<div class="facts pf"><div class="fact"><b>Apr 2025 &ndash; Jun 2026</b><span>Period</span></div><div class="fact"><b>Prof. S. M. Mominuzzaman, BUET</b><span>Supervisor</span></div><div class="fact"><b>DFT, Quantum ESPRESSO</b><span>Method</span></div><div class="fact"><b>Journal extension under review</b><span>Status</span></div></div></div>
-<section><h2>Motivation</h2><div class="card"><ul><li>Contact resistance at the metal&ndash;semiconductor interface limits 2D field-effect transistors; a Schottky barrier throttles current injection.</li><li>Janus MoSeTe has an intrinsic out-of-plane dipole, so the Se side and the Te side of the same material can behave differently as a contact.</li><li>Goal: find controllable knobs that move the contact from Schottky to Ohmic without changing the materials.</li></ul></div></section>
-<section><h2>How it was done</h2><ol class="steps"><li><h3>Build the stacks</h3><ul><li>Graphene on Janus MoSeTe, Se-side and Te-side interfaces, with six stacking configurations considered.</li><li>Vacuum spacing along the stacking direction to isolate periodic images.</li></ul></li><li><h3>Relax and compare stackings</h3><ul><li>GGA-PBE with PAW pseudopotentials and DFT-D3 van der Waals correction.</li><li>BFGS structural relaxation; binding energy used to rank stacking configurations.</li></ul></li><li><h3>Electronic structure</h3><ul><li>SCF, then band structure along &Gamma;&ndash;M&ndash;K&ndash;&Gamma;, then projected wavefunctions (PDOS).</li><li>Fatband analysis to project bands onto each layer and read off the Schottky barrier height from the semiconductor band edges relative to the graphene Dirac point.</li></ul></li><li><h3>Tune the contact</h3><ul><li>Perpendicular electric field sweeps (sawtooth field with dipole correction).</li><li>Biaxial strain sweeps over the heterostructure lattice.</li><li>Barrier height tracked as a function of each knob, separately and together.</li></ul></li><li><h3>Explain the physics</h3><ul><li>Charge density difference and Bader charge analysis for interfacial charge transfer.</li><li>Work function, electron localization function, and planar-averaged electrostatic potential to link the barrier to the interface dipole.</li></ul></li><li><h3>Device concept</h3><ul><li>Used the tunable contact behavior to propose a 2D field-effect transistor architecture.</li></ul></li></ol></section>
-<section><h2>Figures</h2><div class="figs"><figure class="wide"><img src="../assets/img/graphene-mosete-thesis/fig1-structure.png" alt="Atomic structure" loading="lazy"><figcaption><b>Atomic structure.</b> Side and top views of the Graphene/Janus MoSeTe heterostructure.</figcaption></figure><figure class=""><img src="../assets/img/graphene-mosete-thesis/fig2-bands.png" alt="Band structure" loading="lazy"><figcaption><b>Band structure.</b> Layer-projected (fatband) bands used to extract the barrier height.</figcaption></figure><figure class=""><img src="../assets/img/graphene-mosete-thesis/fig3-efield.png" alt="Electric-field tuning" loading="lazy"><figcaption><b>Electric-field tuning.</b> Schottky barrier height versus perpendicular electric field.</figcaption></figure><figure class=""><img src="../assets/img/graphene-mosete-thesis/fig4-strain.png" alt="Strain tuning" loading="lazy"><figcaption><b>Strain tuning.</b> Schottky barrier height versus biaxial strain.</figcaption></figure><figure class=""><img src="../assets/img/graphene-mosete-thesis/fig5-charge.png" alt="Charge transfer" loading="lazy"><figcaption><b>Charge transfer.</b> Charge density difference and electrostatic potential profile.</figcaption></figure><figure class=""><img src="../assets/img/graphene-mosete-thesis/fig6-fet.png" alt="Device concept" loading="lazy"><figcaption><b>Device concept.</b> Proposed 2D FET architecture.</figcaption></figure></div></section>
-<section><h2>Results</h2><ul class="res"><li><b>Four independent pathways</b> to a fully Ohmic Graphene/MoSeTe contact, using electric field and biaxial strain to modulate the Schottky barrier.</li><li><b>A proposed 2D FET architecture</b> that exploits the tunable contact.</li></ul></section>
-<section><h2>Tools</h2><div class="chips"><span class="chip">Quantum ESPRESSO</span><span class="chip">GGA-PBE</span><span class="chip">PAW</span><span class="chip">DFT-D3</span><span class="chip">Bader analysis</span><span class="chip">Python</span></div></section>
-<section><h2>Links</h2><div class="links"><p class="note">Companion study: 1T-NbS<sub>2</sub>/Janus 2H-MoSeTe (submitted to <i>Nanoscale Advances</i>)</p></div></section>
-</main><footer><div class="wrap"><p class="fine">&copy; Mohammad Al Hosan Kanon &middot; <a href="../index.html">Portfolio</a></p></div></footer>
-<script src="../assets/site.js"></script></body></html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Schottky-to-Ohmic Contact Modulation in Janus MoSeTe/Graphene</title>
+<style>
+:root{--paper:#f9f9f7;--ink:#111;--red:#8b0000;--blue:#000080;--muted:#555;--rule:#d1d1cc;--serif:'Merriweather',Georgia,serif;--head:'Playfair Display',Georgia,serif;--mono:'Source Code Pro',monospace}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:4.5rem}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 1rem/1.75 var(--serif);-webkit-font-smoothing:antialiased}
+sub,sup{line-height:0}a{color:inherit}
+.wrap{max-width:1200px;margin:0 auto;padding:0 1.25rem}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+
+/* sticky stage nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(249,249,247,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--ink)}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:1rem;min-height:3rem}
+.top b{font:600 .8rem var(--mono)}
+.top nav{display:flex;gap:.25rem}
+.top nav a{font:400 .8rem var(--mono);text-decoration:none;padding:.3rem .7rem;border:1px solid transparent}
+.top nav a:hover{border-color:var(--ink)}
+.top nav a.on{background:var(--ink);color:var(--paper)}
+.hero{padding:3rem 0 3rem;border-bottom:1px solid var(--ink)}
+.hero h1{font:700 clamp(1.9rem,4vw,3.1rem)/1.15 var(--head);margin:0 0 .75rem}
+.hero .sub{font-style:italic;color:var(--muted);font-size:1.1rem;margin:0 0 2rem;padding-bottom:1.25rem;border-bottom:1px solid var(--ink)}
+.hg{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:2.5rem;align-items:start}
+.abs p{margin:0 0 1.25rem;font-size:.95rem;text-align:justify;hyphens:auto}
+.abs p::first-letter{font:700 3.4rem/.9 var(--head);float:left;padding:.3rem .5rem 0 0}
+.keys{margin:0;padding:0;list-style:none;border:1px solid var(--ink);background:#fff}
+.keys li{display:flex;justify-content:space-between;gap:1rem;padding:.7rem 1rem;font-size:.85rem;border-bottom:1px solid var(--rule)}
+.keys li:last-child{border:0}.keys b{font:600 .85rem var(--mono);white-space:nowrap}
+.rail{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-bottom:.75rem}
+.tab{all:unset;cursor:pointer;display:block;border:1px solid var(--ink);background:#fff;padding:.5rem .7rem .8rem;position:relative;overflow:hidden}
+.tab b{display:block;font:600 .9rem var(--mono)}
+.tab small{display:block;font:400 .72rem/1.3 var(--serif);color:var(--muted)}
+.tab i{position:absolute;left:0;bottom:0;height:4px;width:0;background:var(--red)}
+.tab.done i{width:100%;background:var(--ink)}
+.tab.on{background:var(--ink);color:var(--paper)}.tab.on small{color:#bbb}
+.tab:hover:not(.on){background:#efefe9}
+
+.stage{display:grid;position:relative;overflow:hidden;border:1px solid var(--ink);background:var(--paper);box-shadow:5px 5px 0 rgba(17,17,17,.12)}
+.slide{grid-area:1/1;display:none;flex-direction:column;background:var(--paper)}
+.slide.on{display:flex}
+.pane{padding:1rem;border-bottom:1px solid var(--ink);background:#f1f1ec;display:grid;gap:.5rem;align-content:start}
+.pane.two{grid-template-columns:1fr 1fr}
+.pane.halo-pane{display:flex;flex-direction:column;gap:.5rem}
+.pane-subrow{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+
+.pane .fi img{max-height:260px;object-fit:contain}
+.pane.halo-pane .fi img{max-height:130px}
+.pane.halo-pane>div:first-child .fi img{max-height:260px}
+
+.story{padding:1.1rem 1.25rem 1.1rem;display:flex;flex-direction:column;gap:.8rem}
+.story h3{font:700 1.2rem/1.3 var(--head);margin:0}
+.flow{margin:0;display:grid;gap:.5rem}
+.flow div{display:grid;grid-template-columns:4.4rem 1fr;gap:.7rem;border-left:4px solid var(--ink);padding:.1rem 0 .1rem .7rem}
+.flow div:nth-child(1){border-color:var(--red)}.flow div:nth-child(3){border-color:var(--blue)}
+.flow dt{font:600 .76rem/1.8 var(--mono)}
+.flow dd{margin:0;font-size:.85rem;line-height:1.55}
+.more{font:600 .78rem var(--mono);text-decoration:none;border-bottom:2px solid var(--ink);align-self:flex-start}
+.ctrl{display:flex;justify-content:space-between;align-items:center;gap:.5rem;margin-top:.75rem;flex-wrap:wrap}
+.ctrl div{display:flex;gap:.5rem}
+.btn{font:400 .8rem var(--mono);background:#fff;color:var(--ink);border:1px solid var(--ink);padding:.45rem .9rem;cursor:pointer}
+.btn:hover{background:var(--ink);color:var(--paper)}
+#count{font:400 .76rem var(--mono);color:var(--muted)}
+.fig{margin:0;background:#fff;border:1px solid var(--ink);box-shadow:4px 4px 0 rgba(17,17,17,.1);display:flex;flex-direction:column;min-width:0}
+.fh{display:flex;gap:.6rem;align-items:baseline;padding:.4rem .75rem;border-bottom:1px solid var(--ink);background:var(--paper)}
+.fh b{font:600 .75rem var(--mono);color:var(--red);white-space:nowrap}
+.fh span{font:700 .85rem/1.3 var(--head)}
+.fi{all:unset;cursor:zoom-in;display:flex;align-items:center;justify-content:center;flex:1;padding:.4rem;background:#fff}
+.fi img{display:block;width:100%;height:auto;max-height:340px;object-fit:contain}
+.full .fi img{max-height:none}
+.fig figcaption{font-size:.72rem;line-height:1.4;color:var(--muted);padding:.4rem .75rem;border-top:1px solid #e5e5e5}
+dialog{border:1px solid var(--ink);padding:0;max-width:94vw;background:#fff}
+dialog::backdrop{background:rgba(0,0,0,.7)}
+dialog img{display:block;max-width:94vw;max-height:90vh}
+.sec{padding:3.5rem 0;border-bottom:1px solid var(--ink)}
+.sec header{display:flex;gap:1.25rem;align-items:center;margin-bottom:1.75rem}
+.sec h2{font:700 clamp(1.5rem,3vw,2.1rem)/1.2 var(--head);margin:0}
+.badge{font:700 1.1rem var(--mono);background:var(--ink);color:var(--paper);padding:.6rem .9rem;min-width:4.2rem;text-align:center}
+.sec header p{margin:.2rem 0 0;color:var(--muted);font-style:italic;font-size:.95rem}
+.row{display:grid;gap:1.5rem;margin-bottom:1.5rem;align-items:stretch}
+.r1{grid-template-columns:1fr}.r2{grid-template-columns:1fr 1fr}.r3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.txt{border:1px solid var(--ink);background:#fff;padding:1.1rem 1.25rem;display:flex;flex-direction:column;gap:1rem;justify-content:space-between;box-shadow:4px 4px 0 rgba(17,17,17,.1)}
+.pts{margin:0;padding-left:1.1rem;font-size:.88rem;line-height:1.6}.pts li{margin-bottom:.4rem}
+.trd{border-top:1px solid var(--ink);padding-top:.8rem}
+.trd>b{font:600 .8rem var(--mono);color:var(--blue)}
+.sw{font:400 .76rem var(--mono);color:var(--muted);margin:.5rem 0 .3rem}
+.trd ul{list-style:none;margin:0 0 .6rem;padding:0}
+.trd li{display:grid;grid-template-columns:5.2rem 1.4rem 1fr;gap:.3rem;font-size:.82rem;line-height:1.6;border-bottom:1px dotted var(--rule)}
+.trd li span{font-weight:700}.trd li i{font:600 .9rem var(--mono);font-style:normal}.trd li em{font-style:normal;color:var(--muted)}
+.chartbox{background:#fff;border:1px solid var(--ink);box-shadow:4px 4px 0 rgba(17,17,17,.1);display:flex;flex-direction:column;min-width:0}
+.cv{position:relative;height:320px;padding:.9rem}
+.chartbox figcaption{margin:0;font-size:.78rem;line-height:1.55;color:var(--muted);padding:.6rem .75rem;border-top:1px solid #e5e5e5}
+.sum{padding:3.5rem 0 4rem}
+.sum h2{font:700 clamp(1.5rem,3vw,2.1rem) var(--head);margin:0 0 1.5rem}
+.sum h3{font:700 1.1rem var(--head);margin:2.25rem 0 .75rem}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:640px;background:#fff;font-size:.85rem;line-height:1.55}
+th,td{border:1px solid var(--ink);padding:.65rem .85rem;text-align:left;vertical-align:top}
+th{font:600 .78rem var(--mono);background:var(--ink);color:var(--paper)}
+td:first-child{font:600 .85rem var(--mono)}
+.nums td:not(:first-child){font-family:var(--mono);text-align:right}.nums th:not(:first-child){text-align:right}
+.tl{margin:1rem 0 0;padding-left:1.1rem;font-size:.9rem}
+footer{background:var(--ink);color:var(--paper);padding:1.75rem 0;text-align:center;font:400 .8rem var(--mono)}
+footer p{margin:0;opacity:.85}
+@media(max-width:900px){.hg,.r2,.r3,.pane-subrow{grid-template-columns:1fr}.top b{display:none}.tab small{display:none}.pane.two{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+/* classic look overrides: fonts, colors, shadows only */
+:root{--paper:#fff;--rule:#ccc;--serif:Georgia,'Times New Roman',serif;--head:Georgia,'Times New Roman',serif;--mono:Georgia,'Times New Roman',serif}
+body{background:#fff}
+.stage,.fig,.chartbox,.txt,.keys,.tab{box-shadow:none!important}
+.top{background:#fff;backdrop-filter:none}
+</style>
+</head>
+<body>
+<div class="top"><div class="wrap"><b>Janus MoSeTe/Graphene &middot; DFT study</b>
+<nav id="spy"><a href="#overview">Overview</a><a href="#eq">Baseline</a><a href="#field">Field</a><a href="#strain">Strain</a><a href="#fet">FET</a></nav></div></div>
+
+<header class="hero" id="overview"><div class="wrap">
+<h1>Schottky-to-Ohmic Contact Modulation in Janus MoSeTe/Graphene van der Waals Heterostructure</h1>
+<p class="sub">Perpendicular electric field and biaxial strain, a first-principles study</p>
+<div class="hg">
+<div class="abs">
+<p>Systematic multi-pathway Ohmic contact engineering from a single van der Waals heterostructure has not been shown. Using DFT (PBE with D3 dispersion, Quantum ESPRESSO), this study follows the Se-face Janus MoSeTe/graphene interface from an n-type Schottky contact (&Phi;<sub>n</sub> = 0.477&nbsp;eV, &Phi;<sub>p</sub> = 0.850&nbsp;eV) to Ohmic contact by two mechanistically different routes. A perpendicular field acts almost as a rigid Fermi-level shift, while biaxial strain renormalizes the MoSeTe bandgap.</p>
+<ul class="keys">
+<li><span>Equilibrium contact</span><b>n-type Schottky, &Phi;<sub>n</sub> 0.477&nbsp;eV</b></li>
+<li><span>Field to Ohmic (n / p)</span><b>+0.6 / &minus;0.20 V/&Aring;</b></li>
+<li><span>Strain to p-type Ohmic</span><b>+4 to +6&nbsp;%</b></li>
+<li><span>Method</span><b>DFT, PBE-D3, scalar-relativistic</b></li>
+</ul></div>
+<div>
+<div class="rail" id="rail" role="tablist"></div>
+<div class="stage" id="stage"></div>
+<div class="ctrl"><button class="btn" id="prev">&larr; Previous</button><span id="count"></span>
+<div><button class="btn" id="play" aria-pressed="true">Pause</button><button class="btn" id="next">Next &rarr;</button></div></div>
+</div></div></div></header>
+
+<main id="secs"></main>
+
+<section class="sum"><div class="wrap">
+<h2>What each perturbation did to the barriers</h2>
+<div class="tw"><table>
+<tr><th>Stage</th><th>Perturbation</th><th>Result</th><th>Mechanism / caveat</th></tr>
+<tr><td>Baseline</td><td>None, Se-face stacking</td><td>n-type Schottky, &Phi;<sub>n</sub> 0.477&nbsp;eV</td><td>0.44&nbsp;eV work-function mismatch; 1.15&nbsp;D Janus dipole</td></tr>
+<tr><td>Field</td><td>&minus;0.4 to +0.6 V/&Aring;</td><td>n-Ohmic at +0.6, near p-Ohmic at &minus;0.20 V/&Aring;</td><td>Mostly rigid Fermi-level shift; gap shrinks only near the +0.6 crossing</td></tr>
+<tr><td>Strain</td><td>&minus;8 to +8&nbsp;%</td><td>Near p-Ohmic at +4 to +6&nbsp;%; &Phi;<sub>n</sub> 0.055&nbsp;eV at &minus;8&nbsp;%</td><td>Genuine gap renormalization; strain is relative to the relaxed heterostructure, where MoSeTe is already &minus;3.46&nbsp;% strained</td></tr>
+<tr><td>FET</td><td>Local gates, flexible substrate</td><td>Concept only</td><td>No transport or contact-resistance calculation yet</td></tr>
+</table></div>
+<h3>Selected operating points (eV)</h3>
+<div class="tw"><table class="nums">
+<tr><th>Condition</th><th>&Phi;<sub>n</sub></th><th>&Phi;<sub>p</sub></th><th>E<sub>g</sub><sup>eff</sup></th><th>Contact</th></tr>
+<tr><td>Equilibrium</td><td>0.477</td><td>0.850</td><td>1.327</td><td>n-type Schottky</td></tr>
+<tr><td>+0.5 V/&Aring;</td><td>0.020</td><td>1.213</td><td>1.233</td><td>n, below k<sub>B</sub>T</td></tr>
+<tr><td>+0.6 V/&Aring;</td><td>&minus;0.024</td><td>1.146</td><td>1.122</td><td>n-type Ohmic</td></tr>
+<tr><td>&minus;0.15 V/&Aring;</td><td>0.684</td><td>0.648</td><td>1.331</td><td>n-type Schottky</td></tr>
+<tr><td>&minus;0.20 V/&Aring;</td><td>1.318</td><td>0.005</td><td>1.323</td><td>near p-type Ohmic</td></tr>
+<tr><td>+4&nbsp;% strain</td><td>0.638</td><td>0.623</td><td>1.261</td><td>Schottky</td></tr>
+<tr><td>+6&nbsp;% strain</td><td>1.062</td><td>0.060</td><td>1.122</td><td>near p-type Ohmic</td></tr>
+<tr><td>&minus;8&nbsp;% strain</td><td>0.055</td><td>0.531</td><td>0.586</td><td>approaching n-Ohmic</td></tr>
+</table></div>
+<ul class="tl"><li>Field-driven transitions leave E<sub>g</sub><sup>eff</sup> near 1.32&ndash;1.34&nbsp;eV except close to the positive-field crossing.</li>
+<li>Strain-driven transitions shrink E<sub>g</sub><sup>eff</sup> to 0.59&ndash;0.91&nbsp;eV at &plusmn;8&nbsp;%.</li>
+<li>All barriers are scalar-relativistic PBE values; spin-orbit coupling and hybrid-functional corrections would shift absolute heights.</li></ul>
+</div></section>
+
+<footer><p>&copy; 2026 Mohammad Al Hosan &middot; First-principles DFT project</p></footer>
+<dialog id="lb"><img alt=""></dialog>
+<script>
+const B='../assets/img/graphene-mosete-thesis/';
+const F={
+'4':{s:'fig4-fatband-pdos.png',t:'Electronic structure, Gr/SeMoTe',c:'Projected fat bands (graphene blue, MoSeTe red) with &Phi;<sub>n</sub> and &Phi;<sub>p</sub> marked, and the projected and total density of states. The MoSeTe gap stays clear and the Dirac cone stays intact.'},
+'5':{s:'fig5-alignment-potential.png',t:'Band alignment and interfacial dipole',c:'(a) Graphene work function, MoSeTe electron affinity and work function, &Phi;<sub>n</sub>, &Phi;<sub>p</sub> and the vacuum offset &Delta;V = 0.504&nbsp;eV. (b) Planar-averaged electrostatic potential.'},
+'6':{s:'fig6-bonding.png',t:'Interfacial bonding character',c:'(a) Charge density difference, (b) its planar average and (c) the ELF cross-section. Charge moves from graphene to MoSeTe within about 1.5&nbsp;&Aring; of each layer, and the gap ELF falls to 0.050.'},
+'7m':{s:'fig7m-field-trend.png',t:'Barrier heights vs. electric field',c:'&Phi;<sub>n</sub>, &Phi;<sub>p</sub> and E<sub>g</sub><sup>eff</sup> from &minus;0.4 to +0.6 V/&Aring;. E<sub>g</sub><sup>eff</sup> is flat except near the positive-field Ohmic crossing.'},
+'7':{s:'fig7-field.png',t:'Fat bands under perpendicular field',c:'Positive fields (+0.1 to +0.6 V/&Aring;) lower the CBM; negative fields (&minus;0.05 to &minus;0.40 V/&Aring;) give a sharp n-to-p transition near &minus;0.20 V/&Aring;.'},
+'8i':{s:'fig8i-strain-trend.png',t:'Barrier heights vs. biaxial strain',c:'&Phi;<sub>n</sub>, &Phi;<sub>p</sub> and E<sub>g</sub><sup>eff</sup> from &minus;8 to +8&nbsp;%. E<sub>g</sub><sup>eff</sup> contracts in both directions.'},
+'8':{s:'fig8-strain.png',t:'Fat bands under biaxial strain',c:'Tensile strain (+2 to +8&nbsp;%) drives a sharp n-to-p transition between +4 and +6&nbsp;%; compressive strain (&minus;2 to &minus;8&nbsp;%) approaches n-type Ohmic character.'},
+'9':{s:'fig9-proposed-fet.png',t:'Proposed contact-tunable FET',c:'Design concept, not a simulated device: top gate V<sub>G</sub> and grounded back gate set the channel, local gates V<sub>LG1</sub> and V<sub>LG2</sub> tune the source and drain barriers, a flexible substrate applies strain, and the contacts are biased at &#8723;V<sub>DS</sub>/2.'}};
+const T=(a,b,c)=>[a,b,c];
+const S=[
+{k:'eq',tab:'Baseline',nm:'Equilibrium contact',now:'An n-type Schottky contact at zero field.',hero:['5'],
+ p:'The interface starts with a barrier for both carriers.',m:'Se-face MoSeTe on graphene, no field, no strain.',r:'&Phi;<sub>n</sub> 0.477&nbsp;eV, &Phi;<sub>p</sub> 0.850&nbsp;eV.',
+ title:'I. Equilibrium contact of the Se-face interface',sum:'The barrier comes from work-function mismatch and the Janus dipole, not from defects or hybridization.',
+ pts:['Graphene (4.22&nbsp;eV) and the MoSeTe Se face (4.66&nbsp;eV) differ by 0.44&nbsp;eV, so electrons move from graphene to MoSeTe.','The Janus dipole (1.15&nbsp;Debye) gives a 0.504&nbsp;eV vacuum step, reduced from 0.601&nbsp;eV in the isolated layer by graphene screening.','The gap ELF falls to 0.050, so the bonding is van der Waals.','The Te-face termination is already p-type Ohmic (E<sub>F</sub> 18.5&nbsp;meV above the VBM), so only the Se face has a barrier to tune.'],
+ tr:[['Se-face interface, equilibrium',[T('&Phi;<sub>n</sub>','','0.477 eV'),T('&Phi;<sub>p</sub>','','0.850 eV'),T('E<sub>g</sub><sup>eff</sup>','','1.327 eV'),T('&Delta;V','','0.504 eV'),T('P<sub>TB</sub>','','&asymp; 1.8&times;10<sup>-2</sup>')]]],
+ rows:[['txt','4'],['6']]},
+{k:'field',tab:'Field',nm:'Electric field',now:'A field moves the Fermi level.',hero:['7m'],
+ p:'One interface needs both Ohmic contact types.',m:'Field from &minus;0.4 to +0.6 V/&Aring;, positive from MoSeTe toward graphene.',r:'+0.6 V/&Aring;: n-Ohmic. &minus;0.20 V/&Aring;: near p-Ohmic.',
+ title:'II. Barrier modulation by perpendicular electric field',sum:'Both Ohmic contact types are reachable from the same interface by changing the field sign.',
+ pts:['Positive field reinforces the dipole: &Phi;<sub>n</sub> falls to 0.020&nbsp;eV at +0.5 V/&Aring;, below k<sub>B</sub>T (0.026&nbsp;eV).','At +0.6 V/&Aring; the CBM crosses E<sub>F</sub> (&Phi;<sub>n</sub> = &minus;0.024&nbsp;eV): full n-type Ohmic contact.','Negative field changes the barriers smoothly to &minus;0.15 V/&Aring;, then &Phi;<sub>p</sub> collapses from 0.648 to 0.005&nbsp;eV by &minus;0.20 V/&Aring;.','E<sub>g</sub><sup>eff</sup> stays near 1.32&ndash;1.34&nbsp;eV, so the field acts as a near-rigid Fermi-level shift.'],
+ tr:[['Positive field, 0 to +0.4 V/&Aring;',[T('&Phi;<sub>n</sub>','&darr;','0.477 &rarr; 0.090 eV'),T('&Phi;<sub>p</sub>','&uarr;','0.850 &rarr; 1.223 eV'),T('E<sub>g</sub><sup>eff</sup>','&asymp;','1.327 &rarr; 1.313 eV')]],['Positive field, +0.5 and +0.6 V/&Aring;',[T('&Phi;<sub>n</sub>','&darr;','0.020 &rarr; &minus;0.024 eV'),T('E<sub>g</sub><sup>eff</sup>','&darr;','1.233 &rarr; 1.122 eV')]],['Negative field, 0 to &minus;0.15 V/&Aring;',[T('&Phi;<sub>n</sub>','&uarr;','0.477 &rarr; 0.684 eV'),T('&Phi;<sub>p</sub>','&darr;','0.850 &rarr; 0.648 eV')]],['Negative field, &minus;0.15 to &minus;0.20 V/&Aring;',[T('&Phi;<sub>p</sub>','&darr;','0.648 &rarr; 0.005 eV'),T('&Phi;<sub>n</sub>','&uarr;','&rarr; 1.318 eV'),T('E<sub>g</sub><sup>eff</sup>','&asymp;','1.331 &rarr; 1.323 eV')]]],
+ rows:[['txt','7']]},
+{k:'strain',tab:'Strain',nm:'Biaxial strain',now:'Strain reshapes the bandgap itself.',hero:['8i'],
+ p:'Field alone leaves the MoSeTe gap almost unchanged.',m:'Biaxial strain from &minus;8 to +8&nbsp;%, relative to the relaxed heterostructure.',r:'+4 to +6&nbsp;%: near p-Ohmic. &minus;8&nbsp;%: &Phi;<sub>n</sub> 0.055&nbsp;eV.',
+ title:'III. Barrier modulation by biaxial strain',sum:'Strain is a second, mechanistically different handle: it renormalizes the gap rather than shifting the Fermi level.',
+ pts:['Tensile strain changes the barriers smoothly to +4&nbsp;%, then &Phi;<sub>p</sub> drops from 0.623 to 0.060&nbsp;eV between +4 and +6&nbsp;%, and stays low to +8&nbsp;%.','Compressive strain lowers &Phi;<sub>n</sub> monotonically to 0.055&nbsp;eV at &minus;8&nbsp;%, short of Ohmic. Linear extrapolation puts the crossing near &minus;9 to &minus;10&nbsp;%.','E<sub>g</sub><sup>eff</sup> falls to 0.586&nbsp;eV at &minus;8&nbsp;% and 0.908&nbsp;eV at +8&nbsp;%.','The strain zero is the relaxed heterostructure, where MoSeTe is already compressed 3.46&nbsp;% and graphene stretched 0.87&nbsp;%.'],
+ tr:[['Tensile, 0 to +4&nbsp;%',[T('&Phi;<sub>p</sub>','&darr;','0.850 &rarr; 0.623 eV'),T('&Phi;<sub>n</sub>','&uarr;','0.477 &rarr; 0.638 eV'),T('E<sub>g</sub><sup>eff</sup>','&darr;','1.327 &rarr; 1.261 eV')]],['Tensile, +4 to +6&nbsp;%',[T('&Phi;<sub>p</sub>','&darr;','0.623 &rarr; 0.060 eV'),T('&Phi;<sub>n</sub>','&uarr;','0.638 &rarr; 1.062 eV'),T('E<sub>g</sub><sup>eff</sup>','&darr;','1.261 &rarr; 1.122 eV')]],['Compressive, 0 to &minus;8&nbsp;%',[T('&Phi;<sub>n</sub>','&darr;','0.477 &rarr; 0.055 eV'),T('&Phi;<sub>p</sub>','&uarr;','0.850 &rarr; 0.932 eV at &minus;2&nbsp;%, then 0.531 eV'),T('E<sub>g</sub><sup>eff</sup>','&darr;','1.327 &rarr; 0.586 eV')]]],
+ rows:[['txt','8']]},
+{k:'fet',tab:'FET',nm:'Proposed device',now:'Two gates for the contacts, two for the channel.',hero:['9'],
+ p:'The tunable contact needs a device that can use it.',m:'Local gates set the field at each contact; a flexible substrate sets the strain.',r:'Source and drain barriers tuned apart from the channel gating.',
+ title:'IV. Proposed contact-tunable FET',sum:'A device concept built on the field and strain results. It is a proposal, not a simulated device.',
+ pts:['The top gate V<sub>G</sub> and grounded back gate jointly set the channel carrier density.','Local gates V<sub>LG1</sub> and V<sub>LG2</sub> under the source and drain contacts apply the perpendicular field of Section II independently at each contact.','A flexible substrate applies the biaxial strain of Section III, and the contacts are biased symmetrically at &#8723;V<sub>DS</sub>/2.','No transport or contact-resistance calculation backs this yet; NEGF and hybrid-functional checks are listed as future work.'],
+ tr:[['Contact states from the DFT thresholds',[T('n-Ohmic','','+0.6 V/&Aring; field'),T('p-Ohmic','','&minus;0.20 V/&Aring; field, or +4 to +6&nbsp;% strain'),T('Switching window','','&asymp; 0.05 V/&Aring; (field), &asymp; 2&nbsp;% (strain)')]]],
+ rows:[['txt']]}
+];
+const C={};
+const $=s=>document.querySelector(s);
+const nt=t=>t.replace(/<[^>]+>/g,'');
+const fig=(id,full)=>{const f=F[id];return `<figure class="fig${full?' full':''}"><div class="fh"><b>Fig ${id}</b><span>${f.t}</span></div><button class="fi" data-z="${f.s}" aria-label="Enlarge: ${nt(f.t)}"><img src="${B+f.s}" alt="${nt(f.t)}" loading="lazy"></button><figcaption>${f.c}</figcaption></figure>`};
+const cb=id=>`<figure class="chartbox"><div class="fh"><b>Trend</b><span>${C[id]}</span></div><div class="cv"><canvas id="c-${id}"></canvas></div><figcaption>${CC[id]}</figcaption></figure>`;
+const txt=s=>`<div class="txt"><ul class="pts">${s.pts.map(x=>`<li>${x}</li>`).join('')}</ul><div class="trd"><b>Trends</b>${s.tr.map(g=>`<p class="sw">${g[0]}</p><ul>${g[1].map(r=>`<li><span>${r[0]}</span><i>${r[1]}</i><em>${r[2]}</em></li>`).join('')}</ul>`).join('')}</div></div>`;
+const cell=(x,s,n)=>x==='txt'?txt(s):x.startsWith('c:')?cb(x.slice(2)):fig(x,n===1);
+
+$('#rail').innerHTML=S.map((s,i)=>`<button class="tab" role="tab" data-i="${i}"><b>${i+1}. ${s.tab}</b><small>${s.nm}</small><i></i></button>`).join('');
+$('#stage').innerHTML=S.map(s=>{
+ if(s.k==='halo'){
+  return `<article class="slide"><div class="pane halo-pane"><div>${fig(s.hero[0])}</div><div class="pane-subrow">${fig(s.hero[1])}${fig(s.hero[2])}</div></div><div class="story"><h3>${s.now}</h3><dl class="flow"><div><dt>Problem</dt><dd>${s.p}</dd></div><div><dt>Change</dt><dd>${s.m}</dd></div><div><dt>Result</dt><dd>${s.r}</dd></div></dl><a class="more" href="#${s.k}">Read the full stage &darr;</a></div></article>`;
+ }
+ return `<article class="slide"><div class="pane${s.hero.length>1?' two':''}">${s.hero.map(h=>fig(h)).join('')}</div><div class="story"><h3>${s.now}</h3><dl class="flow"><div><dt>Problem</dt><dd>${s.p}</dd></div><div><dt>Change</dt><dd>${s.m}</dd></div><div><dt>Result</dt><dd>${s.r}</dd></div></dl><a class="more" href="#${s.k}">Read the full stage &darr;</a></div></article>`;
+}).join('');
+$('#secs').innerHTML=S.map(s=>`<section class="sec" id="${s.k}"><div class="wrap"><header><span class="badge">${s.tab}</span><div><h2>${s.title}</h2><p>${s.sum}</p></div></header>${s.rows.map(r=>`<div class="row r${r.length}">${r.map(x=>cell(x,s,r.length)).join('')}</div>`).join('')}</div></section>`).join('');
+
+const tabs=[...document.querySelectorAll('.tab')],slides=[...document.querySelectorAll('.slide')];
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const DUR=4000,MOVE=800,EASE='cubic-bezier(.7,0,.2,1)';
+let cur=0,busy=false,prog=0,last=0,playing=!reduce,hover=false,inView=true;
+slides[0].classList.add('on');
+function mark(){tabs.forEach((t,i)=>{t.classList.toggle('on',i===cur);t.classList.toggle('done',i<cur);t.setAttribute('aria-selected',i===cur);t.querySelector('i').style.width=i===cur?prog*100+'%':''});$('#count').textContent=`Stage ${cur+1} of 4: ${S[cur].nm}`}
+function go(n,dir){n=(n+4)%4;if(n===cur||busy)return;
+ const o=slides[cur],a=slides[n];a.classList.add('on');a.style.zIndex=2;o.style.zIndex=1;
+ const d=reduce?0:MOVE;busy=true;
+ const hb=st.offsetHeight;
+ o.style.position='absolute';o.style.top=o.style.left=o.style.right='0';
+ const ha=st.offsetHeight;
+ let done=false;
+ const fin=()=>{if(done)return;done=true;
+  slides.forEach(s=>{if(s!==a){s.classList.remove('on');s.style.position='';s.style.top=s.style.left=s.style.right='';s.style.zIndex=''}});
+  a.style.zIndex='';busy=false};
+ if(d>0){
+  st.animate([{height:hb+'px'},{height:ha+'px'}],{duration:d,easing:EASE});
+  a.animate([{transform:`translateX(${dir*100}%)`,boxShadow:`${-dir*28}px 0 44px -18px rgba(0,0,0,.35)`},{transform:'translateX(0)',boxShadow:'0 0 0 rgba(0,0,0,0)'}],{duration:d,easing:EASE});
+  const an=o.animate([{transform:'none',opacity:1},{transform:`translateX(${-dir*22}%)`,opacity:.4}],{duration:d,easing:EASE});
+  an.onfinish=fin;an.oncancel=fin;setTimeout(fin,d+150);
+ }else fin();
+ cur=n;prog=0;mark()}
+const next=()=>go(cur+1,1),prev=()=>go(cur-1,-1);
+$('#next').onclick=next;$('#prev').onclick=prev;
+tabs.forEach((t,i)=>t.onclick=()=>go(i,i>cur?1:-1));
+const pb=$('#play');
+function setPlay(v){playing=v;pb.textContent=v?'Pause':'Play';pb.setAttribute('aria-pressed',v)}
+pb.onclick=()=>setPlay(!playing);setPlay(playing);
+const st=$('#stage');
+st.onmouseenter=()=>hover=true;st.onmouseleave=()=>hover=false;
+st.addEventListener('focusin',()=>hover=true);st.addEventListener('focusout',()=>hover=false);
+new IntersectionObserver(e=>inView=e[0].isIntersecting,{threshold:.35}).observe(st);
+function tick(t){const dt=t-last;last=t;
+ if(playing&&!hover&&inView&&!busy&&!document.hidden&&dt<200){prog+=dt/DUR;if(prog>=1)next();else tabs[cur].querySelector('i').style.width=prog*100+'%'}
+ requestAnimationFrame(tick)}
+mark();requestAnimationFrame(tick);
+document.addEventListener('keydown',e=>{if(!inView||e.target.closest('dialog'))return;if(e.key==='ArrowRight')next();if(e.key==='ArrowLeft')prev()});
+const lb=$('#lb');document.addEventListener('click',e=>{const b=e.target.closest('[data-z]');if(b){lb.querySelector('img').src=B+b.dataset.z;lb.showModal()}else if(e.target.closest('#lb'))lb.close()});
+const links=[...document.querySelectorAll('#spy a')];
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(l=>l.classList.toggle('on',l.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-40% 0px -55% 0px'});
+['overview','eq','field','strain','fet'].forEach(id=>io.observe(document.getElementById(id)));
+
+
+</script>
+</body>
+</html>

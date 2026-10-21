@@ -109,6 +109,11 @@ footer{background:var(--ink);color:var(--paper);padding:1.75rem 0;text-align:cen
 footer p{margin:0;opacity:.85}
 @media(max-width:900px){.hg,.r2,.r3,.pane-subrow{grid-template-columns:1fr}.top b{display:none}.tab small{display:none}.pane.two{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+/* classic look overrides: fonts, colors, shadows only */
+:root{--paper:#fff;--rule:#ccc;--serif:Georgia,'Times New Roman',serif;--head:Georgia,'Times New Roman',serif;--mono:Georgia,'Times New Roman',serif}
+body{background:#fff}
+.stage,.fig,.chartbox,.txt,.keys,.tab{box-shadow:none!important}
+.top{background:#fff;backdrop-filter:none}
 </style>
 </head>
 <body>
@@ -268,8 +273,8 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.f
 ['overview','uo','so','dmg','halo'].forEach(id=>io.observe(document.getElementById(id)));
 
 addEventListener('DOMContentLoaded',()=>{if(!window.Chart)return;
- Chart.defaults.font.family="'Merriweather',serif";Chart.defaults.color='#111';Chart.defaults.scale.grid.color='#e5e5e5';
- const R='#8b0000',N='#000080',G='#1b6b1b',tf={family:"'Playfair Display',serif",size:13,weight:'bold'};
+ Chart.defaults.font.family="Georgia,'Times New Roman',serif";Chart.defaults.color='#111';Chart.defaults.scale.grid.color='#e5e5e5';
+ const R='#8b0000',N='#000080',G='#1b6b1b',tf={family:"Georgia,'Times New Roman',serif",size:13,weight:'bold'};
  const mk=(id,labels,ser,xt)=>{const sc={x:{title:{display:true,text:xt,font:tf}}};
   const ds=ser.map(([l,d,c,ax,dash,ps,yt])=>{sc[ax]=sc[ax]||{position:ax==='y'?'left':'right',title:{display:true,text:yt,color:c,font:tf},ticks:{color:c},grid:{drawOnChartArea:ax==='y'}};
    return{label:l,data:d,borderColor:c,backgroundColor:c,borderWidth:2,borderDash:dash?[5,5]:[],pointStyle:ps,pointRadius:6,yAxisID:ax,tension:0,spanGaps:false}});

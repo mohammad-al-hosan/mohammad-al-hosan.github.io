@@ -44,7 +44,7 @@ h3{font-family:var(--sans);font-weight:600;font-size:.97rem;line-height:1.4;marg
 .sup{color:var(--dim);font-size:.9rem;font-style:italic;margin:0 0 14px}
 .card ul{margin:0;padding-left:20px;color:var(--dim);font-size:.94rem}.card li{margin-bottom:6px}.card li::marker{color:var(--teal)}
 .st{color:var(--amber)}
-.pc h3 a,.tp a{color:var(--ink)}.pc h3 a:hover,.tp a:hover{color:var(--teal);text-decoration:none}.tp a{font-weight:500}
+.pc h3 a,.tp>a{color:var(--ink)}.pc h3 a:hover,.tp>a:hover{color:var(--teal);text-decoration:none}.tp>a{font-weight:500}.tp i a{font-weight:400;color:var(--teal)}
 .card .lnk{margin-top:12px}
 .sub{font-family:var(--serif);font-style:italic;color:var(--dim);font-size:1.05rem;margin:28px 0 8px}.sub:first-of-type{margin-top:0}
 .pub{padding:16px 0;border-bottom:1px solid var(--line)}
@@ -130,6 +130,10 @@ footer{padding:50px 0}.crow{display:flex;gap:24px;flex-wrap:wrap;margin-top:18px
 <div class="fact"><b>3</b><span>manuscripts under review</span></div>
 <div class="fact"><b>7.0</b><span>IELTS Academic, C1</span></div>
 </div>
+<p class="sub" style="margin-top:40px">Education</p>
+<div class="col">
+<div class="row"><div>B.Sc. (Hons.), Electrical and Electronic Engineering<small>Bangladesh University of Engineering &amp; Technology (BUET), Dhaka. Major: Electronics and Photonics. CGPA 3.78/4.00 (4.00/4.00 in senior year).<br><a href="https://scholar.google.com/citations?user=BAxNnlMAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a> &nbsp;&middot;&nbsp; <a href="https://orcid.org/0009-0009-1415-5787" target="_blank" rel="noopener">ORCID</a></small></div><span class="d">Dec 2021&ndash;Jun 2026</span></div>
+</div>
 </div></section>
 
 <section class="view" id="research"><div class="wrap">
@@ -202,29 +206,32 @@ footer{padding:50px 0}.crow{display:flex;gap:24px;flex-wrap:wrap;margin-top:18px
 <h3>Bridging Spectral Specificity and Semantic Generalization for Respiratory Sound Classification: A Comparative Study of MFCCs and Augmented YAMNet Embeddings</h3>
 <div class="venue">IEEE QPAIN 2026, Chittagong</div>
 <div class="meta">M. Al Amin, M. A. H. Kanon, and M. M. Rahman. pp. 1&ndash;6.</div>
-<a class="lnk" href="https://doi.org/10.1109/QPAIN69676.2026.11546080" target="_blank" rel="noopener">IEEE Xplore</a>
+<a class="lnk" href="https://drive.google.com/file/d/1uKw06zyTmQcRN1hrlawbvH1JpgdurjQq/view?usp=sharing" target="_blank" rel="noopener">Poster</a> &nbsp;&middot;&nbsp; <a class="lnk" href="https://doi.org/10.1109/QPAIN69676.2026.11546080" target="_blank" rel="noopener">IEEE Xplore</a>
 </div>
 </div></section>
 
-<section class="view" id="projects"><div class="wrap">
-<h2>Selected projects</h2>
+<section class="view" id="projects"><div class="wrap"><h2>Selected projects</h2>
 <div class="pgrid">
-<div class="pc"><small>Level 4, Term 2</small><h3><a href="projects/mac-unit-rtl-to-gdsii.html">RTL-to-GDSII implementation of an optimised MAC unit</a></h3><p>Parameterized multiply-accumulate unit taken from RTL to GDSII on two flows: commercial Cadence Genus/Innovus (GPDK045, 45 nm) and open-source OpenROAD (IHP SG13G2, 130 nm). Extended into the ICECE 2026 paper above.</p><span class="s">SystemVerilog, Cadence Genus/Innovus, OpenROAD</span><br><a class="lnk" href="projects/mac-unit-rtl-to-gdsii.html">Project details &rarr;</a></div>
+<div class="pc"><small>Level 4, Term 2</small><h3><a href="projects/mac-unit-rtl-to-gdsii.html">RTL-to-GDSII implementation of an optimised MAC unit</a></h3><p>Parameterized multiply-accumulate unit taken from RTL to GDSII on two flows: commercial Cadence Genus/Innovus (GPDK045, 45 nm) and open-source OpenROAD (IHP SG13G2, 130 nm). Extended into the <a href="#publications">ICECE 2026 paper</a>.</p><span class="s">SystemVerilog, Cadence Genus/Innovus, OpenROAD</span><br><a class="lnk" href="projects/mac-unit-rtl-to-gdsii.html">Project details &rarr;</a></div>
 <div class="pc"><small>Level 4, Term 2</small><h3><a href="projects/led-optical-classification.html">Optical quality classification of LEDs</a></h3><p>Low-cost measurement setup with a BPW34 photodiode and TCS34725 sensor on Arduino, feeding feature-engineered KNN and Random Forest classifiers, with a Streamlit interface.</p><span class="s">Python (scikit-learn, pandas), Streamlit, Arduino, PySerial</span><br><a class="lnk" href="projects/led-optical-classification.html">Project details &rarr;</a></div>
-<div class="pc"><small>Level 4, Term 2</small><h3>Electrical services design, 10-storey residential building</h3><p>Load estimation, wiring, and distribution design for a multi-storied residential building, drawn in AutoCAD.</p><span class="s">AutoCAD, load estimation, distribution design</span></div>
-<div class="pc"><small>Level 4, Term 1</small><h3>Class-A RF power amplifier, 433 MHz</h3><p>Cadence Virtuoso (90 nm gpdk090): 10.11 dB gain, 18.01 dBm P<sub>sat</sub>, 7.52% PAE, S<sub>11</sub> of about &minus;33.5 dB.</p><span class="s">Cadence Virtuoso, RF design, QUCS Studio</span><br><a class="lnk" href="https://github.com/mohammad-al-hosan/Class_A_RF_Power_Amplifier_433MHz.git" target="_blank" rel="noopener">GitHub</a></div>
-<div class="pc"><small>Level 4, Term 1</small><h3>IoT fruit storage monitor</h3><p>Arduino Mega with ESP8266, DHT22 and MQ135 sensing, relay-driven Peltier cooling and misting, cloud logging with remote override.</p><span class="s">Embedded systems, IoT</span><br><a class="lnk" href="https://github.com/mohammad-al-hosan/IOT_Fruit_Storage_System.git" target="_blank" rel="noopener">GitHub</a></div>
-<div class="pc"><small>Level 3, Term 1</small><h3>Fast-decoupled load flow</h3><p>MATLAB implementation on IEEE 4 to 30 bus systems; faster convergence than Newton&ndash;Raphson at comparable accuracy.</p><span class="s">MATLAB, power systems</span></div>
+<div class="pc"><small>Level 3, Term 2</small><h3><a href="projects/smart-grid-ups.html">Smart-grid UPS with bidirectional inverter</a></h3><p>CD4047 push&ndash;pull inverter (12 V to 50 Hz AC) with a relay-based solar charger that switches panel current between the battery and a surplus path. Simulated in Proteus and built on breadboards.</p><span class="s">Proteus, push&ndash;pull inverter, solar charger, relay logic</span><br><a class="lnk" href="projects/smart-grid-ups.html">Project details &rarr;</a></div>
 <div class="pc"><small>Level 3, Term 2</small><h3><a href="projects/uart-verilog-fpga.html">UART in Verilog on FPGA</a></h3><p>Moore FSM transmitter and receiver with parity checking, verified by testbench and demonstrated on CPLD/FPGA hardware.</p><span class="s">Verilog, FPGA</span><br><a class="lnk" href="projects/uart-verilog-fpga.html">Project details &rarr;</a></div>
+</div>
+
+<h2 style="margin-top:60px">Other projects</h2>
+<div class="pgrid">
+<div class="pc"><small>Level 4, Term 2</small><h3>Electrical services design, 10-storey residential building</h3><p>Load estimation, wiring, and distribution design for a multi-storied residential building, drawn in AutoCAD.</p><span class="s">AutoCAD, load estimation, distribution design</span></div>
+<div class="pc"><small>Level 4, Term 1</small><h3>Class-A RF power amplifier, 433 MHz</h3><p>Cadence Virtuoso (90 nm gpdk090): 10.11 dB gain, 18.01 dBm P<sub>sat</sub>, 7.52% PAE, S<sub>11</sub> of about &minus;33.5 dB.</p><span class="s">Cadence Virtuoso, RF design, QUCS Studio</span><br><a class="lnk" href="https://github.com/mohammad-al-hosan/Class_A_RF_Power_Amplifier_433MHz.git" target="_blank" rel="noopener">GitHub</a> &nbsp;&middot;&nbsp; <a class="lnk" href="https://doi.org/10.1109/ICECTE69292.2026.11429413" target="_blank" rel="noopener">Paper (IEEE Xplore)</a></div>
+<div class="pc"><small>Level 4, Term 1</small><h3>IoT fruit storage monitor</h3><p>Arduino Mega with ESP8266, DHT22 and MQ135 sensing, relay-driven Peltier cooling and misting, cloud logging with remote override.</p><span class="s">Embedded systems, IoT</span><br><a class="lnk" href="https://github.com/mohammad-al-hosan/IOT_Fruit_Storage_System.git" target="_blank" rel="noopener">GitHub</a> &nbsp;&middot;&nbsp; <a class="lnk" href="https://doi.org/10.1109/ICECTE69292.2026.11429225" target="_blank" rel="noopener">Paper (IEEE Xplore)</a></div>
+<div class="pc"><small>Level 3, Term 1</small><h3>Fast-decoupled load flow</h3><p>MATLAB implementation on IEEE 4 to 30 bus systems; faster convergence than Newton&ndash;Raphson at comparable accuracy.</p><span class="s">MATLAB, power systems</span></div>
 </div>
 <div style="text-align:center;margin-top:24px"><button class="tb" id="tb" type="button" aria-expanded="false" aria-controls="tl">Show earlier projects (Level 2 to 3)</button></div>
 <div id="tl">
 <div class="tl-h">Level 3, Term 2</div>
-<div class="tp">Autonomous mop bot<i>Ultrasonic obstacle avoidance; extended into the RAAICON 2025 paper.</i></div>
-<div class="tp"><a href="projects/smart-grid-ups.html">Smart-grid UPS with bidirectional inverter</a><i>Push&ndash;pull inverter with solar charging and automatic load shifting.</i></div>
+<div class="tp">Autonomous mop bot<i>Ultrasonic obstacle avoidance; extended into the <a href="https://doi.org/10.1109/RAAICON69033.2025.11502377" target="_blank" rel="noopener">RAAICON 2025 paper</a>.</i></div>
 <div class="tl-h">Level 3, Term 1</div>
 <div class="tp">Low-power FM transmitter<i>Electret microphone front end, 2N2222 amplifier, tunable LC oscillator.</i></div>
-<div class="tp">Pulmonary disease detection with MFCC and KNN<i>Respiratory sound classification; extended into the QPAIN 2026 paper.</i></div>
+<div class="tp">Pulmonary disease detection with MFCC and KNN<i>Respiratory sound classification; extended into the <a href="https://doi.org/10.1109/QPAIN69676.2026.11546080" target="_blank" rel="noopener">QPAIN 2026 paper</a>.</i></div>
 <div class="tl-h">Level 2</div>
 <div class="tp">PSpice PID controller design and tuning<i>Op-amp P/I/D blocks evaluated on step, square, triangular, and sinusoidal inputs.</i></div>
 <div class="tp">Induction motor rewinding and parameter measurement<i>Equivalent-circuit extraction from DC, no-load, and blocked-rotor tests.</i></div>
@@ -232,8 +239,7 @@ footer{padding:50px 0}.crow{display:flex;gap:24px;flex-wrap:wrap;margin-top:18px
 </div>
 </div></section>
 
-<section class="view" id="more"><div class="wrap">
-<h2>Awards, skills, and service</h2>
+<section class="view" id="more"><div class="wrap"><h2>Awards, experience, skills, and service</h2>
 <div class="col">
 <p class="sub">Awards and scholarships</p>
 <div class="row"><div>Dean's List Award<small>BUET. GPA of 3.75 or higher across two consecutive regular terms.</small></div><span class="d">2026</span></div>
@@ -241,23 +247,28 @@ footer{padding:50px 0}.crow{display:flex;gap:24px;flex-wrap:wrap;margin-top:18px
 <div class="row"><div>University Stipend Scholarship<small>BUET. GPA of 3.92 in Level-3 Term-II.</small></div><span class="d">2025</span></div>
 <div class="row"><div>Government Board Scholarship, SSC<small>Board of Intermediate and Secondary Education, Chattogram.</small></div><span class="d">2018</span></div>
 
+<p class="sub">Work experience</p>
+<div class="row"><div>Lecturer in Physics (part-time, online), Academic &amp; Admission Pathshala<small>Dhaka, Bangladesh. Taught university-admission and secondary physics and developed comprehensive lectures.<br><a href="https://aapathshala.com/" target="_blank" rel="noopener">Website</a> &nbsp;&middot;&nbsp; Lecture videos on YouTube: <a href="https://youtube.com/playlist?list=PLJiYKz1_vG1iyTmMMEu-CseYiYXP1rAZs" target="_blank" rel="noopener">&#9654; Admission playlist</a> &nbsp;&middot;&nbsp; <a href="https://youtube.com/playlist?list=PLJiYKz1_vG1g_7Ft48tnWzOHP0Mi92cZA" target="_blank" rel="noopener">&#9654; Academic playlist</a></small></div><span class="d">Nov 2022&ndash;Nov 2024</span></div>
+<div class="row"><div>Intern (in-person), Inovace Technologies Ltd.<small>Dhaka, Bangladesh. Hardware&ndash;software integration for biometric devices with R&amp;D; analysed the Tipsoi product architecture; observed QC and RMA workflows.<br><a href="https://inovacetech.com/" target="_blank" rel="noopener">Website</a> &nbsp;&middot;&nbsp; <a href="https://drive.google.com/file/d/1muq7ZkPdJhjhr_e9-5XN00en-h0HzghT/view?usp=sharing" target="_blank" rel="noopener">Credential</a></small></div><span class="d">Nov 2025</span></div>
+
 <p class="sub">Technical skills</p>
 <dl class="skills" style="margin:0">
-<dt>Materials and device simulation</dt><dd>Quantum ESPRESSO, Silvaco TCAD, Materials Studio, VESTA</dd>
-<dt>EDA and circuit design</dt><dd>Cadence tools, Quartus, Proteus, OrCAD PSpice, LTSpice</dd>
-<dt>Hardware and programming</dt><dd>FPGA, Arduino, STM32; Python, MATLAB, C/C++, Verilog/SystemVerilog</dd>
-<dt>Documentation</dt><dd>LaTeX (Overleaf, TeXstudio), MS Word, MS PowerPoint</dd>
+<dt>Materials and device simulation</dt><dd>Silvaco ATLAS (2D; DeckBuild, TonyPlot), Quantum ESPRESSO (PWscf, PHonon, PostProc), Materials Studio (DMol3), VESTA</dd>
+<dt>EDA and circuit design</dt><dd>Cadence (Virtuoso, Spectre; Genus, Innovus), Intel Quartus, LTspice, OrCAD PSpice, Proteus</dd>
+<dt>Hardware and programming</dt><dd>FPGA, Arduino, STM32; Python, MATLAB, C/C++, Verilog/SystemVerilog, HTML</dd>
+<dt>Documentation and design</dt><dd>LaTeX (Overleaf, TeXstudio), MS Word, MS PowerPoint, Adobe Illustrator</dd>
 </dl>
 
-<p class="sub">Peer review</p>
-<div class="row"><div>Journal reviewer, <i>Physica Scripta</i><small>IOP Publishing</small></div><span class="d">Present</span></div>
-<div class="row"><div>Conference reviewer, IEEE COMPAS<small>IEEE CS BDC, University of Dhaka</small></div><span class="d">2026</span></div>
+<p class="sub">Non-credit fabrication course</p>
+<div class="row"><div>Semiconductor Fabrication 101<small>Purdue University, The University of Texas at Austin &amp; Intel. Lithography, oxidation, diffusion, ion implantation, deposition, etching, and packaging; trained on vFabLab, a virtual cleanroom simulator.<br><a href="https://purdue.brightspace.com/d2l/awards/assertions/683760/view" target="_blank" rel="noopener">Certificate</a></small></div><span class="d">2026</span></div>
 
-<p class="sub">Internship</p>
-<div class="row"><div>Inovace Technologies Ltd.<small>Hardware&ndash;software integration for biometric devices with R&amp;D; observed QC and RMA workflows.</small></div><span class="d">Nov 2025</span></div>
+<p class="sub">Peer review and memberships</p>
+<div class="row"><div>Journal reviewer, <i>Physica Scripta</i><small>IOP Publishing</small></div><span class="d">Present</span></div>
+<div class="row"><div>Conference reviewer, IEEE COMPAS<small>IEEE CS BDC, University of Dhaka. <a href="https://drive.google.com/file/d/1tEEg1aV4KprUgnNnM2ipti2pnGTifuww/view?usp=sharing" target="_blank" rel="noopener">Credential</a></small></div><span class="d">2026</span></div>
+<div class="row"><div>Memberships<small>IEEE (Student Member), IEEE Young Professionals, BUET Robotics Society</small></div></div>
 
 <p class="sub">Language proficiency</p>
-<div class="row"><div>IELTS Academic, overall 7.0 (C1)<small>Listening 7.5, Reading 8.0, Writing 6.5, Speaking 6.5</small></div></div>
+<div class="row"><div>IELTS Academic, overall 7.0 (C1)<small>Listening 7.5, Reading 8.0, Writing 6.5, Speaking 6.5. <a href="https://drive.google.com/file/d/19VuSy4EHJkOMMMg6GeyeEE0bDfleHyQ_/view?usp=sharing" target="_blank" rel="noopener">Certificate</a></small></div></div>
 </div>
 </div></section>
 
@@ -268,9 +279,11 @@ footer{padding:50px 0}.crow{display:flex;gap:24px;flex-wrap:wrap;margin-top:18px
 <a href="mailto:md.alhosan.buet@gmail.com">md.alhosan.buet@gmail.com</a>
 <a href="https://www.linkedin.com/in/md-al-hosan" target="_blank" rel="noopener">LinkedIn</a>
 <a href="https://scholar.google.com/citations?user=BAxNnlMAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>
+<a href="https://orcid.org/0009-0009-1415-5787" target="_blank" rel="noopener">ORCID</a>
 <a href="https://github.com/mohammad-al-hosan" target="_blank" rel="noopener">GitHub</a>
 <a href="CV_MohammadAlHosanKanon.pdf">CV (PDF)</a>
 </div>
+<p class="fine" style="margin-top:18px">Dhaka, Bangladesh &nbsp;&middot;&nbsp; <a href="https://mohammad-al-hosan.github.io/" target="_blank" rel="noopener">mohammad-al-hosan.github.io</a></p>
 
 </div></section>
 </main>

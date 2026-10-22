@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Mohammad Al Hosan Kanon | Semiconductor Devices &amp; 2D Materials</title>
-<meta name="description" content="Portfolio of Mohammad Al Hosan Kanon, BUET EEE graduate working on first-principles DFT of 2D van der Waals heterostructures and semiconductor device simulation." />
+<title>Mohammad Al Hosan Kanon | Semiconductor Devices &amp; Electronic Materials</title>
+<meta name="description" content="Portfolio of Mohammad Al Hosan Kanon, BUET EEE graduate working on semiconductor devices and electronic materials." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,72,400;0,72,500;0,72,600;1,72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>document.documentElement.className+=" js"</script>
 <style>
 :root{--bg:#f6f7f9;--panel:#fff;--panel2:#eef1f5;--ink:#14203a;--dim:#4b5872;--faint:#6b7790;--teal:#0f766e;--tealsoft:#d8ece9;--amber:#a9762f;--line:rgba(20,32,58,.10);--line2:rgba(20,32,58,.22);--onteal:#fff;--serif:'Newsreader',Georgia,serif;--sans:'IBM Plex Sans',system-ui,sans-serif;--mono:'IBM Plex Mono',monospace}
 html[data-theme="dark"]{--bg:#0a101d;--panel:#0f1830;--panel2:#111d3a;--ink:#e7ebf5;--dim:#9aa6bc;--faint:#7c88a5;--teal:#49d7cd;--tealsoft:#173836;--amber:#d7ad55;--line:rgba(231,235,245,.09);--line2:rgba(231,235,245,.18);--onteal:#06110f}
-@media(prefers-color-scheme:dark){html:not([data-theme="light"]):not([data-theme="dark"]){--bg:#0a101d;--panel:#0f1830;--panel2:#111d3a;--ink:#e7ebf5;--dim:#9aa6bc;--faint:#7c88a5;--teal:#49d7cd;--tealsoft:#173836;--amber:#d7ad55;--line:rgba(231,235,245,.09);--line2:rgba(231,235,245,.18);--onteal:#06110f}}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:70px}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
@@ -20,21 +20,16 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--teal);outline-offse
 .wrap{max-width:920px;margin:0 auto;padding:0 28px}
 header.nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .nav-in{max-width:920px;margin:0 auto;padding:12px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-.mark{font-family:var(--mono);font-size:13px;color:var(--dim);white-space:nowrap}.mark b{color:var(--ink);font-weight:500}
+.mark:hover{text-decoration:none}.mark{font-family:var(--mono);font-size:13px;color:var(--dim);white-space:nowrap}.mark b{color:var(--ink);font-weight:500}
 nav{display:flex;align-items:center;gap:18px;flex-wrap:wrap;font-size:13.5px}
-nav a{color:var(--dim)}nav a:hover{color:var(--teal);text-decoration:none}
+nav a{color:var(--dim)}nav a:hover,nav a.on{color:var(--teal);text-decoration:none}nav a.on{font-weight:500}
 .tt{width:30px;height:30px;border-radius:50%;border:1px solid var(--line2);background:var(--panel);color:var(--dim);cursor:pointer;font-size:14px}
 .tt:hover{border-color:var(--teal);color:var(--teal)}
-.hero{padding:68px 0 52px;display:grid;grid-template-columns:1fr auto;gap:36px;align-items:center}
-.photo{width:210px;height:210px;border-radius:50%;object-fit:cover;border:1px solid var(--line2);background:var(--panel2)}
-.hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(2.1rem,4.6vw,3.2rem);line-height:1.08;margin:0 0 12px;letter-spacing:-.01em}
-.role{font-family:var(--serif);font-style:italic;font-size:1.2rem;color:var(--dim);margin:0 0 18px;max-width:560px}
-.lede{max-width:580px;color:var(--dim);margin:0 0 26px}
 .acts{display:flex;gap:12px;flex-wrap:wrap}
 .btn{font-size:14px;padding:10px 18px;border-radius:4px;border:1px solid var(--line2);color:var(--ink)}
 .btn:hover{border-color:var(--teal);color:var(--teal);text-decoration:none;background:var(--tealsoft)}
 .btn.p{background:var(--teal);color:var(--onteal);border-color:var(--teal);font-weight:500}.btn.p:hover{opacity:.9;color:var(--onteal)}
-section{padding:54px 0}section+section{border-top:1px solid var(--line)}
+section{padding:54px 0}
 h2{font-family:var(--serif);font-weight:500;font-size:1.6rem;margin:0 0 24px;letter-spacing:-.01em}
 h3{font-family:var(--sans);font-weight:600;font-size:.97rem;line-height:1.4;margin:0 0 6px}
 .txt{max-width:660px;color:var(--dim)}.txt p{margin:0 0 14px}.txt b{color:var(--ink);font-weight:600}
@@ -49,6 +44,8 @@ h3{font-family:var(--sans);font-weight:600;font-size:.97rem;line-height:1.4;marg
 .sup{color:var(--dim);font-size:.9rem;font-style:italic;margin:0 0 14px}
 .card ul{margin:0;padding-left:20px;color:var(--dim);font-size:.94rem}.card li{margin-bottom:6px}.card li::marker{color:var(--teal)}
 .st{color:var(--amber)}
+.pc h3 a,.tp a{color:var(--ink)}.pc h3 a:hover,.tp a:hover{color:var(--teal);text-decoration:none}.tp a{font-weight:500}
+.card .lnk{margin-top:12px}
 .sub{font-family:var(--serif);font-style:italic;color:var(--dim);font-size:1.05rem;margin:28px 0 8px}.sub:first-of-type{margin-top:0}
 .pub{padding:16px 0;border-bottom:1px solid var(--line)}
 .venue{font-family:var(--mono);font-size:12px;color:var(--teal)}
@@ -71,29 +68,52 @@ h3{font-family:var(--sans);font-weight:600;font-size:.97rem;line-height:1.4;marg
 .tl-h{font-size:12.5px;color:var(--amber);margin:20px 0 4px;font-weight:600}
 footer{padding:50px 0}.crow{display:flex;gap:24px;flex-wrap:wrap;margin-top:18px;font-size:.95rem}
 .fine{color:var(--faint);font-size:12.5px;margin-top:34px}
-@media(max-width:640px){.nav-in{flex-direction:column;align-items:flex-start;gap:8px}.facts{grid-template-columns:1fr 1fr}.two,.pgrid{grid-template-columns:1fr}.hero{grid-template-columns:1fr}.photo{order:-1;width:140px;height:140px}}
+.js .view{display:none}.js .view.on{display:block;animation:vin .35s ease}
+@keyframes vin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.hero{position:relative;min-height:calc(100vh - 58px);min-height:calc(100svh - 58px);align-items:flex-end;background:#0a101d;color:#fff;overflow:hidden}
+.js .hero.on{display:flex}
+.book{position:absolute;inset:0;perspective:2400px;z-index:0}
+.pg{position:absolute;inset:0;background:#0a101d}
+.pg img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 25%}
+.under{z-index:1}
+.leaf{z-index:2;transform-origin:left center;backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:transform 1.6s cubic-bezier(.65,0,.35,1)}
+.leaf::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.5),rgba(0,0,0,0) 45%);opacity:0;transition:opacity 1.6s;pointer-events:none}
+.leaf.turn{transform:rotateY(-180deg)}.leaf.turn::after{opacity:1}
+.leaf.nt,.leaf.nt::after{transition:none}
+.veil{position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(90deg,rgba(8,13,24,.80),rgba(8,13,24,.45) 55%,rgba(8,13,24,.15)),linear-gradient(0deg,rgba(8,13,24,.6),transparent 50%)}
+.hero-in{position:relative;z-index:4;width:100%;max-width:920px;margin:0 auto;padding:0 28px 72px}
+.hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(2.3rem,5.4vw,3.8rem);line-height:1.05;margin:0 0 18px;letter-spacing:-.01em;color:#fff}
+.cr{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#7ee6dd;margin:0 0 6px}
+.role{font-family:var(--serif);font-style:italic;font-size:clamp(1.1rem,2.2vw,1.4rem);line-height:1.4;color:rgba(255,255,255,.92);margin:0 0 28px;max-width:600px}
+.hero .btn{color:#fff;border-color:rgba(255,255,255,.5)}.hero .btn:hover{background:rgba(255,255,255,.16);color:#fff;border-color:#fff}
+.hero .btn.p{background:#49d7cd;border-color:#49d7cd;color:#06110f}.hero .btn.p:hover{background:#49d7cd;color:#06110f;opacity:.9}
+.gf{padding:22px 0;border-top:1px solid var(--line)}.gf .fine{margin:0}
+@media(prefers-reduced-motion:reduce){.leaf{transition:none}.js .view.on{animation:none}}
+
+@media(max-width:640px){.nav-in{flex-direction:column;align-items:flex-start;gap:8px}.facts{grid-template-columns:1fr 1fr}.two,.pgrid{grid-template-columns:1fr}.hero{min-height:calc(100svh - 96px)}.hero-in{padding-bottom:48px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
 <header class="nav"><div class="nav-in">
-<span class="mark"><b>M. A. H. Kanon</b> / EEE, BUET</span>
-<nav><a href="#about">About</a><a href="#research">Research</a><a href="#publications">Publications</a><a href="#projects">Projects</a><a href="#more">Awards &amp; service</a><a href="#contact">Contact</a>
+<a class="mark" href="#top"><b>M. A. H. Kanon</b> / EEE, BUET</a>
+<nav><a data-v="about" href="#about">About</a><a data-v="research" href="#research">Research</a><a data-v="publications" href="#publications">Publications</a><a data-v="projects" href="#projects">Projects</a><a data-v="more" href="#more">Awards &amp; more</a><a data-v="contact" href="#contact">Contact</a>
 <button class="tt" id="tt" type="button" aria-label="Toggle dark mode">&#9789;</button></nav>
 </div></header>
 
-<main class="wrap">
-<section class="hero" id="top">
-<div>
+<main>
+<section class="hero view on" id="top">
+<div class="book" id="book" aria-hidden="true"><div class="pg under"><img alt="" id="imgB"></div><div class="pg leaf" id="leaf"><img alt="" id="imgA"></div></div>
+<div class="veil"></div>
+<div class="hero-in">
 <h1>Mohammad Al Hosan Kanon</h1>
-<p class="role">Semiconductor devices, electronic materials, and first-principles simulation of 2D heterostructures</p>
-<p class="lede">Currently researching TCAD-based semiconductor devices, with a background in first-principles (DFT) studies of 2D van der Waals heterostructures.</p>
+<p class="cr">Current research</p>
+<p class="role">Reconfigurable FETs (RFETs) and devices based on wide-bandgap (WBG) and ultra-wide-bandgap (UWBG) materials.</p>
 <div class="acts"><a class="btn p" href="CV_MohammadAlHosanKanon.pdf">Download CV</a><a class="btn" href="#publications">Publications</a><a class="btn" href="#contact">Contact</a></div>
 </div>
-<img class="photo" src="profile.jpg" alt="Mohammad Al Hosan Kanon" />
 </section>
 
-<section id="about">
+<section class="view" id="about"><div class="wrap">
 <h2>About</h2>
 <div class="txt">
 <p>I graduated from the Department of EEE at BUET (Dec 2021 to June 2026) with a CGPA of <b>3.78/4.00</b>, including <b>4.00/4.00</b> in my senior year.</p>
@@ -102,12 +122,12 @@ footer{padding:50px 0}.crow{display:flex;gap:24px;flex-wrap:wrap;margin-top:18px
 <div class="facts">
 <div class="fact"><b>3.78</b><span>CGPA out of 4.00</span></div>
 <div class="fact"><b>4</b><span>papers on IEEE Xplore</span></div>
-<div class="fact"><b>4</b><span>manuscripts under review</span></div>
+<div class="fact"><b>3</b><span>manuscripts under review</span></div>
 <div class="fact"><b>7.0</b><span>IELTS Academic, C1</span></div>
 </div>
-</section>
+</div></section>
 
-<section id="research">
+<section class="view" id="research"><div class="wrap">
 <h2>Research</h2>
 <div class="chips" style="margin-bottom:28px"><span class="chip">Semiconductor devices</span><span class="chip">Electronic materials</span><span class="chip">Nanoelectronics</span><span class="chip">Nanotechnology</span></div>
 
@@ -120,6 +140,7 @@ footer{padding:50px 0}.crow{display:flex;gap:24px;flex-wrap:wrap;margin-top:18px
 <li>Proposed a 2D field-effect transistor architecture that uses the tunable contact behavior.</li>
 <li>A companion study on the 1T-NbS<sub>2</sub>/Janus 2H-MoSeTe heterostructure is submitted to <i>Nanoscale Advances</i>.</li>
 </ul>
+<a class="lnk" href="projects/graphene-mosete-thesis.html">Project details &rarr;</a>
 </div>
 
 <div class="card">
@@ -127,10 +148,11 @@ footer{padding:50px 0}.crow{display:flex;gap:24px;flex-wrap:wrap;margin-top:18px
 <h3>Mitigation of Short-Channel Effects in 20 nm Double-Gate MOSFETs via Step Oxide, Dual-Material Gate, and Halo Doping</h3>
 <p class="sup">Supervisor: Prof. Dr. Sharif Mohammad Mominuzzaman</p>
 <ul><li>Achieved a 60% reduction in DIBL and a nearly sixfold improvement in I<sub>ON</sub>/I<sub>OFF</sub> using step-oxide, dual-material-gate, and halo-doping engineering (Silvaco TCAD).</li></ul>
+<a class="lnk" href="projects/dg-mosfet-short-channel.html">Project details &rarr;</a>
 </div>
-</section>
+</div></section>
 
-<section id="publications">
+<section class="view" id="publications"><div class="wrap">
 <h2>Publications</h2>
 
 <p class="sub">Journal</p>
@@ -177,29 +199,24 @@ footer{padding:50px 0}.crow{display:flex;gap:24px;flex-wrap:wrap;margin-top:18px
 <div class="meta">M. Al Amin, M. A. H. Kanon, and M. M. Rahman. pp. 1&ndash;6.</div>
 <a class="lnk" href="https://doi.org/10.1109/QPAIN69676.2026.11546080" target="_blank" rel="noopener">IEEE Xplore</a>
 </div>
-<div class="pub">
-<h3>Machine Learning-Based Optical Quality Classification of LEDs Using a Low-Cost Optical Characterization System<span class="badge">under review</span></h3>
-<div class="venue">ICECE 2026, Dhaka</div>
-<div class="meta">M. A. H. Kanon, M. A. Islam, I. Ahmad, S. A. Rifat, and S. T. Islam</div>
-</div>
-</section>
+</div></section>
 
-<section id="projects">
+<section class="view" id="projects"><div class="wrap">
 <h2>Selected projects</h2>
 <div class="pgrid">
-<div class="pc"><small>Level 4, Term 2</small><h3>RTL-to-GDSII implementation of an optimised MAC unit</h3><p>Parameterized multiply-accumulate unit taken from RTL to GDSII on two flows: commercial Cadence Genus/Innovus (GPDK045, 45 nm) and open-source OpenROAD (IHP SG13G2, 130 nm). Extended into the ICECE 2026 paper above.</p><span class="s">SystemVerilog, Cadence Genus/Innovus, OpenROAD</span></div>
-<div class="pc"><small>Level 4, Term 2</small><h3>Optical quality classification of LEDs</h3><p>Low-cost measurement setup with a BPW34 photodiode and TCS34725 sensor on Arduino, feeding feature-engineered KNN and Random Forest classifiers, with a Streamlit interface. Extended into the ICECE 2026 paper above.</p><span class="s">Python (scikit-learn, pandas), Streamlit, Arduino, PySerial</span></div>
+<div class="pc"><small>Level 4, Term 2</small><h3><a href="projects/mac-unit-rtl-to-gdsii.html">RTL-to-GDSII implementation of an optimised MAC unit</a></h3><p>Parameterized multiply-accumulate unit taken from RTL to GDSII on two flows: commercial Cadence Genus/Innovus (GPDK045, 45 nm) and open-source OpenROAD (IHP SG13G2, 130 nm). Extended into the ICECE 2026 paper above.</p><span class="s">SystemVerilog, Cadence Genus/Innovus, OpenROAD</span><br><a class="lnk" href="projects/mac-unit-rtl-to-gdsii.html">Project details &rarr;</a></div>
+<div class="pc"><small>Level 4, Term 2</small><h3><a href="projects/led-optical-classification.html">Optical quality classification of LEDs</a></h3><p>Low-cost measurement setup with a BPW34 photodiode and TCS34725 sensor on Arduino, feeding feature-engineered KNN and Random Forest classifiers, with a Streamlit interface.</p><span class="s">Python (scikit-learn, pandas), Streamlit, Arduino, PySerial</span><br><a class="lnk" href="projects/led-optical-classification.html">Project details &rarr;</a></div>
 <div class="pc"><small>Level 4, Term 2</small><h3>Electrical services design, 10-storey residential building</h3><p>Load estimation, wiring, and distribution design for a multi-storied residential building, drawn in AutoCAD.</p><span class="s">AutoCAD, load estimation, distribution design</span></div>
 <div class="pc"><small>Level 4, Term 1</small><h3>Class-A RF power amplifier, 433 MHz</h3><p>Cadence Virtuoso (90 nm gpdk090): 10.11 dB gain, 18.01 dBm P<sub>sat</sub>, 7.52% PAE, S<sub>11</sub> of about &minus;33.5 dB.</p><span class="s">Cadence Virtuoso, RF design, QUCS Studio</span><br><a class="lnk" href="https://github.com/mohammad-al-hosan/Class_A_RF_Power_Amplifier_433MHz.git" target="_blank" rel="noopener">GitHub</a></div>
 <div class="pc"><small>Level 4, Term 1</small><h3>IoT fruit storage monitor</h3><p>Arduino Mega with ESP8266, DHT22 and MQ135 sensing, relay-driven Peltier cooling and misting, cloud logging with remote override.</p><span class="s">Embedded systems, IoT</span><br><a class="lnk" href="https://github.com/mohammad-al-hosan/IOT_Fruit_Storage_System.git" target="_blank" rel="noopener">GitHub</a></div>
 <div class="pc"><small>Level 3, Term 1</small><h3>Fast-decoupled load flow</h3><p>MATLAB implementation on IEEE 4 to 30 bus systems; faster convergence than Newton&ndash;Raphson at comparable accuracy.</p><span class="s">MATLAB, power systems</span></div>
-<div class="pc"><small>Level 3, Term 2</small><h3>UART in Verilog on FPGA</h3><p>Moore FSM transmitter and receiver with parity checking, verified by testbench and demonstrated on CPLD/FPGA hardware.</p><span class="s">Verilog, FPGA</span></div>
+<div class="pc"><small>Level 3, Term 2</small><h3><a href="projects/uart-verilog-fpga.html">UART in Verilog on FPGA</a></h3><p>Moore FSM transmitter and receiver with parity checking, verified by testbench and demonstrated on CPLD/FPGA hardware.</p><span class="s">Verilog, FPGA</span><br><a class="lnk" href="projects/uart-verilog-fpga.html">Project details &rarr;</a></div>
 </div>
 <div style="text-align:center;margin-top:24px"><button class="tb" id="tb" type="button" aria-expanded="false" aria-controls="tl">Show earlier projects (Level 2 to 3)</button></div>
 <div id="tl">
 <div class="tl-h">Level 3, Term 2</div>
 <div class="tp">Autonomous mop bot<i>Ultrasonic obstacle avoidance; extended into the RAAICON 2025 paper.</i></div>
-<div class="tp">Smart-grid UPS with bidirectional inverter<i>Push&ndash;pull inverter with solar charging and automatic load shifting.</i></div>
+<div class="tp"><a href="projects/smart-grid-ups.html">Smart-grid UPS with bidirectional inverter</a><i>Push&ndash;pull inverter with solar charging and automatic load shifting.</i></div>
 <div class="tl-h">Level 3, Term 1</div>
 <div class="tp">Low-power FM transmitter<i>Electret microphone front end, 2N2222 amplifier, tunable LC oscillator.</i></div>
 <div class="tp">Pulmonary disease detection with MFCC and KNN<i>Respiratory sound classification; extended into the QPAIN 2026 paper.</i></div>
@@ -208,9 +225,9 @@ footer{padding:50px 0}.crow{display:flex;gap:24px;flex-wrap:wrap;margin-top:18px
 <div class="tp">Induction motor rewinding and parameter measurement<i>Equivalent-circuit extraction from DC, no-load, and blocked-rotor tests.</i></div>
 <div class="tp">2D Poisson equation by finite differences<i>MATLAB electrostatic potential and field visualization for varying boundary conditions.</i></div>
 </div>
-</section>
+</div></section>
 
-<section id="more">
+<section class="view" id="more"><div class="wrap">
 <h2>Awards, skills, and service</h2>
 <div class="col">
 <p class="sub">Awards and scholarships</p>
@@ -237,9 +254,9 @@ footer{padding:50px 0}.crow{display:flex;gap:24px;flex-wrap:wrap;margin-top:18px
 <p class="sub">Language proficiency</p>
 <div class="row"><div>IELTS Academic, overall 7.0 (C1)<small>Listening 7.5, Reading 8.0, Writing 6.5, Speaking 6.5</small></div></div>
 </div>
-</section>
+</div></section>
 
-<footer id="contact">
+<section class="view" id="contact"><div class="wrap">
 <h2>Contact</h2>
 <p class="txt">I am applying for Ph.D. positions starting Fall 2027 in semiconductor device physics, 2D materials, and computational nanoelectronics. Email me for my CV, thesis results, or code from any project above.</p>
 <div class="crow">
@@ -249,21 +266,48 @@ footer{padding:50px 0}.crow{display:flex;gap:24px;flex-wrap:wrap;margin-top:18px
 <a href="https://github.com/mohammad-al-hosan" target="_blank" rel="noopener">GitHub</a>
 <a href="CV_MohammadAlHosanKanon.pdf">CV (PDF)</a>
 </div>
-<p class="fine">&copy; 2026 Mohammad Al Hosan Kanon. Hosted on GitHub Pages.</p>
-</footer>
+
+</div></section>
 </main>
+<footer class="gf"><div class="wrap"><p class="fine">&copy; 2026 Mohammad Al Hosan Kanon. Hosted on GitHub Pages.</p></div></footer>
 
 <script>
 (function(){
 var r=document.documentElement,t=document.getElementById('tt');
-function store(v){try{localStorage.setItem('theme',v)}catch(e){}}
-var s=null;try{s=localStorage.getItem('theme')}catch(e){}
-function dark(){return r.getAttribute('data-theme')==='dark'||(!r.getAttribute('data-theme')&&matchMedia('(prefers-color-scheme: dark)').matches)}
+function store(v){try{localStorage.setItem('kanon-theme',v)}catch(e){}}
+var s=null;try{s=localStorage.getItem('kanon-theme')}catch(e){}
+function dark(){return r.getAttribute('data-theme')==='dark'}
 function icon(){t.textContent=dark()?'\u2600':'\u263D'}
-if(s)r.setAttribute('data-theme',s);icon();
+if(s==='dark'||s==='light')r.setAttribute('data-theme',s);icon();
 t.onclick=function(){var v=dark()?'light':'dark';r.setAttribute('data-theme',v);store(v);icon()};
+
 var b=document.getElementById('tb'),p=document.getElementById('tl');
 b.onclick=function(){var o=p.classList.toggle('open');b.setAttribute('aria-expanded',o);b.textContent=o?'Hide earlier projects':'Show earlier projects (Level 2 to 3)'};
+
+/* top-menu views: home shows only the hero, each menu item shows one section */
+var ids=['about','research','publications','projects','more','contact'];
+function route(){
+ var h=(location.hash||'').slice(1);if(ids.indexOf(h)<0)h='top';
+ [].forEach.call(document.querySelectorAll('.view'),function(v){v.classList.toggle('on',v.id===h)});
+ [].forEach.call(document.querySelectorAll('nav a[data-v]'),function(a){a.classList.toggle('on',a.getAttribute('data-v')===h)});
+ window.scrollTo(0,0);
+}
+addEventListener('hashchange',route);route();
+
+/* home background: fig_personal-01 ... 04, turning like a page */
+var exts=['jpg','jpeg','png','webp'],found=[],left=4;
+function find(n,done){var i=0;(function t(){if(i>=exts.length)return done(null);var im=new Image();im.onload=function(){done(im.src)};im.onerror=function(){i++;t()};im.src='assets/img/personal/fig_personal-0'+n+'.'+exts[i]})()}
+[1,2,3,4].forEach(function(n){find(n,function(src){found[n-1]=src;if(--left===0)start()})});
+function start(){
+ var srcs=found.filter(Boolean);if(!srcs.length)return;
+ var leaf=document.getElementById('leaf'),a=document.getElementById('imgA'),c=document.getElementById('imgB'),hero=document.getElementById('top'),i=0,busy=false;
+ a.src=srcs[0];if(srcs.length<2||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ c.src=srcs[1];
+ setInterval(function(){
+  if(busy||document.hidden||!hero.classList.contains('on'))return;busy=true;leaf.classList.add('turn');
+  setTimeout(function(){i=(i+1)%srcs.length;leaf.classList.add('nt');a.src=srcs[i];leaf.classList.remove('turn');void leaf.offsetWidth;leaf.classList.remove('nt');c.src=srcs[(i+1)%srcs.length];busy=false},1700);
+ },6500);
+}
 })();
 </script>
 </body>
